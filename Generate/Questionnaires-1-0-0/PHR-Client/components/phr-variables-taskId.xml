@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<variables xmlns="http://hl7.org/fhir">
+    <variable>
+        <name value="task-id"/>
+        <expression value="Task.id"/>
+        <sourceId value="task-requested-fixture"/>
+    </variable>
+</variables>

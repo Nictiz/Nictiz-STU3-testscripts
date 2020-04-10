@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions xmlns="http://hl7.org/fhir" xmlns:nictiz="http://nictiz.nl/xsl/testscript">
+    <nictiz:actions href="../../../general/common-tests/assert-authorizationHeader.xml"/>
+    <action>
+        <assert>
+            <description value="Confirm that the request body is a Task"/>
+            <direction value="request"/>
+            <resource value="Task"/>
+        </assert>
+    </action>
+    <action>
+        <assert>
+            <description value="Confirm that the Task instance declares its profile"/>
+            <direction value="request"/>
+            <expression value="meta.profile = 'http://nictiz.nl/fhir/StructureDefinition/vl-QuestionnaireProvisioningTask'"/>
+        </assert>
+    </action>
+    <nictiz:actions href="../../../general/common-tests/assert-responseSuccess.xml"/>
+    <!-- TODO: Enable when package is loaded -->
+    <!--        <action>
+                <assert>
+                    <description value="Confirm that the Task conforms to the required profile"/>
+                    <direction value="request"/>
+                    <validateProfileId value="Task-profile"/>
+                </assert>
+            </action>
+    -->
+    <!-- TODO: This doesn't seem to work -->
+    <!--        <action>
+                <assert>
+                    <description value="Confirm that the Task contains all the same information as the original task"/>
+                    <direction value="request"/>
+                    <minimumId value="task-requested-fixture"/>
+                </assert>
+            </action>
+    -->
+</actions>
