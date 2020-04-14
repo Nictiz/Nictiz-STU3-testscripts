@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions  xmlns="http://hl7.org/fhir" xmlns:nictiz="http://nictiz.nl/xsl/testscript">
+    <action>
+        <operation>
+            <type>
+                <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+                <code value="transaction"/>
+            </type>
+            <description value="Test XIS server to handle the transaction bundle."/>
+            <destination value="1"/>
+            <origin value="1"/>
+            <requestHeader>
+                <!-- 0..* Each operation can have one or more header elements -->
+                <field value="Authorization"/>
+                <!-- 1..1 HTTP header field name: OAuth access token -->
+                <value value="${patient1-token-id}"/>
+                <!-- 1..1 HTTP headerfield value: UUID4 -->
+            </requestHeader>
+            <responseId value="transaction-response"/>
+            <sourceId value="transaction-bundle-fixture"/>
+        </operation>
+    </action>
+    <actions href="xis-assert-transactionBundle.xml"/>
+    <action>
+        <assert>
+            <description value="Confirm that the transaction was succesful"/>
+            <direction value="response"/>
+            <responseCode value="200"/>
+        </assert>
+    </action>
+    <action>
+        <assert>
+            <description value="Confirm that QuestionnaireProvisioningTask is succesfully updated"/>
+            <direction value="response"/>
+            <expression value="entry.where(resource as Task).response.status.startsWith('200')"/>
+        </assert>
+    </action>
+    <action>
+        <assert>
+            <description value="Confirm that QuestionnaireResponse is created"/>
+            <direction value="response"/>
+            <expression value="entry.where(resource as QuestionnaireResponse).response.status.startsWith('201')"/>
+        </assert>
+    </action>
+    <action>
+        <assert>
+            <description value="Confirm that Task.status is 'completed'"/>
+            <direction value="response"/>
+            <expression value="entry.where(resource as Task).resource.status = 'completed'"/>
+        </assert>
+    </action>
+    <action>
+        <assert>
+            <description value="Confirm that Task.output references the newly created QuestionnaireResponse resource"/>
+            <direction value="request"/>
+            <expression value="entry.where(resource as Task).resource.output.where(type.text = 'QuestionnaireResponse').value.reference = entry.where(resource as QuestionnaireResponse).fullUrl"/>
+        </assert>
+    </action>
+</actions>
