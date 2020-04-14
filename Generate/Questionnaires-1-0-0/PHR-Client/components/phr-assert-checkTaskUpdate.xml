@@ -16,15 +16,15 @@
         </assert>
     </action>
     <nictiz:actions href="../../../general/common-tests/assert-responseSuccess.xml"/>
-    <!-- TODO: Enable when package is loaded -->
-    <!--        <action>
-                <assert>
-                    <description value="Confirm that the Task conforms to the required profile"/>
-                    <direction value="request"/>
-                    <validateProfileId value="Task-profile"/>
-                </assert>
-            </action>
-    -->
+    
+    <nictiz:profile id="Task-profile" value="http://nictiz.nl/fhir/StructureDefinition/vl-QuestionnaireProvisioningTask"/> 
+    <action>
+        <assert>
+            <description value="Confirm that the Task conforms to the required profile"/>
+            <direction value="request"/>
+            <validateProfileId value="Task-profile"/>
+        </assert>
+    </action>
     <!-- TODO: This doesn't seem to work -->
     <!--        <action>
                 <assert>
