@@ -3,13 +3,10 @@
     <id value="medmij-questionnaires-fhir3-0-1-phr-1.5-2.5"/>
     <name value="MedMij Questionnaires - PHR Client - Scenario 1.5 and 2.5"/>
     <description value="MedMij Questionnaires for FHIR STU3 - PHR Client - Scenario 1.5 and 2.5 - Retrieve QuestionnaireProvisioningTask with reference to Questionnaire that cannot be rendered, and reject QuestionnaireProvisioningTask"/>
-    <nictiz:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-token.xml"/>
     
+    <nictiz:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-token.xml"/>
     <nictiz:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-PHQ9E-REQUESTED.xml"/>
     <nictiz:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-PHQ9E-REJECTED.xml"/>
-    
-    <!-- TODO: Enable when package is loaded -->
-    <!-- <nictiz:profile id="Task-profile" value="http://nictiz.nl/fhir/StructureDefinition/vl-QuestionnaireProvisioningTask"/> -->
     
     <nictiz:variables href="components/phr-variables-taskId.xml"/>
     <nictiz:includeDateT value="yes"/>

@@ -35,6 +35,8 @@
             <expression value="Bundle.type = 'transaction'"/>
         </assert>
     </action>
+    
+    <nictiz:profile id="Bundle-profile" value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
     <action>
         <assert>
             <description value="Confirm that the Bundle conforms to the required profile"/>
