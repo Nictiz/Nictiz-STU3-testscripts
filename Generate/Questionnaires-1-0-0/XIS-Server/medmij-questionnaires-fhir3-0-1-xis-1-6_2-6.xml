@@ -10,7 +10,12 @@
     
     <nictiz:variables href="components/xis-variables-taskId.xml"/>
     <nictiz:includeDateT value="yes"/>
-        
+    
+    <setup>
+        <nictiz:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-PHQ9E-REQUESTED.xml" />
+        <nictiz:actions href="components/xis-setup-createTask.xml"/>            
+    </setup>
+    
     <test id="Scenario1.6-ServeTask">
         <name value="Scenario1.6 - Serve QuestionnaireProvisioningTask for patient 3"/>
         <description value="Test XIS server to serve a QuestionnaireProvisioningTask with status 'requested'. This Task is found using a search operation and the XIS server should return a Bundle with a single entry. The Questionnaire referenced in this Task is assumed to be too complex to render for the client."/>
