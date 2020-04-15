@@ -18,29 +18,27 @@
         <nictiz:actions href="components/phr-setup-createTask.xml"/>
     </setup>
     
-    <tests>
-        <test id="Scenario1.3-SearchTask">
-            <name value="Scenario1.3 - Search QuestionnaireProvisioningTask(s) for patient 2"/>
-            <description value="Test PHR client to search for QuestionnaireProvisioningTasks with status 'requested'. The return value should be a Bundle with a single entry."/>
-            <nictiz:actions href="components/phr-scenario1-searchTask.xml"/>
-        </test>
-        <test id="Scenario2.3-RetrieveQuestionnaire">
-            <name value="Scenario2.3 - Retrieve Questionnaire"/>
-            <description value="Test PHR client to retrieve the Questionnaire resource specified in the QuestionnaireProvisioningTask.output:Questionnaire.reference. This should be a single GET on the Questionnaire resource."/>
-            <nictiz:actions href="components/phr-scenario2-retrieveQuestionnaire.xml"/>
-        </test>
-        <test id="Scenario3.3-part1-SendQuestionnaireResponse">
-            <name value="Scenario3.3 - Part 1 - Accept QuestionnaireProvisioningTask"/>
-            <description value="Test PHR client to send an update of the QuestionnaireProvisioningTask with status='accepted'. The body of the request should otherwise be the same as the original Task as received from the server."/>
-            <nictiz:actions href="components/phr-scenario3-acceptTaskUpdate.xml"/>
-        </test>
-        <test id="Scenario3.3-part2-SendQuestionnaireResponse">
-            <name value="Scenario3.3 - Part 2 - Send QuestionnaireResponse"/>
-            <description value="Test PHR client to complete the QuestionnaireProvisioningTask with a QuestionnaireResponse instance. This should be a transaction where Task status is set to 'completed', the QuestionnaireResponse is created and the QuestionnaireResponse is linked in Task.output."/>
-            <nictiz:actions href="components/phr-scenario3-handleTransaction.xml"/>
-            <nictiz:actions href="components/phr-assert-checkQRIsAlgemeneIntake.xml"/>
-        </test>
-    </tests>
+    <test id="Scenario1.3-SearchTask">
+        <name value="Scenario1.3 - Search QuestionnaireProvisioningTask(s) for patient 2"/>
+        <description value="Test PHR client to search for QuestionnaireProvisioningTasks with status 'requested'. The return value should be a Bundle with a single entry."/>
+        <nictiz:actions href="components/phr-scenario1-searchTask.xml"/>
+    </test>
+    <test id="Scenario2.3-RetrieveQuestionnaire">
+        <name value="Scenario2.3 - Retrieve Questionnaire"/>
+        <description value="Test PHR client to retrieve the Questionnaire resource specified in the QuestionnaireProvisioningTask.output:Questionnaire.reference. This should be a single GET on the Questionnaire resource."/>
+        <nictiz:actions href="components/phr-scenario2-retrieveQuestionnaire.xml"/>
+    </test>
+    <test id="Scenario3.3-part1-SendQuestionnaireResponse">
+        <name value="Scenario3.3 - Part 1 - Accept QuestionnaireProvisioningTask"/>
+        <description value="Test PHR client to send an update of the QuestionnaireProvisioningTask with status='accepted'. The body of the request should otherwise be the same as the original Task as received from the server."/>
+        <nictiz:actions href="components/phr-scenario3-acceptTaskUpdate.xml"/>
+    </test>
+    <test id="Scenario3.3-part2-SendQuestionnaireResponse">
+        <name value="Scenario3.3 - Part 2 - Send QuestionnaireResponse"/>
+        <description value="Test PHR client to complete the QuestionnaireProvisioningTask with a QuestionnaireResponse instance. This should be a transaction where Task status is set to 'completed', the QuestionnaireResponse is created and the QuestionnaireResponse is linked in Task.output."/>
+        <nictiz:actions href="components/phr-scenario3-handleTransaction.xml"/>
+        <nictiz:actions href="components/phr-assert-checkQRIsAlgemeneIntake.xml"/>
+    </test>
     
     <teardown>
         <nictiz:actions href="components/phr-teardown-deleteTask.xml"/>
