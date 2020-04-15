@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/medmij-questionnaires-fhir3-0-1-xis-1.2-3.2"/>
    <name value="MedMij Questionnaires - XIS Server - Scenario 1.2 and 3.2"/>
    <status value="active"/>
-   <date value="2020-04-14"/>
+   <date value="2020-04-15"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -149,7 +149,7 @@
                <value value="${patient-token-id}"/>
                <!-- 1..1 HTTP headerfield value: UUID4 -->
             </requestHeader>
-            <sourceId value="task-accepted-fixture"/>
+            <sourceId value="task-update-fixture"/>
          </operation>
       </action>
       <action>
