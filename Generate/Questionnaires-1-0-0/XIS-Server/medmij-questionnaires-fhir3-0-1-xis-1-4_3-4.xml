@@ -20,7 +20,7 @@
     <test id="Scenario3.4-MissingQuestionnaireResponse">
         <name value="Scenario3.4 - Reject QuestionnaireProvisioningTask status 'completed' without QuestionnaireResponse."/>
         <description value="Test XIS server to reject attempts from the client to send updates of the QuestionnaireProvisioningTask with status 'completed' without also referencing a QuestionnaireResponse resource. The server should respond with a 400 or 500 type status code and an OperationOutcome with details of the problem."/>
-        <nictiz:actions href="components/xis-assert-transactionBundle.xml"/>
+        <nictiz:actions href="components/xis-scenario3-receiveQuestionnaireResponse.xml"/>
         <action>
             <assert>
                 <description value="Confirm that the transaction is rejected"/>
