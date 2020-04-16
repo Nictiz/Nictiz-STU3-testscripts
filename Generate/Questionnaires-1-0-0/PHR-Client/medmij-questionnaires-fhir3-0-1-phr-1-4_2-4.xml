@@ -7,6 +7,7 @@
     <nictiz:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-token.xml"/>
     <nictiz:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-REQUESTED.xml"/>
     <nictiz:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-FAILED.xml"/>
+    <nictiz:fixture id="task-minimum-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-minimum.xml"/>
     
     <nictiz:variables href="components/phr-variables-taskId.xml"/>
     <nictiz:includeDateT value="yes"/>

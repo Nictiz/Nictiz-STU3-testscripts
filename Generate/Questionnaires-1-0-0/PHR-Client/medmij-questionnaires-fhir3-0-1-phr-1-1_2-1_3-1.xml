@@ -7,7 +7,8 @@
     
     <nictiz:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-VERKEULEN-token.xml"/>
     <nictiz:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Verkeulen-Intake-REQUESTED.xml"/>
-    <nictiz:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Verkeulen-Intake-ACCEPTED.xml"/>
+    <nictiz:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Verkeulen-Intake-ACCEPTED.xml"/>    
+    <nictiz:fixture id="task-minimum-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Verkeulen-Intake-minimum.xml"/>
     <nictiz:fixture id="questionnaire-fixture" href="resources/resources-questionnaires/medmij-questionnaires-fhir3-0-1-vl-Questionnaire-INTAKE-NIEUWE-PATIENT.xml"/>
     <nictiz:fixture id="response-bundle-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-Transaction-Verkeulen-Intake.xml"/>
     
