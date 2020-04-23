@@ -18,6 +18,18 @@
         </xsl:choose>
     </xsl:variable>
     
+    <xsl:variable name="scenarioNr">
+        <xsl:variable name="rawValue" select="/adaxml/data/*/scenario-nr/@value"/>
+        <xsl:choose>
+            <xsl:when test="contains($rawValue,' ')">
+                <xsl:value-of select="substring-before($rawValue,' ')"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$rawValue"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
     <xsl:variable name="testScriptId">
         <xsl:value-of select="translate(lower-case($infoStandard),' ','-')"/>
         <xsl:if test="not($partId='')">
@@ -60,7 +72,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="scenarioNr" select="/adaxml/data/*/scenario-nr/@value"/>
     
     <xsl:output indent="yes" method="xml"/>
     
