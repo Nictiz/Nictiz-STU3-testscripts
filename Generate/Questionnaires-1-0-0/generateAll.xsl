@@ -2,7 +2,7 @@
     xmlns="http://hl7.org/fhir"
     xmlns:f="http://hl7.org/fhir"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:nictiz="http://nictiz.nl/xsl/testscript"
+    xmlns:nts="http://nictiz.nl/xsl/testscript"
     exclude-result-prefixes="#all">
     <xsl:output method="xml" indent="yes"/>
     <xsl:strip-space elements="*"/>

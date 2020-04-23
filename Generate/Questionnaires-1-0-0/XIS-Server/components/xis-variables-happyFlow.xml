@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<variables xmlns="http://hl7.org/fhir" xmlns:nictiz="http://nictiz.nl/xsl/testscript">
-    <nictiz:variables href="xis-variables-taskId.xml"/>
+<variables xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+    <nts:variables href="xis-variables-taskId.xml"/>
     <variable>
         <name value="task-fullurl"/>
         <!-- Assume there's just one entry, which is a requirement for the test -->

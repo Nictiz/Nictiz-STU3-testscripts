@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<actions xmlns="http://hl7.org/fhir" xmlns:nictiz="http://nictiz.nl/xsl/testscript">
-    <nictiz:actions href="../../../general/common-tests/assert-authorizationHeader.xml"/>
+<actions xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+    <nts:actions href="../../../general/common-tests/assert-authorizationHeader.xml"/>
     <action>
         <assert>
             <description value="Confirm that the request body is a Task"/>
@@ -15,9 +15,9 @@
             <expression value="meta.profile = 'http://nictiz.nl/fhir/StructureDefinition/vl-QuestionnaireProvisioningTask'"/>
         </assert>
     </action>
-    <nictiz:actions href="../../../general/common-tests/assert-responseSuccess.xml"/>
+    <nts:actions href="../../../general/common-tests/assert-responseSuccess.xml"/>
     
-    <nictiz:profile id="Task-profile" value="http://nictiz.nl/fhir/StructureDefinition/vl-QuestionnaireProvisioningTask"/> 
+    <nts:profile id="Task-profile" value="http://nictiz.nl/fhir/StructureDefinition/vl-QuestionnaireProvisioningTask"/> 
     <action>
         <assert>
             <description value="Confirm that the Task conforms to the required profile"/>

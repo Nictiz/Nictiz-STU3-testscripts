@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestScript xmlns="http://hl7.org/fhir" xmlns:nictiz="http://nictiz.nl/xsl/testscript">
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
     <id value="medmij-questionnaires-fhir3-0-1-phr-1.3-2.3-3.3"/>
     <name value="MedMij Questionnaires - PHR Client - Scenario 1.3, 2.3, 3.3"/>
     <description value="MedMij Questionnaires for FHIR STU3 - PHR Client - Scenario 1.3, 2.3, 3.3 - Retrieve QuestionnaireProvisioningTask, retrieve Questionnaire, and send QuestionnaireResponse"/>
     
-    <nictiz:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-VERKEULEN-token.xml"/>
-    <nictiz:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-Intake-REQUESTED.xml"/>
-    <nictiz:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-Intake-ACCEPTED.xml"/>
-    <nictiz:fixture id="task-minimum-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-Intake-minimum.xml"/>
-    <nictiz:fixture id="questionnaire-fixture" href="resources/resources-questionnaires/medmij-questionnaires-fhir3-0-1-vl-Questionnaire-INTAKE-NIEUWE-PATIENT.xml"/>
-    <nictiz:fixture id="response-bundle-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-Transaction-Bie-Verkeulen-Intake.xml"/>
+    <nts:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-VERKEULEN-token.xml"/>
+    <nts:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-Intake-REQUESTED.xml"/>
+    <nts:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-Intake-ACCEPTED.xml"/>
+    <nts:fixture id="task-minimum-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-Intake-minimum.xml"/>
+    <nts:fixture id="questionnaire-fixture" href="resources/resources-questionnaires/medmij-questionnaires-fhir3-0-1-vl-Questionnaire-INTAKE-NIEUWE-PATIENT.xml"/>
+    <nts:fixture id="response-bundle-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-Transaction-Bie-Verkeulen-Intake.xml"/>
     
-    <nictiz:variables href="components/phr-variables-happyFlow.xml"/>
-    <nictiz:includeDateT value="yes"/>
+    <nts:variables href="components/phr-variables-happyFlow.xml"/>
+    <nts:includeDateT value="yes"/>
     
     <setup>
-        <nictiz:actions href="components/phr-setup-checkForOpenTasks.xml"/>
-        <nictiz:actions href="components/phr-setup-createTask.xml"/>
+        <nts:actions href="components/phr-setup-checkForOpenTasks.xml"/>
+        <nts:actions href="components/phr-setup-createTask.xml"/>
     </setup>
     
     <test id="Scenario1.3-SearchTask">
         <name value="Scenario1.3 - Search QuestionnaireProvisioningTask(s) for patient 2"/>
         <description value="Test PHR client to search for QuestionnaireProvisioningTasks with status 'requested'. The return value should be a Bundle with a single entry."/>
-        <nictiz:actions href="components/phr-scenario1-searchTask.xml"/>
+        <nts:actions href="components/phr-scenario1-searchTask.xml"/>
     </test>
     <test id="Scenario2.3-RetrieveQuestionnaire">
         <name value="Scenario2.3 - Retrieve Questionnaire"/>
         <description value="Test PHR client to retrieve the Questionnaire resource specified in the QuestionnaireProvisioningTask.output:Questionnaire.reference. This should be a single GET on the Questionnaire resource."/>
-        <nictiz:actions href="components/phr-scenario2-retrieveQuestionnaire.xml"/>
+        <nts:actions href="components/phr-scenario2-retrieveQuestionnaire.xml"/>
     </test>
     <test id="Scenario3.3-part1-SendQuestionnaireResponse">
         <name value="Scenario3.3 - Part 1 - Accept QuestionnaireProvisioningTask"/>
         <description value="Test PHR client to send an update of the QuestionnaireProvisioningTask with status='accepted'. The body of the request should otherwise be the same as the original Task as received from the server."/>
-        <nictiz:actions href="components/phr-scenario3-acceptTaskUpdate.xml"/>
+        <nts:actions href="components/phr-scenario3-acceptTaskUpdate.xml"/>
     </test>
     <test id="Scenario3.3-part2-SendQuestionnaireResponse">
         <name value="Scenario3.3 - Part 2 - Send QuestionnaireResponse"/>
         <description value="Test PHR client to complete the QuestionnaireProvisioningTask with a QuestionnaireResponse instance. This should be a transaction where Task status is set to 'completed', the QuestionnaireResponse is created and the QuestionnaireResponse is linked in Task.output."/>
-        <nictiz:actions href="components/phr-scenario3-handleTransaction.xml"/>
-        <nictiz:actions href="components/phr-assert-checkQRIsAlgemeneIntake.xml"/>
+        <nts:actions href="components/phr-scenario3-handleTransaction.xml"/>
+        <nts:actions href="components/phr-assert-checkQRIsAlgemeneIntake.xml"/>
     </test>
     
     <teardown>
-        <nictiz:actions href="components/phr-teardown-deleteTask.xml"/>
-        <nictiz:actions href="components/phr-teardown-deleteQuestionnaireResponse.xml"/>
+        <nts:actions href="components/phr-teardown-deleteTask.xml"/>
+        <nts:actions href="components/phr-teardown-deleteQuestionnaireResponse.xml"/>
     </teardown>
 </TestScript>
