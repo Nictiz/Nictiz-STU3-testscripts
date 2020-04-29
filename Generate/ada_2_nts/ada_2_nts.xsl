@@ -20,12 +20,13 @@
     
     <xsl:variable name="scenarioNr">
         <xsl:variable name="rawValue" select="/adaxml/data/*/scenario-nr/@value"/>
+        <xsl:variable name="replaceChars" select="translate($rawValue,'&lt;&gt;:&quot;/\|?*','         ')"/>
         <xsl:choose>
-            <xsl:when test="contains($rawValue,' ')">
-                <xsl:value-of select="substring-before($rawValue,' ')"/>
+            <xsl:when test="contains($replaceChars,' ')">
+                <xsl:value-of select="substring-before($replaceChars,' ')"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="$rawValue"/>
+                <xsl:value-of select="$replaceChars"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
@@ -41,7 +42,7 @@
         <xsl:text>-</xsl:text>
         <xsl:value-of select="$targetSystem"/>
         <xsl:text>-</xsl:text>
-        <xsl:value-of select="$scenarioNr"/>
+        <xsl:value-of select="translate($scenarioNr,'.','-')"/>
     </xsl:variable>
     <xsl:variable name="outputFileName">
         <xsl:value-of select="$testScriptId"/>
