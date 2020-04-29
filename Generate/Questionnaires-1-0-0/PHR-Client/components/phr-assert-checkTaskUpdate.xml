@@ -25,11 +25,20 @@
             <validateProfileId value="Task-profile"/>
         </assert>
     </action>
+    
+    <nts:rule id="assertMinimumRequest" href="rule/assertMinimumRequest.groovy"/>
     <action>
         <assert>
-            <description value="Confirm that the Task contains all the same information as the original task"/>
+            <!-- There seems to be a bug in Touchstone that requires this directive to be present, although it 
+                 shouldn't be necessary from the Groovy perspective. --> 
             <direction value="request"/>
-            <minimumId value="task-minimum-fixture"/>
+            <rule>
+                <ruleId value="assertMinimumRequest"/>
+                <param>
+                    <name value="minimumFixtureBase"/>
+                    <value value="task-minimum-fixture"/>
+                </param>
+            </rule>
         </assert>
     </action>
 
