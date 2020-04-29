@@ -53,15 +53,6 @@
             <xsl:when test="$targetSystem='xis'">XIS-Server</xsl:when>
             <xsl:when test="$targetSystem='phr'">PHR-Client</xsl:when>
         </xsl:choose>
-        <xsl:text>/</xsl:text>
-        <xsl:if test="not($partId='')">
-            <xsl:choose>
-                <xsl:when test="$partId='ma'">Agreement</xsl:when>
-                <xsl:when test="$partId='vv'">DispenseRequest</xsl:when>
-                <xsl:when test="$partId='mo'">MedicationOverview</xsl:when>
-            </xsl:choose>
-            <xsl:text>/</xsl:text>
-        </xsl:if>
     </xsl:variable>
     <xsl:variable name="targetSystemFull">
         <xsl:choose>
