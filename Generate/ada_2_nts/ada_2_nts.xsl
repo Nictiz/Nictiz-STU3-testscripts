@@ -49,7 +49,7 @@
         <xsl:text>.xml</xsl:text>
     </xsl:variable>
     <xsl:variable name="outputDir">
-        <xsl:text>../Medication-9-0-7/</xsl:text>
+        <xsl:text>../../../Medication-9-0-7/</xsl:text>
         <xsl:choose>
             <xsl:when test="$targetSystem='xis'">XIS-Server</xsl:when>
             <xsl:when test="$targetSystem='phr'">PHR-Client</xsl:when>
@@ -80,7 +80,7 @@
                 <name value="{$infoStandard} - {$targetSystemFull} - Scenario {$scenarioNr}"/>
                 <description value="Scenario {$scenarioNr} - {$description}"/>
                 
-                <nts:patientTokenFixture href="{translate(lower-case($infoStandard),' ','-')}-{$fhirVersion}-nl-core-patient-{$patientName}-token.xml"/>
+                <nts:patientTokenFixture href="{translate(lower-case($infoStandard),' ','-')}-{$fhirVersion}-nl-core-patient-{$patientName}-token.xml" type="{$targetSystem}"/>
                 
                 <xsl:comment>&lt;nts:fixture id="" href=""/></xsl:comment>
                 <!--<nts:fixture id="" href=""/>-->

@@ -3,7 +3,8 @@
    <id value="medmij-medication-vv-fhir3-0-2-xis-0-5"/>
    <name value="Medmij Medication - XIS Server - Scenario 0.5"/>
    <description value="Scenario 0.5 - Een antwoord zonder verstrekkingsverzoeken (filter op een niet in het systeem aanwezige id &#34;MBH_907_QAnietaanwezig&#34;)&#xA;(Antwoord: bericht zonder verstrekkingsverzoek)"/>
-   <nts:patientTokenFixture href="medmij-medication-fhir3-0-2-nl-core-patient-XXX-JANKIE-token.xml"/>
+   <nts:patientTokenFixture href="medmij-medication-fhir3-0-2-nl-core-patient-XXX-JANKIE-token.xml"
+                            type="xis"/>
    <!--<nts:fixture id="" href=""/>-->
    <!--<nts:variables href=""/>-->
    <!--<nts:includeDateT value=""/>-->

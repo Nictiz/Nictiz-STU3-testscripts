@@ -3,7 +3,8 @@
    <id value="medmij-medication-ma-fhir3-0-2-xis-1-4"/>
    <name value="Medmij Medication - XIS Server - Scenario 1.4"/>
    <description value="Scenario 1.4 - Medicatieafspraak met eenheid 'dosis/stuks'"/>
-   <nts:patientTokenFixture href="medmij-medication-fhir3-0-2-nl-core-patient-XXX-BOSCHMAN-token.xml"/>
+   <nts:patientTokenFixture href="medmij-medication-fhir3-0-2-nl-core-patient-XXX-BOSCHMAN-token.xml"
+                            type="xis"/>
    <!--<nts:fixture id="" href=""/>-->
    <!--<nts:variables href=""/>-->
    <!--<nts:includeDateT value=""/>-->
