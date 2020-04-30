@@ -6,7 +6,7 @@
     <name value="MedMij Questionnaires - XIS Server - Scenario 1.1 and 3.1"/>
     <description value="MedMij Questionnaires for FHIR STU3 - XIS Server - Scenario 1.1 and 3.1 - Serve QuestionnaireProvisioningTask, and receive QuestionnaireResponse"/>
     
-    <nts:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-VERKEULEN-token.xml" type="XIS"/>
+    <nts:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-VERKEULEN-token.xml" type="xis"/>
     <nts:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Verkeulen-Intake-ACCEPTED.xml"/>
     <nts:fixture id="response-bundle-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-Transaction-Verkeulen-Intake.xml"/>
     

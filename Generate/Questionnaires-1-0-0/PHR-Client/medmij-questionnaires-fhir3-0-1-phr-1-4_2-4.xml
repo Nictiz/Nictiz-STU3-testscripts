@@ -4,7 +4,7 @@
     <name value="MedMij Questionnaires - PHR Client - Scenario 1.4 and 2.4"/>
     <description value="MedMij Questionnaires for FHIR STU3 - PHR Client - Scenario 1.4 and 2.4 - Retrieve QuestionnaireProvisioningTask with invalid reference, and reject QuestionnaireProvisioningTask"/>
     
-    <nts:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-token.xml" type="PHR"/>
+    <nts:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-token.xml" type="phr"/>
     <nts:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-REQUESTED.xml"/>
     <nts:fixture id="task-update-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-FAILED.xml"/>
     <nts:fixture id="task-minimum-fixture-xml" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-minimum.xml"/>
