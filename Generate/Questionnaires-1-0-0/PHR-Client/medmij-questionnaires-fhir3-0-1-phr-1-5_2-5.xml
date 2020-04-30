@@ -11,24 +11,24 @@
     <nts:fixture id="task-minimum-fixture-json" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-PHQ9E-minimum.json"/>
     
     
-    <nts:variables href="components/phr-variables-taskId.xml"/>
+    <nts:include href="components/phr-variables-taskId.xml"/>
     <nts:includeDateT value="yes"/>
     
     <setup>
-        <nts:actions href="components/phr-setup-checkForOpenTasks.xml"/>
-        <nts:actions href="components/phr-setup-createTask.xml"/>
+        <nts:include href="components/phr-setup-checkForOpenTasks.xml"/>
+        <nts:include href="components/phr-setup-createTask.xml"/>
     </setup>
     
     <test id="Scenario1.5-SearchTask">
         <name value="Scenario1.5 - Search QuestionnaireProvisioningTask(s) for patient 3"/>
         <description value="Test PHR client to search for QuestionnaireProvisioningTasks with status 'requested'. The return value should be a Bundle with a single entry."/>
-        <nts:actions href="components/phr-scenario1-searchTask.xml"/>
+        <nts:include href="components/phr-scenario1-searchTask.xml"/>
     </test>
     <test id="Scenario2.5-RejectTask">
         <name value="Scenario2.5 - Set QuestionnaireProvisioningTask to 'rejected'"/>
         <description value="Test PHR client to set the status of the QuestionnaireProvisioningTask to 'rejected' when the Questionnaire cannot be rendered."/>
-        <nts:actions href="components/phr-operation-updateTask.xml"/>
-        <nts:actions href="components/phr-assert-checkTaskUpdate.xml"/>
+        <nts:include href="components/phr-operation-updateTask.xml"/>
+        <nts:include href="components/phr-assert-checkTaskUpdate.xml"/>
         <action>
             <assert>
                 <description value="Confirm that the status of the Task is 'rejected'"/>
@@ -39,6 +39,6 @@
     </test>            
     
     <teardown>
-        <nts:actions href="components/phr-teardown-deleteTask.xml"/>
+        <nts:include href="components/phr-teardown-deleteTask.xml"/>
     </teardown>
 </TestScript>

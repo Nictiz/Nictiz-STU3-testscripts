@@ -13,38 +13,38 @@
     <nts:fixture id="questionnaire-fixture" href="resources/resources-questionnaires/medmij-questionnaires-fhir3-0-1-vl-Questionnaire-INTAKE-NIEUWE-PATIENT.xml"/>
     <nts:fixture id="response-bundle-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-Transaction-Verkeulen-Intake.xml"/>
        
-    <nts:variables href="components/phr-variables-happyFlow.xml"/>
+    <nts:include href="components/phr-variables-happyFlow.xml"/>
     <nts:includeDateT value="yes"/>
     
     <setup>
-        <nts:actions href="components/phr-setup-checkForOpenTasks.xml"/>
-        <nts:actions href="components/phr-setup-createTask.xml"/>
+        <nts:include href="components/phr-setup-checkForOpenTasks.xml"/>
+        <nts:include href="components/phr-setup-createTask.xml"/>
     </setup>
     
     <test id="Scenario1.1-SearchTask">
         <name value="Scenario1.1 - Search QuestionnaireProvisioningTask(s) for patient 1"/>
         <description value="Test PHR client to search for QuestionnaireProvisioningTasks with status 'requested'. The return value should be a Bundle with a single entry."/>
-        <nts:actions href="components/phr-scenario1-searchTask.xml"/>
+        <nts:include href="components/phr-scenario1-searchTask.xml"/>
     </test>
     <test id="Scenario2.1-RetrieveQuestionnaire">
         <name value="Scenario2.1 - Retrieve Questionnaire"/>
         <description value="Test PHR client to retrieve the Questionnaire resource specified in the QuestionnaireProvisioningTask.output:Questionnaire.reference. This should be a single GET on the Questionnaire resource."/>
-        <nts:actions href="components/phr-scenario2-retrieveQuestionnaire.xml"/>
+        <nts:include href="components/phr-scenario2-retrieveQuestionnaire.xml"/>
     </test>
     <test id="Scenario3.1-part1-SendQuestionnaireResponse">
         <name value="Scenario3.1 - Part 1 - Accept QuestionnaireProvisioningTask"/>
         <description value="Test PHR client to send an update of the QuestionnaireProvisioningTask with status='accepted'. The body of the request should otherwise be the same as the original Task as received from the server."/>
-        <nts:actions href="components/phr-scenario3-acceptTaskUpdate.xml"/>
+        <nts:include href="components/phr-scenario3-acceptTaskUpdate.xml"/>
     </test>
     <test id="Scenario3.1-part2-SendQuestionnaireResponse">
         <name value="Scenario3.1 - Part 2 - Send QuestionnaireResponse"/>
         <description value="Test PHR client to complete the QuestionnaireProvisioningTask with a QuestionnaireResponse instance. This should be a transaction where Task status is set to 'completed', the QuestionnaireResponse is created and the QuestionnaireResponse is linked in Task.output."/>
-        <nts:actions href="components/phr-scenario3-handleTransaction.xml"/>
-        <nts:actions href="components/phr-assert-checkQRIsAlgemeneIntake.xml"/>
+        <nts:include href="components/phr-scenario3-handleTransaction.xml"/>
+        <nts:include href="components/phr-assert-checkQRIsAlgemeneIntake.xml"/>
     </test>
     
     <teardown>
-        <nts:actions href="components/phr-teardown-deleteTask.xml"/>
-        <nts:actions href="components/phr-teardown-deleteQuestionnaireResponse.xml"/>
+        <nts:include href="components/phr-teardown-deleteTask.xml"/>
+        <nts:include href="components/phr-teardown-deleteQuestionnaireResponse.xml"/>
     </teardown>
 </TestScript>

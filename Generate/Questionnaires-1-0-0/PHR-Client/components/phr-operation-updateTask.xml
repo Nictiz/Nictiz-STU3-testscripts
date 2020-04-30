@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Update a previously retrieved Task. This depends on a fixture called 'task-update-fixture' to be present. --> 
-<actions xmlns="http://hl7.org/fhir">
+<nts:parts xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
     <action>
         <operation>
             <type>
@@ -22,4 +22,4 @@
             <sourceId value="task-update-fixture"/>
         </operation>
     </action>
-</actions>
+</nts:parts>
