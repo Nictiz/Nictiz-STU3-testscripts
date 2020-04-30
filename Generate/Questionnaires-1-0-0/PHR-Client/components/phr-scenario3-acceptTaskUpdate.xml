@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<actions xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
-    <nts:actions href="phr-operation-updateTask.xml"/>
-    <nts:actions href="phr-assert-checkTaskUpdate.xml"/>   
+<nts:parts xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+    <nts:include href="phr-operation-updateTask.xml"/>
+    <nts:include href="phr-assert-checkTaskUpdate.xml"/>   
     <action>
         <assert>
             <description value="Confirm that the status of the Task is 'accepted'"/>
@@ -9,4 +9,4 @@
             <expression value="Task.status = 'accepted'"/>
         </assert>
     </action>
-</actions>
+</nts:parts>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<variables xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
-    <nts:variables href="phr-variables-taskId.xml"/>
+<nts:parts xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+    <nts:include href="phr-variables-taskId.xml"/>
     <variable>
         <name value="questionnaire-id"/>
         <expression value="Questionnaire.id"/>
@@ -24,4 +24,4 @@
         <expression value="link.url.replace('Task?code=http%3A%2F%2Floinc.org%7C74468-0&amp;status=requested', '')"/>
         <sourceId value="search-response"/>
     </variable>
-</variables>
+</nts:parts>

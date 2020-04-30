@@ -8,24 +8,24 @@
     <nts:patientTokenFixture href="medmij-questionnaires-fhir3-0-1-nl-core-patient-BIE-VERKEULEN-token.xml" type="xis"/>
     <nts:fixture id="response-bundle-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-Transaction-Bie-Verkeulen-PHQ9-noQR.xml"/>
     
-    <nts:variables href="components/xis-variables-taskId.xml"/>
+    <nts:include href="components/xis-variables-taskId.xml"/>
     <nts:includeDateT value="yes"/>
     
     <setup>
         <nts:fixture id="task-requested-fixture" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-Verkeulen-PHQ9-REQUESTED.xml" />
-        <nts:actions href="components/xis-setup-createTask.xml"/>            
+        <nts:include href="components/xis-setup-createTask.xml"/>            
     </setup>
     
     <test id="Scenario1.4-ServeTask">
         <name value="Scenario1.4 - Serve QuestionnaireProvisioningTask(s) for patient 2"/>
         <description value="Test XIS server to serve a QuestionnaireProvisioningTask with status 'requested'. This Task is found using a search operation and the XIS server should return a Bundle with a single entry."/>
-        <nts:actions href="components/xis-scenario1-serveTask.xml"/>
+        <nts:include href="components/xis-scenario1-serveTask.xml"/>
     </test>
     
     <test id="Scenario3.4-MissingQuestionnaireResponse">
         <name value="Scenario3.4 - Reject QuestionnaireProvisioningTask status 'completed' without QuestionnaireResponse."/>
         <description value="Test XIS server to reject attempts from the client to send updates of the QuestionnaireProvisioningTask with status 'completed' without also referencing a QuestionnaireResponse resource. The server should respond with a 400 or 500 type status code and an OperationOutcome with details of the problem."/>
-        <nts:actions href="components/xis-scenario3-receiveQuestionnaireResponse.xml"/>
+        <nts:include href="components/xis-scenario3-receiveQuestionnaireResponse.xml"/>
         <action>
             <assert>
                 <description value="Confirm that the transaction is rejected"/>
