@@ -21,7 +21,7 @@
             <responseId value="search-response"/>
         </operation>
     </action>
-    <nts:include href="../../../general/common-tests/assert-authorizationHeader.xml"/>
+    <nts:include scope="common" value="assert-authorizationHeader"/>
     <action>
         <assert>
             <description value="Confirm that query parameter 'owner=' was not present to avoid BSNs in the URL."/>
