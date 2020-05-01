@@ -11,24 +11,24 @@
     <nts:fixture id="task-minimum-fixture-json" href="resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-invalid-minimum.json"/>
     
     
-    <nts:include href="components/phr-variables-taskId.xml"/>
+    <nts:include value="phr-variables-taskId"/>
     <nts:includeDateT value="yes"/>
     
     <setup>
-        <nts:include href="components/phr-setup-checkForOpenTasks.xml"/>
-        <nts:include href="components/phr-setup-createTask.xml"/>
+        <nts:include value="phr-setup-checkForOpenTasks"/>
+        <nts:include value="phr-setup-createTask"/>
     </setup>
     
     <test id="Scenario1.4-SearchTask">
         <name value="Scenario1.4 - Search QuestionnaireProvisioningTask(s) for patient 3"/>
         <description value="Test PHR client to search for QuestionnaireProvisioningTasks with status 'requested'. The return value should be a Bundle with a single entry."/>
-        <nts:include href="components/phr-scenario1-searchTask.xml"/>
+        <nts:include value="phr-scenario1-searchTask"/>
     </test>
     <test id="Scenario2.4-FailTask">
         <name value="Scenario2.4 - Set QuestionnaireProvisioningTask to 'failed'"/>
         <description value="Test PHR client to set the status of the QuestionnaireProvisioningTask to 'failed' when the Questionnaire cannot be retrieved."/>
-        <nts:include href="components/phr-operation-updateTask.xml"/>
-        <nts:include href="components/phr-assert-checkTaskUpdate.xml"/>
+        <nts:include value="phr-operation-updateTask"/>
+        <nts:include value="phr-assert-checkTaskUpdate"/>
         <action>
             <assert>
                 <description value="Confirm that the status of the Task is 'failed'"/>
@@ -39,6 +39,6 @@
     </test>            
     
     <teardown>
-        <nts:include href="components/phr-teardown-deleteTask.xml"/>
+        <nts:include value="phr-teardown-deleteTask"/>
     </teardown>
 </TestScript>

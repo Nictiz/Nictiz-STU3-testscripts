@@ -20,5 +20,5 @@
             <sourceId value="response-bundle-fixture"/>
         </operation>
     </action>
-    <nts:include href="xis-assert-transactionBundle.xml"/>
+    <nts:include value="xis-assert-transactionBundle"/>
 </nts:parts>

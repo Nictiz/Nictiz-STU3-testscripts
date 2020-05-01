@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nts:parts xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
-    <nts:include href="phr-variables-taskId.xml"/>
+    <nts:include value="phr-variables-taskId"/>
     <variable>
         <name value="questionnaire-id"/>
         <expression value="Questionnaire.id"/>
