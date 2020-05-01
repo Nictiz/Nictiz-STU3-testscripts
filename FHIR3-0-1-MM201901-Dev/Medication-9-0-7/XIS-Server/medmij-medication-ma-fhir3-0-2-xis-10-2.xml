@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/medmij-medication-ma-fhir3-0-2-xis-10-2"/>
    <name value="Medmij Medication - XIS Server - Scenario 10.2"/>
    <status value="active"/>
-   <date value="2020-04-29"/>
+   <date value="2020-05-01"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -33,15 +33,11 @@
    <!--<nts:variables href=""/>-->
    <!--<nts:includeDateT value=""/>-->
    <!--<setup><nts:actions href=""/></setup>-->
-   <fixture id="patient-token-fixture">
-      <resource>
-         <reference value="../_reference/medmij-medication-fhir3-0-2-nl-core-patient-XXX-KESTER-token.xml"/>
-      </resource>
-   </fixture>
    <variable>
       <name value="patient-token-id"/>
-      <expression value="Patient.id"/>
-      <sourceId value="patient-token-fixture"/>
+      <defaultValue value=""/>
+      <!--patientTokenFixture mp9-nl-core-patient-XXX-KESTER-token.xml not available-->
+      <description value="OAuth Token for current patient"/>
    </variable>
    <test id="mg-mgr-mg-MA-Scenarioset10-10-2optioneel">
       <name value="Scenario 10.2"/>
