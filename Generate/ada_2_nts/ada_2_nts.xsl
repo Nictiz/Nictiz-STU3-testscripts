@@ -6,9 +6,18 @@
     version="2.0">
     
     <xsl:param name="infoStandard">Medmij Medication</xsl:param>
+    <xsl:param name="infoStandardVersion">9.0.7</xsl:param>
     <xsl:param name="fhirVersion">fhir3-0-2</xsl:param>
     <xsl:param name="targetSystem">xis</xsl:param>
     
+    <xsl:variable name="shortInfoStandard">
+        <xsl:choose>
+            <xsl:when test="$infoStandard='Medmij Medication'">
+                <xsl:text>mp</xsl:text>
+                <xsl:value-of select="substring-before($infoStandardVersion,'.')"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="scenarioId" select="/adaxml/data/*/@id"/>
     <xsl:variable name="partId">
         <xsl:choose>
@@ -16,6 +25,13 @@
             <xsl:when test="starts-with($scenarioId,'mg-mgr-mg-VV')">vv</xsl:when>
             <xsl:when test="starts-with($scenarioId,'mo-mor-ma')">mo</xsl:when>
         </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="outputDirBase">
+        <xsl:choose>
+            <xsl:when test="$infoStandard='Medmij Medication'">Medication</xsl:when>
+        </xsl:choose>
+        <xsl:text>-</xsl:text>
+        <xsl:value-of select="translate($infoStandardVersion,'.','-')"/>
     </xsl:variable>
     
     <xsl:variable name="scenarioNr">
@@ -49,7 +65,9 @@
         <xsl:text>.xml</xsl:text>
     </xsl:variable>
     <xsl:variable name="outputDir">
-        <xsl:text>../../../Medication-9-0-7/</xsl:text>
+        <xsl:text>../../../</xsl:text>
+        <xsl:value-of select="$outputDirBase"/>
+        <xsl:text>/</xsl:text>
         <xsl:choose>
             <xsl:when test="$targetSystem='xis'">XIS-Server</xsl:when>
             <xsl:when test="$targetSystem='phr'">PHR-Client</xsl:when>
@@ -80,7 +98,7 @@
                 <name value="{$infoStandard} - {$targetSystemFull} - Scenario {$scenarioNr}"/>
                 <description value="Scenario {$scenarioNr} - {$description}"/>
                 
-                <nts:patientTokenFixture href="{translate(lower-case($infoStandard),' ','-')}-{$fhirVersion}-nl-core-patient-{$patientName}-token.xml" type="{$targetSystem}"/>
+                <nts:patientTokenFixture href="{$shortInfoStandard}-nl-core-patient-{$patientName}-token.xml" type="{$targetSystem}"/>
                 
                 <xsl:comment>&lt;nts:fixture id="" href=""/></xsl:comment>
                 <!--<nts:fixture id="" href=""/>-->

@@ -3,8 +3,7 @@
    <id value="medmij-medication-ma-fhir3-0-2-xis-1-3"/>
    <name value="Medmij Medication - XIS Server - Scenario 1.3"/>
    <description value="Scenario 1.3 - Medicatieafspraak gebruiksperiode ingangsdatum (chronische medicatie)"/>
-   <nts:patientTokenFixture href="medmij-medication-fhir3-0-2-nl-core-patient-XXX-BOSCHMAN-token.xml"
-                            type="xis"/>
+   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-BOSCHMAN-token.xml" type="xis"/>
    <!--<nts:fixture id="" href=""/>-->
    <!--<nts:variables href=""/>-->
    <!--<nts:includeDateT value=""/>-->

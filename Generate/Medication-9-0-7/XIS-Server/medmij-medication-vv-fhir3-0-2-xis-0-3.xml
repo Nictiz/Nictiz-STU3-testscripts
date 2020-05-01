@@ -3,8 +3,7 @@
    <id value="medmij-medication-vv-fhir3-0-2-xis-0-3"/>
    <name value="Medmij Medication - XIS Server - Scenario 0.3"/>
    <description value="Scenario 0.3 - Verstrekkingsverzoek met een filter op product code (PRK 3956)&#xA;(Antwoord: bericht met 1 verstrekkingsverzoek)"/>
-   <nts:patientTokenFixture href="medmij-medication-fhir3-0-2-nl-core-patient-XXX-JANKIE-token.xml"
-                            type="xis"/>
+   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-JANKIE-token.xml" type="xis"/>
    <!--<nts:fixture id="" href=""/>-->
    <!--<nts:variables href=""/>-->
    <!--<nts:includeDateT value=""/>-->
