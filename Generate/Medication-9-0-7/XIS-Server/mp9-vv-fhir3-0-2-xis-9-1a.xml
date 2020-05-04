@@ -11,6 +11,24 @@
    <test id="mg-mgr-mg-VV-Scenarioset9-9-1aoptioneel">
       <name value="Scenario 9.1a"/>
       <description value="Scenario 9.1a - Logistieke verbruiksperiode"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="MedicationRequest"/>
+            <description value="Test XIS server to serve DispenseRequest (NL: VerstrekkingsVerzoek) - Logistieke verbruiksperiode"/>
+            <accept value="xml"/>
+            <destination value="1"/>
+            <origin value="1"/>
+            <params value="?category=http://snomed.info/sct|52711000146108&amp;_include=MedicationRequest:medication"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
    </test>
    <!--<teardown><nts:actions href=""/></teardown>-->
 </TestScript>

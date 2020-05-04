@@ -11,6 +11,24 @@
    <test id="mg-mgr-mg-MA-Scenarioset1-1-4">
       <name value="Scenario 1.4"/>
       <description value="Scenario 1.4 - Medicatieafspraak met eenheid 'dosis/stuks'"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="MedicationRequest"/>
+            <description value="Test XIS server to serve MediactionAgreement (NL: MedicatieAfspraak) - Medicatieafspraak met eenheid 'dosis/stuks'"/>
+            <accept value="xml"/>
+            <destination value="1"/>
+            <origin value="1"/>
+            <params value="?category=http://snomed.info/sct|16076005&amp;_include=MedicationRequest:medication"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
    </test>
    <!--<teardown><nts:actions href=""/></teardown>-->
 </TestScript>

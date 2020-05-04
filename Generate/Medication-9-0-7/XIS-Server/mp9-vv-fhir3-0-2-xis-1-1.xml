@@ -11,6 +11,24 @@
    <test id="mg-mgr-mg-VV-Scenarioset1-1-1">
       <name value="Scenario 1.1"/>
       <description value="Scenario 1.1 - Initieel verstrekkingsverzoek en extra verstrekkingsverzoek behorende bij één MA"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="MedicationRequest"/>
+            <description value="Test XIS server to serve DispenseRequest (NL: VerstrekkingsVerzoek) - Initieel verstrekkingsverzoek en extra verstrekkingsverzoek behorende bij één MA"/>
+            <accept value="xml"/>
+            <destination value="1"/>
+            <origin value="1"/>
+            <params value="?category=http://snomed.info/sct|52711000146108&amp;_include=MedicationRequest:medication"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
    </test>
    <!--<teardown><nts:actions href=""/></teardown>-->
 </TestScript>
