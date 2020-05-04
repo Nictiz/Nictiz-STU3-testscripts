@@ -28,11 +28,19 @@
     </xsl:variable>
     <xsl:variable name="longPartId">
         <xsl:choose>
-            <xsl:when test="starts-with($scenarioId,'mg-mgr-mg-MA')">MediactionAgreement (NL: MedicatieAfspraak)</xsl:when>
-            <xsl:when test="starts-with($scenarioId,'mg-mgr-mg-VV')">DispenseRequest (NL: VerstrekkingsVerzoek)</xsl:when>
-            <xsl:when test="starts-with($scenarioId,'mo-mor-ma')">MedicationOverview (NL: MedicatieOverzicht)</xsl:when>
+            <xsl:when test="starts-with($partId,'ma')">MediactionAgreement (NL: MedicatieAfspraak)</xsl:when>
+            <xsl:when test="starts-with($partId,'vv')">DispenseRequest (NL: VerstrekkingsVerzoek)</xsl:when>
+            <xsl:when test="starts-with($partId,'mo')">MedicationOverview (NL: MedicatieOverzicht)</xsl:when>
         </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="partSnomedCategoryCode">
+        <xsl:choose>
+            <xsl:when test="starts-with($partId,'ma')">16076005</xsl:when>
+            <xsl:when test="starts-with($partId,'vv')">52711000146108</xsl:when>
+            <!-- MedicationOverview is retrieved with a Operation. No Snomedcode needed  -->
+        </xsl:choose>
+    </xsl:variable>
+    
     <xsl:variable name="outputDirBase">
         <xsl:choose>
             <xsl:when test="$infoStandard='Medication Process'">Medication</xsl:when>
@@ -124,6 +132,50 @@
                     <name value="Scenario {$scenarioNr}"/>
                     <description value="Scenario {$scenarioNr} - {$description}"/>
                     <!--<nts:actions href="components/phr-scenario1-searchTask.xml"/>-->
+                    <!-- Example action.operation Template -->
+                    
+                    <xsl:choose>
+                        <xsl:when test="$partId='mo'">
+                            <action>
+                                <operation>
+                                    <type>
+                                        <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+                                        <code value="search"/>
+                                    </type>
+                                    <description value="Test XIS server to serve {$longPartId} - {$description}"/>
+                                    <accept value="xml"/>
+                                    <destination value="1"/>
+                                    <method value="post"/>
+                                    <origin value="1"/>
+                                    <params value="$medication-overview"/>
+                                    <requestHeader>
+                                        <field value="Authorization"/>
+                                        <value value="${{patient-token-id}}"/>
+                                    </requestHeader>
+                                </operation>
+                            </action>  
+                        </xsl:when>
+                        <xsl:when test="$partId='ma' or 'vv'">
+                            <action>
+                                <operation>
+                                    <type>
+                                        <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+                                        <code value="search"/>
+                                    </type>
+                                    <resource value="MedicationRequest"/>
+                                    <description value="Test XIS server to serve {$longPartId} - {$description}"/>
+                                    <accept value="xml"/>
+                                    <destination value="1"/>
+                                    <origin value="1"/>
+                                    <params value="?category=http://snomed.info/sct|{$partSnomedCategoryCode}&amp;_include=MedicationRequest:medication"/>
+                                    <requestHeader>
+                                        <field value="Authorization"/>
+                                        <value value="${{patient-token-id}}"/>
+                                    </requestHeader>
+                                </operation>
+                            </action>    
+                        </xsl:when>
+                    </xsl:choose>
                 </test>
                 
                 <xsl:comment>&lt;teardown>&lt;nts:actions href=""/>&lt;/teardown></xsl:comment>
