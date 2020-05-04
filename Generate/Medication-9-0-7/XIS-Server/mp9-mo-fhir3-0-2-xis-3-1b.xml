@@ -29,6 +29,7 @@
             </requestHeader>
          </operation>
       </action>
+      <nts:actions href="../../general/common-tests/assert-responseSuccess.xml"/>
    </test>
    <!--<teardown><nts:actions href=""/></teardown>-->
 </TestScript>

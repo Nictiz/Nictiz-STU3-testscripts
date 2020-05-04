@@ -176,6 +176,10 @@
                             </action>    
                         </xsl:when>
                     </xsl:choose>
+                    
+                    <!-- added first action to confirm succesfull response-->
+                    <nts:actions href="../../general/common-tests/assert-responseSuccess.xml"/>
+                    
                 </test>
                 
                 <xsl:comment>&lt;teardown>&lt;nts:actions href=""/>&lt;/teardown></xsl:comment>
