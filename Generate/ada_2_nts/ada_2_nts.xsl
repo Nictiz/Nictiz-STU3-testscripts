@@ -153,7 +153,8 @@
                                         <value value="${{patient-token-id}}"/>
                                     </requestHeader>
                                 </operation>
-                            </action>  
+                            </action>
+                            <nts:actions href="../../general/common-tests/assert-responseBundleContent.xml"/>
                         </xsl:when>
                         <xsl:when test="$partId='ma' or 'vv'">
                             <action>
@@ -173,14 +174,11 @@
                                         <value value="${{patient-token-id}}"/>
                                     </requestHeader>
                                 </operation>
-                            </action>    
+                            </action>
+                            <nts:actions href="../../general/common-tests/assert-responseSearchBundleSuccess.xml"/>
+                            <nts:actions href="../../general/common-tests/assert-responseBundleContent.xml"/>
                         </xsl:when>
-                    </xsl:choose>
-                    
-                    <!-- added first action to confirm succesfull response-->
-                    <nts:actions href="../../general/common-tests/assert-responseSearchBundleSuccess.xml"/>
-                    <nts:actions href="../../general/common-tests/assert-responseBundleContent.xml"/>
-                    
+                    </xsl:choose>                    
                 </test>
                 
                 <xsl:comment>&lt;teardown>&lt;nts:actions href=""/>&lt;/teardown></xsl:comment>
