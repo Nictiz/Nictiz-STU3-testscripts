@@ -178,7 +178,8 @@
                     </xsl:choose>
                     
                     <!-- added first action to confirm succesfull response-->
-                    <nts:actions href="../../general/common-tests/assert-responseSuccess.xml"/>
+                    <nts:actions href="../../general/common-tests/assert-responseSearchBundleSuccess.xml"/>
+                    <nts:actions href="../../general/common-tests/assert-responseBundleContent.xml"/>
                     
                 </test>
                 
