@@ -1,5 +1,5 @@
 <MedicationRequest xmlns="http://hl7.org/fhir">
-   <id value="MBH-907-HPKvoorschrijven-MA"/>
+   <id value="MBH-907-logistiekeverbruiksperiode-start-eind-MA"/>
    <meta>
       <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-MedicationAgreement"/>
    </meta>
@@ -7,33 +7,33 @@
       <status value="generated"/>
       <div xmlns="http://www.w3.org/1999/xhtml">
          <table>
-            <caption>Medicatieafspraak. Subject: <a href="Patient/XXX-Kester">B. van XXX_Kester</a>. Id: MBH_907_HPKvoorschrijven_MA (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1), Categorie: <span title="Prescription (procedure) (16076005 - SNOMED CT)">Prescription (procedure)</span>, <span style="display: block;">Intentie: aanvraag</span>
-               <span style="display: block;">Aangevraagd door: <a href="PractitionerRole/000001111010000001111">Peter van Pulver || Huisartsen, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners</a>
+            <caption>Medicatieafspraak. Subject: <a href="Patient/A-XXX-KLOKGIETERS">A. XXX_Klokgieters</a>. Id: MBH_907_logistiekeverbruiksperiode_start_eind_MA (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1), Categorie: <span title="Prescription (procedure) (16076005 - SNOMED CT)">Prescription (procedure)</span>, <span style="display: block;">Intentie: aanvraag</span>
+               <span style="display: block;">Aangevraagd door: <a href="PractitionerRole/000001112010000001111">Bertine van Doorn || Huisartsen, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners</a>
                </span>
             </caption>
             <tbody>
                <tr>
                   <th>Medicamenteuze behandel-id</th>
-                  <td>MBH_907_HPKvoorschrijven (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.1.1)</td>
+                  <td>MBH_907_logistiekeverbruiksperiode_start_eind (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.1.1)</td>
                </tr>
                <tr>
                   <th>Medicatie</th>
                   <td>
-                     <a href="Medication/2-16-840-1-113883-2-4-4-7-2214350">XARELTO TABLET FILMOMHULD 20MG</a>
+                     <a href="Medication/49484-2-16-840-1-113883-2-4-4-10">Acetylsalicylzuur tabletmsr 100mg</a>
                   </td>
                </tr>
                <tr>
                   <th>Gemaakt</th>
-                  <td>${DATE, T, D, -170}T13:00:00+02:00</td>
+                  <td>${DATE, T, D, +0}T11:00:00+02:00</td>
                </tr>
                <tr>
                   <th>Gebruiksduur</th>
-                  <td>${DATE, T, D, -170}T00:00:00+02:00 - ${DATE, T, D, -21}T23:59:59+02:00</td>
+                  <td>${DATE, T, D, +10}T00:00:00+02:00 - ${DATE, T, M, +12}T23:59:59+02:00</td>
                </tr>
                <tr>
                   <th>Doseerinstructie</th>
                   <td>
-                     <div>Tekst: Vanaf &lt;T-170D&gt; t/m &lt;T-21D&gt;, 1 maal per dag 1 stuk, oraal</div>
+                     <div>Tekst: Vanaf &lt;T+10D{00:00:00}&gt; t/m &lt;T+12M{23:59:59}&gt;, 1 maal per dag 1 stuk, oraal</div>
                      <div>Timing: <div>eenmalig per dag</div>
                      </div>
                      <div>Toedieningsweg: <span title="Oraal (9 - G-Standaard thesaurus subtabel 0007)">Oraal</span>
@@ -47,19 +47,19 @@
    </text>
    <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-Medication-PeriodOfUse">
       <valuePeriod>
-         <start value="${DATE, T, D, -170}T00:00:00+02:00"/>
-         <end value="${DATE, T, D, -21}T23:59:59+02:00"/>
+         <start value="${DATE, T, D, +10}T00:00:00+02:00"/>
+         <end value="${DATE, T, M, +12}T23:59:59+02:00"/>
       </valuePeriod>
    </extension>
    <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-Medication-MedicationTreatment">
       <valueIdentifier>
          <system value="urn:oid:2.16.840.1.113883.2.4.3.11.999.77.1.1"/>
-         <value value="MBH_907_HPKvoorschrijven"/>
+         <value value="MBH_907_logistiekeverbruiksperiode_start_eind"/>
       </valueIdentifier>
    </extension>
    <identifier>
       <system value="urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1"/>
-      <value value="MBH_907_HPKvoorschrijven_MA"/>
+      <value value="MBH_907_logistiekeverbruiksperiode_start_eind_MA"/>
    </identifier>
    <intent value="order"/>
    <category>
@@ -71,28 +71,28 @@
       <text value="Medicatieafspraak"/>
    </category>
    <medicationReference>
-      <reference value="Medication/2-16-840-1-113883-2-4-4-7-2214350"/>
-      <display value="XARELTO TABLET FILMOMHULD 20MG"/>
+      <reference value="Medication/49484-2-16-840-1-113883-2-4-4-10"/>
+      <display value="Acetylsalicylzuur tabletmsr 100mg"/>
    </medicationReference>
    <subject>
-      <reference value="Patient/XXX-Kester"/>
-      <display value="B. van XXX_Kester"/>
+      <reference value="Patient/A-XXX-KLOKGIETERS"/>
+      <display value="A. XXX_Klokgieters"/>
    </subject>
-   <authoredOn value="${DATE, T, D, -170}T13:00:00+02:00"/>
+   <authoredOn value="${DATE, T, D, +0}T11:00:00+02:00"/>
    <requester>
       <agent>
          <extension url="http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference">
             <valueReference>
-               <reference value="PractitionerRole/000001111010000001111"/>
-               <display value="Peter van Pulver || Huisartsen, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners"/>
+               <reference value="PractitionerRole/000001112010000001111"/>
+               <display value="Bertine van Doorn || Huisartsen, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners"/>
             </valueReference>
          </extension>
-         <reference value="Practitioner/0000011112-16-528-1-1007-3-1"/>
-         <display value="Peter van Pulver"/>
+         <reference value="Practitioner/0000011122-16-528-1-1007-3-1"/>
+         <display value="Bertine van Doorn"/>
       </agent>
    </requester>
    <dosageInstruction>
-      <text value="Vanaf &lt;T-170D&gt; t/m &lt;T-21D&gt;, 1 maal per dag 1 stuk, oraal"/>
+      <text value="Vanaf &lt;T+10D{00:00:00}&gt; t/m &lt;T+12M{23:59:59}&gt;, 1 maal per dag 1 stuk, oraal"/>
       <timing>
          <repeat>
             <frequency value="1"/>
