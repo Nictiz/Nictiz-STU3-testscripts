@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+   <id value="mp9-vv-fhir3-0-2-xis-9-1c-xml"/>
+   <name value="Medication Process 9.0.7 - DispenseRequest (NL: VerstrekkingsVerzoek) - XIS Server - Scenario 9.1c - XML Format"/>
+   <description value="Scenario 9.1c - Logistieke verbruiksperiode"/>
+   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-INCIDENT-A-token.xml" type="xis"/>
+   <!--<nts:fixture id="" href=""/>-->
+   <!--<nts:variables href=""/>-->
+   <!--<nts:includeDateT value=""/>-->
+   <!--<setup><nts:actions href=""/></setup>-->
+   <test id="mg-mgr-mg-VV-Scenarioset9-9-1coptioneel">
+      <name value="Scenario 9.1c"/>
+      <description value="Scenario 9.1c - Logistieke verbruiksperiode"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="MedicationRequest"/>
+            <description value="Test XIS server to serve DispenseRequest (NL: VerstrekkingsVerzoek) - Logistieke verbruiksperiode"/>
+            <accept value="xml"/>
+            <destination value="1"/>
+            <origin value="1"/>
+            <params value="?category=http://snomed.info/sct|52711000146108&amp;_include=MedicationRequest:medication"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <nts:actions href="../../general/common-tests/assert-responseSearchBundleSuccess.xml"/>
+      <nts:actions href="../../general/common-tests/assert-responseBundleContent.xml"/>
+   </test>
+   <!--<teardown><nts:actions href=""/></teardown>-->
+</TestScript>
