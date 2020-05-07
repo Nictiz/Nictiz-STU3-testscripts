@@ -4,33 +4,19 @@
    <name value="Medication Process 9.0.7 - MedicationAgreement (NL: MedicatieAfspraak) - XIS Server - Scenario 6.11 - XML Format"/>
    <description value="Scenario 6.11 - Afbouw schema en doseerduur"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-MAASZ-token.xml" type="xis"/>
-   <!--<nts:fixture id="" href=""/>-->
-   <!--<nts:variables href=""/>-->
-   <!--<nts:includeDateT value=""/>-->
-   <!--<setup><nts:actions href=""/></setup>-->
+   <profile id="bundle-profile">
+      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
+   </profile>
    <test id="mg-mgr-mg-MA-Scenarioset6-6-11optioneel">
       <name value="Scenario 6.11"/>
       <description value="Scenario 6.11 - Afbouw schema en doseerduur"/>
-      <action>
-         <operation>
-            <type>
-               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
-               <code value="search"/>
-            </type>
-            <resource value="MedicationRequest"/>
-            <description value="Test XIS server to serve MedicationAgreement (NL: MedicatieAfspraak) - Afbouw schema en doseerduur"/>
-            <accept value="xml"/>
-            <destination value="1"/>
-            <origin value="1"/>
-            <params value="?category=http://snomed.info/sct|16076005&amp;_include=MedicationRequest:medication"/>
-            <requestHeader>
-               <field value="Authorization"/>
-               <value value="${patient-token-id}"/>
-            </requestHeader>
-         </operation>
-      </action>
-      <nts:actions href="../../general/common-tests/assert-responseSearchBundleSuccess.xml"/>
-      <nts:actions href="../../general/common-tests/assert-responseBundleContent.xml"/>
+      <nts:include value="xis-ma-vv-operation-search">
+         <nts:variable name="description" value="Test XIS server to serve  - "/>
+         <nts:variable name="accept" value="xml"/>
+         <nts:variable name="params"
+                       value="?category=http://snomed.info/sct|&amp;_include=MedicationRequest:medication"/>
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
    </test>
-   <!--<teardown><nts:actions href=""/></teardown>-->
 </TestScript>
