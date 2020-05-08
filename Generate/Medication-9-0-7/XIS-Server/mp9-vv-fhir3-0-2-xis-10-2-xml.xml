@@ -11,12 +11,19 @@
       <name value="Scenario 10.2"/>
       <description value="Scenario 10.2 - ZI-nr geneesmiddel"/>
       <nts:include value="xis-ma-vv-operation-search">
-         <nts:variable name="description" value="Test XIS server to serve  - "/>
+         <nts:variable name="description"
+                       value="Test XIS server to serve DispenseRequest (NL: VerstrekkingsVerzoek) - ZI-nr geneesmiddel"/>
          <nts:variable name="accept" value="xml"/>
          <nts:variable name="params"
-                       value="?category=http://snomed.info/sct|&amp;_include=MedicationRequest:medication"/>
+                       value="?category=http://snomed.info/sct|52711000146108&amp;_include=MedicationRequest:medication"/>
       </nts:include>
       <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
       <nts:include value="assert-responseBundleContent" scope="common"/>
+      <nts:include value="assert-returnCount" scope="project">
+         <nts:variable name="description"
+                       value="Confirm that the returned searchset Bundle contains 1 DispenseRequest."/>
+         <nts:variable name="expression"
+                       value="Bundle.entry.where(resource.is(MedicationRequest)).count() = 1"/>
+      </nts:include>
    </test>
 </TestScript>
