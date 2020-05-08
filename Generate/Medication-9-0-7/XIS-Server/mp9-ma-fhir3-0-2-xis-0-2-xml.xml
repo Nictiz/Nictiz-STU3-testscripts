@@ -11,12 +11,19 @@
       <name value="Scenario 0.2"/>
       <description value="Scenario 0.2 - Specifieke medicatieafspraak met identificaties als filter (in kwalificatiesimulator het id van &#34;MBH_907_QA1_MA&#34; invoeren)&#xA;(Antwoord: bericht met 1 medicatieafspraak)"/>
       <nts:include value="xis-ma-vv-operation-search">
-         <nts:variable name="description" value="Test XIS server to serve  - "/>
+         <nts:variable name="description"
+                       value="Test XIS server to serve MedicationAgreement (NL: MedicatieAfspraak) - Specifieke medicatieafspraak met identificaties als filter (in kwalificatiesimulator het id van &#34;MBH_907_QA1_MA&#34; invoeren)&#xA;(Antwoord: bericht met 1 medicatieafspraak)"/>
          <nts:variable name="accept" value="xml"/>
          <nts:variable name="params"
-                       value="?category=http://snomed.info/sct|&amp;_include=MedicationRequest:medication"/>
+                       value="?category=http://snomed.info/sct|16076005&amp;_include=MedicationRequest:medication"/>
       </nts:include>
       <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
       <nts:include value="assert-responseBundleContent" scope="common"/>
+      <nts:include value="assert-returnCount" scope="project">
+         <nts:variable name="description"
+                       value="Confirm that the returned searchset Bundle contains 1 MedicationAgreement."/>
+         <nts:variable name="expression"
+                       value="Bundle.entry.where(resource.is(MedicationRequest)).count() = 1"/>
+      </nts:include>
    </test>
 </TestScript>
