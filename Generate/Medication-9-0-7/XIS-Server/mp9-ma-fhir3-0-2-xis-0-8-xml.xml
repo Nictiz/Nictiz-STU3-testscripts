@@ -14,8 +14,8 @@
          <nts:variable name="description"
                        value="Test XIS server to serve MedicationAgreement (NL: MedicatieAfspraak) - Een antwoord zonder medicatieafspraken (filter op gebruiksperiode – einddatum (alles voor T-110))&#xA;(Antwoord: bericht zonder medicatieafspraken)"/>
          <nts:variable name="accept" value="xml"/>
-         <nts:variable name="params"
-                       value="?category=http://snomed.info/sct|16076005&amp;_include=MedicationRequest:medication"/>
+         <nts:variable name="params" 
+                       value="?category=http://snomed.info/sct|16076005&amp;periodofuse=le${DATE, T, D,-110}&amp;_include=MedicationRequest:medication"/>
       </nts:include>
       <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
       <nts:include value="assert-responseBundleContent" scope="common"/>
