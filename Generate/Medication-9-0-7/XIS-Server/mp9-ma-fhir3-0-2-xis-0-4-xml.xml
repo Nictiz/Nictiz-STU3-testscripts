@@ -7,6 +7,7 @@
    <profile id="bundle-profile">
       <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
    </profile>
+   <nts:includeDateT value="yes"/>
    <test id="mg-mgr-mg-MA-Scenarioset0-0-4">
       <name value="Scenario 0.4"/>
       <description value="Scenario 0.4 - Medicatieafspraken met een filter op gebruiksperiode – ingangsdatum (alles vanaf T-21)&#xA;(Antwoord: bericht met 4 medicatieafspraken)"/>
