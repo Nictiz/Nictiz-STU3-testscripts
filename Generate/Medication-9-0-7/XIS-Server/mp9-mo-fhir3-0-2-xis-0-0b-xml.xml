@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript" nts:scenario="server">
    <id value="mp9-mo-fhir3-0-2-xis-0-0b-xml"/>
    <name value="Medication Process 9.0.7 - MedicationOverview (NL: MedicatieOverzicht) - XIS Server - Scenario 0.0b - XML Format"/>
    <description value="Scenario 0.0b - &lt;div&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;Systeemrol controle (MP-MGB versus MP-MOB)&lt;/span&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;: medicatie&lt;/span&gt;&lt;strong style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;overzicht&lt;/strong&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;&amp;nbsp;beschikbaarstellen&lt;/span&gt;&lt;/div&gt;"/>
-   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-JANKIE-token.xml" type="xis"/>
+   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-JANKIE-token.xml" />
    <profile id="bundle-profile">
       <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
    </profile>
