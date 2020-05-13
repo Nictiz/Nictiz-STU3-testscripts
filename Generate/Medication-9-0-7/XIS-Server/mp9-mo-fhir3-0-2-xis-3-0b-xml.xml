@@ -11,9 +11,9 @@
       <name value="Scenario 3.0b"/>
       <description value="Scenario 3.0b - &lt;div&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;Onderbroken medicatieafspraak&lt;/span&gt;&lt;/div&gt;"/>
       <nts:include value="xis-mo-operation-post">
-         <nts:variable name="description"
+         <nts:with-parameter name="description"
                        value="Test XIS server to serve MedicationOverview (NL: MedicatieOverzicht) - &lt;div&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;Onderbroken medicatieafspraak&lt;/span&gt;&lt;/div&gt;"/>
-         <nts:variable name="accept" value="xml"/>
+         <nts:with-parameter name="accept" value="xml"/>
       </nts:include>
       <nts:include value="assert-responseBundleContent" scope="common"/>
    </test>
