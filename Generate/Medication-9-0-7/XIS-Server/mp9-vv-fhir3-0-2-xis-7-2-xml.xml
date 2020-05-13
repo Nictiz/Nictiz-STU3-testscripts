@@ -24,9 +24,9 @@
       </nts:include>
       <nts:include value="assert-returnCount" scope="project">
          <nts:with-parameter name="description"
-                       value="Confirm that the returned searchset Bundle contains 1 DispenseRequest."/>
+                       value="Confirm that the returned searchset Bundle contains 3 DispenseRequest."/>
          <nts:with-parameter name="expression"
-                       value="Bundle.entry.where(resource.is(MedicationRequest)).count() = 1"/>
+                       value="Bundle.entry.where(resource.is(MedicationRequest)).count() = 3"/>
       </nts:include>
    </test>
 </TestScript>
