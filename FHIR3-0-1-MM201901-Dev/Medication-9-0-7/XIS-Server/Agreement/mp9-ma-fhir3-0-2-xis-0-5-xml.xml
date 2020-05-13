@@ -44,7 +44,7 @@
    </variable>
    <test id="mg-mgr-mg-MA-Scenarioset0-0-5">
       <name value="Scenario 0.5"/>
-      <description value="Scenario 0.5 - Medicatieafspraken met een filter op gebruiksperiode – einddatum (alles voor T-21)&#xA;(Antwoord: bericht met 3 medicatieafspraken)"/>
+      <description value="Scenario 0.5 - Medicatieafspraken met een filter op gebruiksperiode – einddatum (alles voor T-22)&#xA;(Antwoord: bericht met 3 medicatieafspraken)"/>
       <action>
          <operation>
             <type>
@@ -56,7 +56,7 @@
             <accept value="xml"/>
             <destination value="1"/>
             <origin value="1"/>
-            <params value="?category=http://snomed.info/sct|16076005&amp;periodofuse=le${DATE, T, D,-21}&amp;_include=MedicationRequest:medication"/>
+            <params value="?category=http://snomed.info/sct|16076005&amp;periodofuse=le${DATE, T, D,-22}&amp;_include=MedicationRequest:medication"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -119,6 +119,27 @@
             <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
             <direction value="response"/>
             <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.id.count() = Bundle.entry.resource.count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="The fullUrl SHALL NOT disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="The fullUrl needs to be a absolute URL. "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all(startsWith('http') or startsWith('urn:oid') or startsWith('urn:uuid'))"/>
          </assert>
       </action>
       <action>
