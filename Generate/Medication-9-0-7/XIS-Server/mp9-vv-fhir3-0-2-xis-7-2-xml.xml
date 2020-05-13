@@ -19,7 +19,9 @@
                        value="?category=http://snomed.info/sct|52711000146108&amp;_include=MedicationRequest:medication"/>
       </nts:include>
       <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
-      <nts:include value="assert-responseBundleContent" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common">
+         <nts:with-parameter name="warningOnly" value="true"/>
+      </nts:include>
       <nts:include value="assert-returnCount" scope="project">
          <nts:with-parameter name="description"
                        value="Confirm that the returned searchset Bundle contains 1 DispenseRequest."/>
