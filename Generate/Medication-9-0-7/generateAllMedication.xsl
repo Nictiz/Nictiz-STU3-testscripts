@@ -13,32 +13,21 @@
     
     <!-- Main template to generate the actual tests scripts for PHR and XIS. This template is standalone, it doesn't work on XML content. --> 
     <xsl:template name="generateAll">
-
-        <!--<!-\- Write out the PHR scripts in a straightforward way -\->
-        <xsl:variable name="phr_dir" select="'PHR-Client'"/>
-        <xsl:for-each select="collection(string-join(($phr_dir, '?select=*.xml'), '/'))">
-            <xsl:result-document href="{string-join(($outputDir, $phr_dir, tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="document(document-uri(.))"/>
-            </xsl:result-document>
-        </xsl:for-each>-->
-        
-        <!-- Write out the XIS scripts in two versions: one with a setup step, used for internal testing against the
-             WildFHIR dev server, and one without the setup, used as the actual test scripts. -->
         <xsl:variable name="xis_dir" select="'XIS-Server'"/>
-        <xsl:for-each select="collection(string-join(($xis_dir, '?select=*.xml'), '/'))">
+        <xsl:for-each select="collection(string-join(($xis_dir, '?recurse=yes;select=*.xml'), '/'))">
             <xsl:variable name="document" select="document(document-uri(.))"/>
-            <xsl:variable name="document_stripped">
-                <xsl:apply-templates mode="stripSetup" select="$document"/>
-            </xsl:variable>
-            
-            <xsl:result-document href="{string-join(($outputDir, $xis_dir, tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="$document_stripped">
-                    <xsl:with-param name="testscriptBase" select="$document"/>
-                </xsl:apply-templates>
-            </xsl:result-document>
-            <!--<xsl:result-document href="{string-join(($outputDir, concat($xis_dir, '-nictiz-intern'), tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="$document"/>
-            </xsl:result-document>-->
+            <xsl:if test="not(contains(base-uri($document),'/components/'))">
+                <xsl:variable name="document_stripped">
+                    <xsl:apply-templates mode="stripSetup" select="$document"/>
+                </xsl:variable>
+                <xsl:variable name="relativePath" select="substring-after(string(base-uri($document)),$xis_dir)"/>
+                <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$xis_dir),$xis_dir)"/>
+                <xsl:result-document href="{concat(string-join(($outputDir, $xis_dir), '/'),$relativePath)}">
+                    <xsl:apply-templates select="$document_stripped">
+                        <xsl:with-param name="inputDir" select="$inputDir"/>
+                    </xsl:apply-templates>
+                </xsl:result-document>
+            </xsl:if>
         </xsl:for-each>
     </xsl:template>
     
