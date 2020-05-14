@@ -17,12 +17,8 @@
         <!-- Write out the PHR scripts in a straightforward way -->
         <xsl:variable name="phr_dir" select="'PHR-Client'"/>
         <xsl:for-each select="collection(string-join(($phr_dir, '?select=*.xml'), '/'))">
-            <xsl:variable name="document" select="document(document-uri(.))"/>
-            <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$phr_dir),$phr_dir)"/>
             <xsl:result-document href="{string-join(($outputDir, $phr_dir, tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="$document">
-                    <xsl:with-param name="inputDir" select="$inputDir"/>
-                </xsl:apply-templates>
+                <xsl:apply-templates select="document(document-uri(.))"/>
             </xsl:result-document>
         </xsl:for-each>
         
@@ -35,16 +31,13 @@
                 <xsl:apply-templates mode="stripSetup" select="$document"/>
             </xsl:variable>
             <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$xis_dir),$xis_dir)"/>
-            
             <xsl:result-document href="{string-join(($outputDir, $xis_dir, tokenize(document-uri(.), '/')[last()]), '/')}">
                 <xsl:apply-templates select="$document_stripped">
                     <xsl:with-param name="inputDir" select="$inputDir"/>
                 </xsl:apply-templates>
             </xsl:result-document>
             <xsl:result-document href="{string-join(($outputDir, concat($xis_dir, '-nictiz-intern'), tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="$document">
-                    <xsl:with-param name="inputDir" select="$inputDir"/>
-                </xsl:apply-templates>
+                <xsl:apply-templates select="$document"/>
             </xsl:result-document>
         </xsl:for-each>
     </xsl:template>
