@@ -5,7 +5,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-2/TestScript/Medication-9-0-7-fhir3-0-1-load-resources-purgecreateupdate-xml"/>
    <name value="NictizMedication-9-0-7 Load DVZA Test Resources - Purge Create Update - XML"/>
    <status value="active"/>
-   <date value="2020-05-14T11:56:56.041+02:00"/>
+   <date value="2020-05-14T13:38:34.393+02:00"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -19,27 +19,27 @@
    <copyright value="© Nictiz 2019"/>
    <fixture id="Bundle-MO-XXX-Herweijer-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-Bundle-d953e66.xml"/>
+         <reference value="../_reference/_ServeMP/mo-mor-ma-Scenario3-0-b-output.xml"/>
       </resource>
    </fixture>
    <fixture id="Bundle-MO-XXX-JANKIE-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-Bundle-d42e242.xml"/>
+         <reference value="../_reference/_ServeMP/mo-mor-ma-Scenario0-0-b-output.xml"/>
       </resource>
    </fixture>
    <fixture id="Bundle-MO-XXX-KLOKGIETERS-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-Bundle-d463e291.xml"/>
+         <reference value="../_reference/_ServeMP/mo-mor-ma-Scenario2-0-b-output.xml"/>
       </resource>
    </fixture>
    <fixture id="Bundle-MO-XXX-MAASZ-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-Bundle-d1111e61.xml"/>
+         <reference value="../_reference/_ServeMP/mo-mor-ma-Scenario3-1-b-output.xml"/>
       </resource>
    </fixture>
    <fixture id="Bundle-MO-XXX-STIJL-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-Bundle-d430e17.xml"/>
+         <reference value="../_reference/_ServeMP/mo-mor-ma-Scenario1-0-b-output.xml"/>
       </resource>
    </fixture>
    <fixture id="List-d1111e61-fx">

@@ -1,17 +1,16 @@
 <?xml-model href="http://hl7.org/fhir/STU3/bundle.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?><Bundle xmlns="http://hl7.org/fhir"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://hl7.org/fhir http://hl7.org/fhir/STU3/bundle.xsd">
-   <id value="MO-XXX-Herweijer"/>
+   <id value="MO-XXX-MAASZ"/>
    <meta>
       <profile value="http://nictiz.nl/fhir/StructureDefinition/Bundle-MedicationOverview"/>
    </meta>
    <type value="searchset"/>
    <total value="1"/>
    <entry>
-      <fullUrl value="urn:uuid:89abdcc6-95bf-11ea-6646-020000000000"/>
+      <fullUrl value="urn:uuid:8a5c76e9-95bf-11ea-1705-020000000000"/>
       <resource>
          <List>
-            <id value="d953e66"/>
             <meta>
                <profile value="http://nictiz.nl/fhir/StructureDefinition/MedicationOverview"/>
             </meta>
@@ -34,14 +33,14 @@
                <text value="Medicatieoverzicht"/>
             </code>
             <subject>
-               <reference value="Patient/XXX-Herweijer"/>
-               <display value="A. XXX_Herweijer"/>
+               <reference value="urn:uuid:8a5c56b5-95bf-11ea-1705-020000000000"/>
+               <display value="N. XXX_Maasz"/>
             </subject>
             <date value="${DATE, T, D, +0}"/>
             <source>
                <extension url="http://nictiz.nl/fhir/StructureDefinition/MedicationOverview-SourceOrganization">
                   <valueReference>
-                     <reference value="Organization/89abdcca-95bf-11ea-6646-020000000000"/>
+                     <reference value="urn:uuid:8a5c76ed-95bf-11ea-1705-020000000000"/>
                      <display value="Huisartsenpraktijk Pulver &amp; Partners"/>
                   </valueReference>
                </extension>
@@ -49,8 +48,8 @@
             </source>
             <entry>
                <item>
-                  <reference value="MedicationRequest/MBH-907-aanvullendeinformatiewensen-MA-onderbreken"/>
-                  <display value="Medicatieafspraak identifier: value='MBH_907_aanvullendeinformatiewensen_MA_onderbreken', system='urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1'"/>
+                  <reference value="urn:uuid:8a5c76bf-95bf-11ea-1705-020000000000"/>
+                  <display value="Medicatieafspraak identifier: value='MBH_907_start_duur2_MA', system='urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1'"/>
                </item>
             </entry>
          </List>
@@ -60,10 +59,9 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:89abdc97-95bf-11ea-6646-020000000000"/>
+      <fullUrl value="urn:uuid:8a5c76bf-95bf-11ea-1705-020000000000"/>
       <resource>
          <MedicationRequest>
-            <id value="MBH-907-aanvullendeinformatiewensen-MA-onderbreken"/>
             <meta>
                <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-MedicationAgreement"/>
             </meta>
@@ -71,56 +69,36 @@
                <status value="generated"/>
                <div xmlns="http://www.w3.org/1999/xhtml">
                   <table>
-                     <caption>Medicatieafspraak. Subject: <a href="Patient/XXX-Herweijer">A. XXX_Herweijer</a>. Id: MBH_907_aanvullendeinformatiewensen_MA_onderbreken (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1), Categorie: <span title="Prescription (procedure) (16076005 - SNOMED CT)">Prescription (procedure)</span>, <span style="display: block;">Intentie: aanvraag</span>
-                        <span style="display: block;">Aangevraagd door: <a href="PractitionerRole/000001112010000001111">Bertine van Doorn || Huisartsen, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners</a>
-                        </span>
+                     <caption>Medicatieafspraak. Subject: N. XXX_Maasz. Id: MBH_907_start_duur2_MA (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1), Categorie: <span title="Prescription (procedure) (16076005 - SNOMED CT)">Prescription (procedure)</span>, <span style="display: block;">Intentie: aanvraag</span>
+                        <span style="display: block;">Aangevraagd door: Peter van Pulver || Huisarts, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners</span>
                      </caption>
                      <tbody>
                         <tr>
-                           <th colspan="2">Medicatie is gestopt: <span title="Onderbreking (1 - 2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1)">Onderbreking</span>
-                           </th>
-                        </tr>
-                        <tr>
                            <th>Medicamenteuze behandel-id</th>
-                           <td>MBH_907_aanvullendeinformatiewensen (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.1.1)</td>
-                        </tr>
-                        <tr>
-                           <th>Gebaseerd op</th>
-                           <td>relatie naar medicatieafspraak: MBH_907_aanvullendeinformatiewensen_MA || 2.16.840.1.113883.2.4.3.11.999.77.16076005.1 (Id: MBH_907_aanvullendeinformatiewensen_MA (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1))</td>
+                           <td>MBH_907_start_duur2 (urn:oid:2.16.840.1.113883.2.4.3.11.999.77.1.1)</td>
                         </tr>
                         <tr>
                            <th>Medicatie</th>
-                           <td>
-                              <a href="Medication/17205-2-16-840-1-113883-2-4-4-10">FENETICILLINE CAPSULE 500MG</a>
-                           </td>
-                        </tr>
-                        <tr>
-                           <th>Ondersteunende informatie</th>
-                           <td>
-                              <div>
-                                 <span title="Bewust hoge dosering (1 - 2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050)">Bewust hoge dosering</span>
-                              </div>
-                           </td>
+                           <td>PANTOPRAZOL TABLET MSR 20MG</td>
                         </tr>
                         <tr>
                            <th>Gemaakt</th>
-                           <td>${DATE, T, D, -1}T18:12:00+02:00</td>
-                        </tr>
-                        <tr>
-                           <th>Reden</th>
-                           <td>
-                              <span title="Opname (305335007 - SNOMED CT)">Opname</span>
-                           </td>
+                           <td>${DATE, T, D, -60}T11:30:00+02:00</td>
                         </tr>
                         <tr>
                            <th>Gebruiksduur</th>
-                           <td>${DATE, T, D, -4}T00:00:00+02:00 - ${DATE, T, D, -1}T23:59:59+02:00</td>
+                           <td>
+                              <ul>
+                                 <li>Vanaf ${DATE, T, D, -60}T00:00:00+02:00</li>
+                                 <li>28 dag</li>
+                              </ul>
+                           </td>
                         </tr>
                         <tr>
                            <th>Doseerinstructie</th>
                            <td>
-                              <div>Tekst: Vanaf &lt;T+1D{00:00:00}&gt; t/m &lt;T+1D{23:59:59}&gt;, 3 maal per dag 1 stuk, oraal</div>
-                              <div>Timing: <div>3 maal per dag</div>
+                              <div>Tekst: Vanaf &lt;T-60D{00:00:00}&gt;, gedurende 28 dagen, 1 maal per dag 1 stuk, oraal</div>
+                              <div>Timing: <div>eenmalig per dag</div>
                               </div>
                               <div>Toedieningsweg: <span title="Oraal (9 - G-Standaard thesaurus subtabel 0007)">Oraal</span>
                               </div>
@@ -133,46 +111,26 @@
             </text>
             <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-Medication-PeriodOfUse">
                <valuePeriod>
-                  <start value="${DATE, T, D, -4}T00:00:00+02:00"/>
-                  <end value="${DATE, T, D, -1}T23:59:59+02:00"/>
+                  <start value="${DATE, T, D, -60}T00:00:00+02:00"/>
                </valuePeriod>
             </extension>
-            <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-Medication-AdditionalInformation">
-               <valueCodeableConcept>
-                  <coding>
-                     <system value="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.14.2050"/>
-                     <code value="1"/>
-                     <display value="Bewust hoge dosering"/>
-                  </coding>
-               </valueCodeableConcept>
+            <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-MedicationUse-Duration">
+               <valueDuration>
+                  <value value="28"/>
+                  <unit value="dag"/>
+                  <system value="http://unitsofmeasure.org"/>
+                  <code value="d"/>
+               </valueDuration>
             </extension>
             <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-Medication-MedicationTreatment">
                <valueIdentifier>
                   <system value="urn:oid:2.16.840.1.113883.2.4.3.11.999.77.1.1"/>
-                  <value value="MBH_907_aanvullendeinformatiewensen"/>
+                  <value value="MBH_907_start_duur2"/>
                </valueIdentifier>
             </extension>
-            <extension url="http://nictiz.nl/fhir/StructureDefinition/zib-MedicationAgreement-BasedOnAgreementOrUse">
-               <valueReference>
-                  <identifier>
-                     <system value="urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1"/>
-                     <value value="MBH_907_aanvullendeinformatiewensen_MA"/>
-                  </identifier>
-                  <display value="relatie naar medicatieafspraak: MBH_907_aanvullendeinformatiewensen_MA || 2.16.840.1.113883.2.4.3.11.999.77.16076005.1"/>
-               </valueReference>
-            </extension>
-            <modifierExtension url="http://nictiz.nl/fhir/StructureDefinition/zib-Medication-StopType">
-               <valueCodeableConcept>
-                  <coding>
-                     <system value="urn:oid:2.16.840.1.113883.2.4.3.11.60.20.77.5.2.1"/>
-                     <code value="1"/>
-                     <display value="Onderbreking"/>
-                  </coding>
-               </valueCodeableConcept>
-            </modifierExtension>
             <identifier>
                <system value="urn:oid:2.16.840.1.113883.2.4.3.11.999.77.16076005.1"/>
-               <value value="MBH_907_aanvullendeinformatiewensen_MA_onderbreken"/>
+               <value value="MBH_907_start_duur2_MA"/>
             </identifier>
             <intent value="order"/>
             <category>
@@ -184,38 +142,31 @@
                <text value="Medicatieafspraak"/>
             </category>
             <medicationReference>
-               <reference value="Medication/17205-2-16-840-1-113883-2-4-4-10"/>
-               <display value="FENETICILLINE CAPSULE 500MG"/>
+               <reference value="urn:oid:2.16.840.1.113883.2.4.4.10.52272"/>
+               <display value="PANTOPRAZOL TABLET MSR 20MG"/>
             </medicationReference>
             <subject>
-               <reference value="Patient/XXX-Herweijer"/>
-               <display value="A. XXX_Herweijer"/>
+               <reference value="urn:uuid:8a5c56b5-95bf-11ea-1705-020000000000"/>
+               <display value="N. XXX_Maasz"/>
             </subject>
-            <authoredOn value="${DATE, T, D, -1}T18:12:00+02:00"/>
+            <authoredOn value="${DATE, T, D, -60}T11:30:00+02:00"/>
             <requester>
                <agent>
                   <extension url="http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference">
                      <valueReference>
-                        <reference value="PractitionerRole/000001112010000001111"/>
-                        <display value="Bertine van Doorn || Huisartsen, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners"/>
+                        <reference value="urn:uuid:8a5c76c4-95bf-11ea-1705-020000000000"/>
+                        <display value="Peter van Pulver || Huisarts, niet nader gespecificeerd || Huisartsenpraktijk Pulver &amp; Partners"/>
                      </valueReference>
                   </extension>
-                  <reference value="Practitioner/0000011122-16-528-1-1007-3-1"/>
-                  <display value="Bertine van Doorn"/>
+                  <reference value="urn:oid:2.16.528.1.1007.3.1.1111"/>
+                  <display value="Peter van Pulver"/>
                </agent>
             </requester>
-            <reasonCode>
-               <coding>
-                  <system value="http://snomed.info/sct"/>
-                  <code value="305335007"/>
-                  <display value="Opname"/>
-               </coding>
-            </reasonCode>
             <dosageInstruction>
-               <text value="Vanaf &lt;T+1D{00:00:00}&gt; t/m &lt;T+1D{23:59:59}&gt;, 3 maal per dag 1 stuk, oraal"/>
+               <text value="Vanaf &lt;T-60D{00:00:00}&gt;, gedurende 28 dagen, 1 maal per dag 1 stuk, oraal"/>
                <timing>
                   <repeat>
-                     <frequency value="3"/>
+                     <frequency value="1"/>
                      <period value="1"/>
                      <periodUnit value="d"/>
                   </repeat>
@@ -241,40 +192,39 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:89abed11-95bf-11ea-6646-020000000000"/>
+      <fullUrl value="urn:uuid:8a5c56b5-95bf-11ea-1705-020000000000"/>
       <resource>
          <Patient>
-            <id value="XXX-Herweijer"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-patient"/>
             </meta>
             <text>
                <status value="generated"/>
                <div xmlns="http://www.w3.org/1999/xhtml">
-                  <div>Id 999911466 (BSN), A. XXX_Herweijer, Vrouw, 2 augustus 1954</div>
+                  <div>Id 999910747 (BSN), N. XXX_Maasz, Vrouw, 10 augustus 1954</div>
                </div>
             </text>
             <identifier>
                <system value="http://fhir.nl/fhir/NamingSystem/bsn"/>
-               <value value="999911466"/>
+               <value value="999910747"/>
             </identifier>
             <name>
                <extension url="http://hl7.org/fhir/StructureDefinition/humanname-assembly-order">
                   <valueCode value="NL1"/>
                </extension>
-               <family value="XXX_Herweijer">
+               <family value="XXX_Maasz">
                   <extension url="http://hl7.org/fhir/StructureDefinition/humanname-own-name">
-                     <valueString value="XXX_Herweijer"/>
+                     <valueString value="XXX_Maasz"/>
                   </extension>
                </family>
-               <given value="A.">
+               <given value="N.">
                   <extension url="http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier">
                      <valueCode value="IN"/>
                   </extension>
                </given>
             </name>
             <gender value="female"/>
-            <birthDate value="1954-08-02"/>
+            <birthDate value="1954-08-10"/>
          </Patient>
       </resource>
       <search>
@@ -282,33 +232,32 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:oid:2.16.528.1.1007.3.1.1112"/>
+      <fullUrl value="urn:oid:2.16.528.1.1007.3.1.1111"/>
       <resource>
          <Practitioner>
-            <id value="0000011122-16-528-1-1007-3-1"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-practitioner"/>
             </meta>
             <text>
                <status value="generated"/>
                <div xmlns="http://www.w3.org/1999/xhtml">
-                  <div>Id 000001112 (UZI-NR-PERS), Bertine van Doorn</div>
+                  <div>Id 000001111 (UZI-NR-PERS), Peter van Pulver</div>
                </div>
             </text>
             <identifier>
                <system value="http://fhir.nl/fhir/NamingSystem/uzi-nr-pers"/>
-               <value value="000001112"/>
+               <value value="000001111"/>
             </identifier>
             <name>
-               <family value="van Doorn">
+               <family value="van Pulver">
                   <extension url="http://hl7.org/fhir/StructureDefinition/humanname-own-prefix">
                      <valueString value="van"/>
                   </extension>
                   <extension url="http://hl7.org/fhir/StructureDefinition/humanname-own-name">
-                     <valueString value="Doorn"/>
+                     <valueString value="Pulver"/>
                   </extension>
                </family>
-               <given value="Bertine">
+               <given value="Peter">
                   <extension url="http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier">
                      <valueCode value="BR"/>
                   </extension>
@@ -324,7 +273,6 @@
       <fullUrl value="urn:oid:2.16.528.1.1007.3.3.1111"/>
       <resource>
          <Organization>
-            <id value="000011112-16-528-1-1007-3-3"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-organization"/>
             </meta>
@@ -371,10 +319,9 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:89abdcca-95bf-11ea-6646-020000000000"/>
+      <fullUrl value="urn:uuid:8a5c76ed-95bf-11ea-1705-020000000000"/>
       <resource>
          <Organization>
-            <id value="89abdcca-95bf-11ea-6646-020000000000"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-organization"/>
             </meta>
@@ -430,10 +377,9 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:89abdc9f-95bf-11ea-6646-020000000000"/>
+      <fullUrl value="urn:uuid:8a5c76c4-95bf-11ea-1705-020000000000"/>
       <resource>
          <PractitionerRole>
-            <id value="000001112010000001111"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-practitionerrole"/>
             </meta>
@@ -446,18 +392,14 @@
                         <tr>
                            <th>Zorgverlener</th>
                            <td>
-                              <div>
-                                 <a href="Practitioner/0000011122-16-528-1-1007-3-1">Bertine van Doorn</a>
-                              </div>
-                              <div>
-                                 <a href="Organization/000011112-16-528-1-1007-3-3">Huisartsenpraktijk Pulver &amp; Partners</a>
-                              </div>
+                              <div>Peter van Pulver</div>
+                              <div>Huisartsenpraktijk Pulver &amp; Partners</div>
                            </td>
                         </tr>
                         <tr>
                            <th>Specialisme</th>
                            <td>
-                              <span title="Huisartsen, niet nader gespecificeerd (0100 - AGB-medisch specialisme)">Huisartsen, niet nader gespecificeerd</span>
+                              <span title="Huisarts, niet nader gespecificeerd (0100 - AGB-medisch specialisme)">Huisarts, niet nader gespecificeerd</span>
                            </td>
                         </tr>
                      </tbody>
@@ -465,18 +407,18 @@
                </div>
             </text>
             <practitioner>
-               <reference value="Practitioner/0000011122-16-528-1-1007-3-1"/>
-               <display value="Bertine van Doorn"/>
+               <reference value="urn:oid:2.16.528.1.1007.3.1.1111"/>
+               <display value="Peter van Pulver"/>
             </practitioner>
             <organization>
-               <reference value="Organization/000011112-16-528-1-1007-3-3"/>
+               <reference value="urn:oid:2.16.528.1.1007.3.3.1111"/>
                <display value="Huisartsenpraktijk Pulver &amp; Partners"/>
             </organization>
             <specialty>
                <coding>
                   <system value="urn:oid:2.16.840.1.113883.2.4.6.7"/>
                   <code value="0100"/>
-                  <display value="Huisartsen, niet nader gespecificeerd"/>
+                  <display value="Huisarts, niet nader gespecificeerd"/>
                </coding>
             </specialty>
          </PractitionerRole>
@@ -486,10 +428,9 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:oid:2.16.840.1.113883.2.4.4.10.17205"/>
+      <fullUrl value="urn:oid:2.16.840.1.113883.2.4.4.10.52272"/>
       <resource>
          <Medication>
-            <id value="17205-2-16-840-1-113883-2-4-4-10"/>
             <meta>
                <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Product"/>
             </meta>
@@ -501,7 +442,7 @@
                         <tr>
                            <th>Code</th>
                            <td>
-                              <span title="FENETICILLINE CAPSULE 500MG (17205 - G-Standaard PRK)">FENETICILLINE CAPSULE 500MG</span>
+                              <span title="PANTOPRAZOL TABLET MSR 20MG (52272 - G-Standaard PRK)">PANTOPRAZOL TABLET MSR 20MG</span>
                            </td>
                         </tr>
                      </tbody>
@@ -511,16 +452,16 @@
             <code>
                <coding>
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.10"/>
-                  <code value="17205"/>
-                  <display value="FENETICILLINE CAPSULE 500MG"/>
+                  <code value="52272"/>
+                  <display value="PANTOPRAZOL TABLET MSR 20MG"/>
                   <userSelected value="true"/>
                </coding>
                <coding>
                   <system value="urn:oid:2.16.840.1.113883.2.4.4.1"/>
-                  <code value="41092"/>
-                  <display value="FENETICILLINE CAPSULE 500MG"/>
+                  <code value="106275"/>
+                  <display value="PANTOPRAZOL TABLET MSR 20MG"/>
                </coding>
-               <text value="FENETICILLINE CAPSULE 500MG"/>
+               <text value="PANTOPRAZOL TABLET MSR 20MG"/>
             </code>
          </Medication>
       </resource>

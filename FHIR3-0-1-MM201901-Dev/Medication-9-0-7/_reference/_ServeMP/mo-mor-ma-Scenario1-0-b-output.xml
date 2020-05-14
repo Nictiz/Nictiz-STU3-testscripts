@@ -8,10 +8,9 @@
    <type value="searchset"/>
    <total value="1"/>
    <entry>
-      <fullUrl value="urn:uuid:898dc449-95bf-11ea-2103-020000000000"/>
+      <fullUrl value="urn:uuid:8a477501-95bf-11ea-5059-020000000000"/>
       <resource>
          <List>
-            <id value="d430e17"/>
             <meta>
                <profile value="http://nictiz.nl/fhir/StructureDefinition/MedicationOverview"/>
             </meta>
@@ -34,14 +33,14 @@
                <text value="Medicatieoverzicht"/>
             </code>
             <subject>
-               <reference value="Patient/XXX-STIJL"/>
+               <reference value="urn:uuid:8a477c27-95bf-11ea-5059-020000000000"/>
                <display value="F. van de XXX_Stijl"/>
             </subject>
             <date value="${DATE, T, D, +0}"/>
             <source>
                <extension url="http://nictiz.nl/fhir/StructureDefinition/MedicationOverview-SourceOrganization">
                   <valueReference>
-                     <reference value="Organization/000011112-16-528-1-1007-3-3"/>
+                     <reference value="urn:oid:2.16.528.1.1007.3.3.1111"/>
                      <display value="Huisartsenpraktijk Pulver &amp; Partners"/>
                   </valueReference>
                </extension>
@@ -54,10 +53,9 @@
       </search>
    </entry>
    <entry>
-      <fullUrl value="urn:uuid:898dc953-95bf-11ea-2103-020000000000"/>
+      <fullUrl value="urn:uuid:8a477c27-95bf-11ea-5059-020000000000"/>
       <resource>
          <Patient>
-            <id value="XXX-STIJL"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-patient"/>
             </meta>
@@ -101,7 +99,6 @@
       <fullUrl value="urn:oid:2.16.528.1.1007.3.3.1111"/>
       <resource>
          <Organization>
-            <id value="000011112-16-528-1-1007-3-3"/>
             <meta>
                <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-organization"/>
             </meta>
