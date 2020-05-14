@@ -14,7 +14,7 @@
          <use value="work"/>
       </telecom>
    </contact>
-   <description value="Scenario 3.0b - &lt;div&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;Onderbroken medicatieafspraak&lt;/span&gt;&lt;/div&gt;"/>
+   <description value="Scenario 3.0b - Onderbroken medicatieafspraak"/>
    <origin>
       <index value="1"/>
       <profile>
@@ -39,14 +39,14 @@
    </variable>
    <test id="mo-mor-ma-Scenario3-0-b-output">
       <name value="Scenario 3.0b"/>
-      <description value="Scenario 3.0b - &lt;div&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;Onderbroken medicatieafspraak&lt;/span&gt;&lt;/div&gt;"/>
+      <description value="Scenario 3.0b - Onderbroken medicatieafspraak"/>
       <action>
          <operation>
             <type>
                <system value="http://hl7.org/fhir/testscript-operation-codes"/>
                <code value="search"/>
             </type>
-            <description value="Test XIS server to serve MedicationOverview (NL: MedicatieOverzicht) - &lt;div&gt;&lt;span style=&#34;font-family: sans-serif; font-size: 14px; background-color: #f9f9f9;&#34;&gt;Onderbroken medicatieafspraak&lt;/span&gt;&lt;/div&gt;"/>
+            <description value="Test XIS server to serve MedicationOverview (NL: MedicatieOverzicht) - Onderbroken medicatieafspraak"/>
             <accept value="xml"/>
             <destination value="1"/>
             <method value="post"/>
@@ -81,9 +81,9 @@
       </action>
       <action>
          <assert>
-            <description value="Confirm that all returned resources contain an Resource.id. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
             <direction value="response"/>
-            <expression value="Bundle.entry.resource.id.count() = Bundle.entry.resource.count()"/>
+            <expression value="Bundle.entry.all(                 $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or                 $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or                 $this.resource.id.exists())"/>
          </assert>
       </action>
       <action>
