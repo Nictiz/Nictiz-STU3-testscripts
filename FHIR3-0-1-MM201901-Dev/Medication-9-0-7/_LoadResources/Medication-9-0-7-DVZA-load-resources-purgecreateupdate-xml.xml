@@ -5,7 +5,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-2/TestScript/Medication-9-0-7-fhir3-0-1-load-resources-purgecreateupdate-xml"/>
    <name value="NictizMedication-9-0-7 Load DVZA Test Resources - Purge Create Update - XML"/>
    <status value="active"/>
-   <date value="2020-05-04T15:41:21.937+02:00"/>
+   <date value="2020-05-14T11:56:56.041+02:00"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -17,6 +17,31 @@
    </contact>
    <description value="Load Medication-9-0-7 test resources using the update (PUT) operation of the target FHIR server for use in Medication-9-0-7 qualification testing. All resource ids are pre-defined. The target XIS FHIR server is expected to support resource create via the update (PUT) operation for client assigned ids."/>
    <copyright value="© Nictiz 2019"/>
+   <fixture id="Bundle-MO-XXX-Herweijer-fx">
+      <resource>
+         <reference value="../_reference/_ServeMP/mp9-Bundle-d953e66.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="Bundle-MO-XXX-JANKIE-fx">
+      <resource>
+         <reference value="../_reference/_ServeMP/mp9-Bundle-d42e242.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="Bundle-MO-XXX-KLOKGIETERS-fx">
+      <resource>
+         <reference value="../_reference/_ServeMP/mp9-Bundle-d463e291.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="Bundle-MO-XXX-MAASZ-fx">
+      <resource>
+         <reference value="../_reference/_ServeMP/mp9-Bundle-d1111e61.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="Bundle-MO-XXX-STIJL-fx">
+      <resource>
+         <reference value="../_reference/_ServeMP/mp9-Bundle-d430e17.xml"/>
+      </resource>
+   </fixture>
    <fixture id="List-d1111e61-fx">
       <resource>
          <reference value="../_reference/_ServeMP/mp9-MedicationOverview-d1111e61.xml"/>
@@ -602,24 +627,24 @@
          <reference value="../_reference/_ServeMP/mp9-nl-core-organization-2-16-528-1-1007-3-300001111.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-271e8c06-8df0-11ea-4117-020000000000-fx">
+   <fixture id="Organization-89700016-95bf-11ea-1425-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-271e8c06-8df0-11ea-4117-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-89700016-95bf-11ea-1425-020000000000.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-2732181f-8df0-11ea-1030-020000000000-fx">
+   <fixture id="Organization-8995b49f-95bf-11ea-1928-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-2732181f-8df0-11ea-1030-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-8995b49f-95bf-11ea-1928-020000000000.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-273fdbda-8df0-11ea-1820-020000000000-fx">
+   <fixture id="Organization-89abdcca-95bf-11ea-6646-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-273fdbda-8df0-11ea-1820-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-89abdcca-95bf-11ea-6646-020000000000.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-2746340d-8df0-11ea-1845-020000000000-fx">
+   <fixture id="Organization-89b6c8dd-95bf-11ea-1837-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-2746340d-8df0-11ea-1845-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-89b6c8dd-95bf-11ea-1837-020000000000.xml"/>
       </resource>
    </fixture>
    <fixture id="Organization-999011112-16-528-1-1007-3-3-fx">
@@ -692,9 +717,9 @@
          <reference value="../_reference/_ServeMP/mp9-nl-core-patient-XXX-BOSCHMAN.xml"/>
       </resource>
    </fixture>
-   <fixture id="Patient-XXX-HERWEIJER-fx">
+   <fixture id="Patient-XXX-Herweijer-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-patient-XXX-HERWEIJER.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-patient-XXX-Herweijer.xml"/>
       </resource>
    </fixture>
    <fixture id="Patient-XXX-INCIDENT-A-fx">
@@ -792,6 +817,31 @@
          <reference value="../_reference/_ServeMP/mp9-nl-core-practitionerrole-999001112010099901111.xml"/>
       </resource>
    </fixture>
+   <variable>
+      <name value="Bundle-MO-XXX-Herweijer-id"/>
+      <expression value="Bundle.id"/>
+      <sourceId value="Bundle-MO-XXX-Herweijer-fx"/>
+   </variable>
+   <variable>
+      <name value="Bundle-MO-XXX-JANKIE-id"/>
+      <expression value="Bundle.id"/>
+      <sourceId value="Bundle-MO-XXX-JANKIE-fx"/>
+   </variable>
+   <variable>
+      <name value="Bundle-MO-XXX-KLOKGIETERS-id"/>
+      <expression value="Bundle.id"/>
+      <sourceId value="Bundle-MO-XXX-KLOKGIETERS-fx"/>
+   </variable>
+   <variable>
+      <name value="Bundle-MO-XXX-MAASZ-id"/>
+      <expression value="Bundle.id"/>
+      <sourceId value="Bundle-MO-XXX-MAASZ-fx"/>
+   </variable>
+   <variable>
+      <name value="Bundle-MO-XXX-STIJL-id"/>
+      <expression value="Bundle.id"/>
+      <sourceId value="Bundle-MO-XXX-STIJL-fx"/>
+   </variable>
    <variable>
       <name value="List-d1111e61-id"/>
       <expression value="List.id"/>
@@ -1378,24 +1428,24 @@
       <sourceId value="Organization-2-16-528-1-1007-3-300001111-fx"/>
    </variable>
    <variable>
-      <name value="Organization-271e8c06-8df0-11ea-4117-020000000000-id"/>
+      <name value="Organization-89700016-95bf-11ea-1425-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-271e8c06-8df0-11ea-4117-020000000000-fx"/>
+      <sourceId value="Organization-89700016-95bf-11ea-1425-020000000000-fx"/>
    </variable>
    <variable>
-      <name value="Organization-2732181f-8df0-11ea-1030-020000000000-id"/>
+      <name value="Organization-8995b49f-95bf-11ea-1928-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-2732181f-8df0-11ea-1030-020000000000-fx"/>
+      <sourceId value="Organization-8995b49f-95bf-11ea-1928-020000000000-fx"/>
    </variable>
    <variable>
-      <name value="Organization-273fdbda-8df0-11ea-1820-020000000000-id"/>
+      <name value="Organization-89abdcca-95bf-11ea-6646-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-273fdbda-8df0-11ea-1820-020000000000-fx"/>
+      <sourceId value="Organization-89abdcca-95bf-11ea-6646-020000000000-fx"/>
    </variable>
    <variable>
-      <name value="Organization-2746340d-8df0-11ea-1845-020000000000-id"/>
+      <name value="Organization-89b6c8dd-95bf-11ea-1837-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-2746340d-8df0-11ea-1845-020000000000-fx"/>
+      <sourceId value="Organization-89b6c8dd-95bf-11ea-1837-020000000000-fx"/>
    </variable>
    <variable>
       <name value="Organization-999011112-16-528-1-1007-3-3-id"/>
@@ -1468,9 +1518,9 @@
       <sourceId value="Patient-XXX-BOSCHMAN-fx"/>
    </variable>
    <variable>
-      <name value="Patient-XXX-HERWEIJER-id"/>
+      <name value="Patient-XXX-Herweijer-id"/>
       <expression value="Patient.id"/>
-      <sourceId value="Patient-XXX-HERWEIJER-fx"/>
+      <sourceId value="Patient-XXX-Herweijer-fx"/>
    </variable>
    <variable>
       <name value="Patient-XXX-INCIDENT-A-id"/>
@@ -1853,6 +1903,126 @@
    <test id="Step1-LoadTestResourceCreate">
       <name value="Step1-LoadTestResourceCreate"/>
       <description value="Load Medication test resources using the update (PUT) operation of the target FHIR server for use in Medication qualification testing. All resource ids are pre-defined. The target XIS FHIR server is expected to support resource create via the update (PUT) operation for client assigned ids. "/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="updateCreate"/>
+            </type>
+            <resource value="Bundle"/>
+            <accept value="xml"/>
+            <contentType value="xml"/>
+            <params value="/${Bundle-MO-XXX-Herweijer-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
+            </requestHeader>
+            <sourceId value="Bundle-MO-XXX-Herweijer-fx"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="updateCreate"/>
+            </type>
+            <resource value="Bundle"/>
+            <accept value="xml"/>
+            <contentType value="xml"/>
+            <params value="/${Bundle-MO-XXX-JANKIE-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
+            </requestHeader>
+            <sourceId value="Bundle-MO-XXX-JANKIE-fx"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="updateCreate"/>
+            </type>
+            <resource value="Bundle"/>
+            <accept value="xml"/>
+            <contentType value="xml"/>
+            <params value="/${Bundle-MO-XXX-KLOKGIETERS-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
+            </requestHeader>
+            <sourceId value="Bundle-MO-XXX-KLOKGIETERS-fx"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="updateCreate"/>
+            </type>
+            <resource value="Bundle"/>
+            <accept value="xml"/>
+            <contentType value="xml"/>
+            <params value="/${Bundle-MO-XXX-MAASZ-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
+            </requestHeader>
+            <sourceId value="Bundle-MO-XXX-MAASZ-fx"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="updateCreate"/>
+            </type>
+            <resource value="Bundle"/>
+            <accept value="xml"/>
+            <contentType value="xml"/>
+            <params value="/${Bundle-MO-XXX-STIJL-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
+            </requestHeader>
+            <sourceId value="Bundle-MO-XXX-STIJL-fx"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
       <action>
          <operation>
             <type>
@@ -4670,12 +4840,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-271e8c06-8df0-11ea-4117-020000000000-id}"/>
+            <params value="/${Organization-89700016-95bf-11ea-1425-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-271e8c06-8df0-11ea-4117-020000000000-fx"/>
+            <sourceId value="Organization-89700016-95bf-11ea-1425-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4694,12 +4864,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-2732181f-8df0-11ea-1030-020000000000-id}"/>
+            <params value="/${Organization-8995b49f-95bf-11ea-1928-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-2732181f-8df0-11ea-1030-020000000000-fx"/>
+            <sourceId value="Organization-8995b49f-95bf-11ea-1928-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4718,12 +4888,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-273fdbda-8df0-11ea-1820-020000000000-id}"/>
+            <params value="/${Organization-89abdcca-95bf-11ea-6646-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-273fdbda-8df0-11ea-1820-020000000000-fx"/>
+            <sourceId value="Organization-89abdcca-95bf-11ea-6646-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4742,12 +4912,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-2746340d-8df0-11ea-1845-020000000000-id}"/>
+            <params value="/${Organization-89b6c8dd-95bf-11ea-1837-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-2746340d-8df0-11ea-1845-020000000000-fx"/>
+            <sourceId value="Organization-89b6c8dd-95bf-11ea-1837-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4814,12 +4984,12 @@
             <resource value="Patient"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Patient-XXX-HERWEIJER-id}"/>
+            <params value="/${Patient-XXX-Herweijer-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Patient-XXX-HERWEIJER-fx"/>
+            <sourceId value="Patient-XXX-Herweijer-fx"/>
          </operation>
       </action>
       <action>
