@@ -155,7 +155,7 @@
          <assert>
             <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
             <direction value="response"/>
-            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all(                 coding.display.exists() or                  (coding.exists().not() and text.exists())))"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all(                 coding.display.exists() or                  (coding.exists().not() and text.exists()))"/>
          </assert>
       </action>
       <action>
