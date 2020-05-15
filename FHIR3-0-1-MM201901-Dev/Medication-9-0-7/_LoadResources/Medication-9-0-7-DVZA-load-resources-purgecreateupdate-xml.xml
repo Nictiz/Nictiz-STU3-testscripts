@@ -5,7 +5,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-2/TestScript/Medication-9-0-7-fhir3-0-1-load-resources-purgecreateupdate-xml"/>
    <name value="NictizMedication-9-0-7 Load DVZA Test Resources - Purge Create Update - XML"/>
    <status value="active"/>
-   <date value="2020-05-14T13:38:34.393+02:00"/>
+   <date value="2020-05-15T17:25:21.838+02:00"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -562,16 +562,6 @@
          <reference value="../_reference/_ServeMP/mp9-zib-MedicationAgreement-MBH-907-variabelehoeveelheidenmaximum-MA.xml"/>
       </resource>
    </fixture>
-   <fixture id="MedicationRequest-MBH-907-VVandermansMA-andermansVV-fx">
-      <resource>
-         <reference value="../_reference/_ServeMP/mp9-zib-DispenseRequest-MBH-907-VVandermansMA-andermansVV.xml"/>
-      </resource>
-   </fixture>
-   <fixture id="MedicationRequest-MBH-907-VVandermansMA-MA-fx">
-      <resource>
-         <reference value="../_reference/_ServeMP/mp9-zib-MedicationAgreement-MBH-907-VVandermansMA-MA.xml"/>
-      </resource>
-   </fixture>
    <fixture id="MedicationRequest-MBH-907-VVandermansMA-VV-fx">
       <resource>
          <reference value="../_reference/_ServeMP/mp9-zib-DispenseRequest-MBH-907-VVandermansMA-VV.xml"/>
@@ -617,6 +607,11 @@
          <reference value="../_reference/_ServeMP/mp9-nl-core-organization-000011112-16-528-1-1007-3-3.xml"/>
       </resource>
    </fixture>
+   <fixture id="Organization-000051112-16-528-1-1007-3-3-fx">
+      <resource>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-000051112-16-528-1-1007-3-3.xml"/>
+      </resource>
+   </fixture>
    <fixture id="Organization-012365782-16-528-1-1007-3-3-fx">
       <resource>
          <reference value="../_reference/_ServeMP/mp9-nl-core-organization-012365782-16-528-1-1007-3-3.xml"/>
@@ -627,24 +622,24 @@
          <reference value="../_reference/_ServeMP/mp9-nl-core-organization-2-16-528-1-1007-3-300001111.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-89700016-95bf-11ea-1425-020000000000-fx">
+   <fixture id="Organization-4e826eb6-96bf-11ea-4754-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-89700016-95bf-11ea-1425-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-4e826eb6-96bf-11ea-4754-020000000000.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-8995b49f-95bf-11ea-1928-020000000000-fx">
+   <fixture id="Organization-4e97816f-96bf-11ea-1971-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-8995b49f-95bf-11ea-1928-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-4e97816f-96bf-11ea-1971-020000000000.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-89abdcca-95bf-11ea-6646-020000000000-fx">
+   <fixture id="Organization-4ea98aea-96bf-11ea-1166-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-89abdcca-95bf-11ea-6646-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-4ea98aea-96bf-11ea-1166-020000000000.xml"/>
       </resource>
    </fixture>
-   <fixture id="Organization-89b6c8dd-95bf-11ea-1837-020000000000-fx">
+   <fixture id="Organization-4eb0cd7d-96bf-11ea-1169-020000000000-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-89b6c8dd-95bf-11ea-1837-020000000000.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-organization-4eb0cd7d-96bf-11ea-1169-020000000000.xml"/>
       </resource>
    </fixture>
    <fixture id="Organization-999011112-16-528-1-1007-3-3-fx">
@@ -807,9 +802,9 @@
          <reference value="../_reference/_ServeMP/mp9-nl-core-practitionerrole-000001112010000001111.xml"/>
       </resource>
    </fixture>
-   <fixture id="PractitionerRole-000001115010000001111-fx">
+   <fixture id="PractitionerRole-000001115010000005111-fx">
       <resource>
-         <reference value="../_reference/_ServeMP/mp9-nl-core-practitionerrole-000001115010000001111.xml"/>
+         <reference value="../_reference/_ServeMP/mp9-nl-core-practitionerrole-000001115010000005111.xml"/>
       </resource>
    </fixture>
    <fixture id="PractitionerRole-999001112010099901111-fx">
@@ -1363,16 +1358,6 @@
       <sourceId value="MedicationRequest-MBH-907-variabelehoeveelheidenmaximum-MA-fx"/>
    </variable>
    <variable>
-      <name value="MedicationRequest-MBH-907-VVandermansMA-andermansVV-id"/>
-      <expression value="MedicationRequest.id"/>
-      <sourceId value="MedicationRequest-MBH-907-VVandermansMA-andermansVV-fx"/>
-   </variable>
-   <variable>
-      <name value="MedicationRequest-MBH-907-VVandermansMA-MA-id"/>
-      <expression value="MedicationRequest.id"/>
-      <sourceId value="MedicationRequest-MBH-907-VVandermansMA-MA-fx"/>
-   </variable>
-   <variable>
       <name value="MedicationRequest-MBH-907-VVandermansMA-VV-id"/>
       <expression value="MedicationRequest.id"/>
       <sourceId value="MedicationRequest-MBH-907-VVandermansMA-VV-fx"/>
@@ -1418,6 +1403,11 @@
       <sourceId value="Organization-000011112-16-528-1-1007-3-3-fx"/>
    </variable>
    <variable>
+      <name value="Organization-000051112-16-528-1-1007-3-3-id"/>
+      <expression value="Organization.id"/>
+      <sourceId value="Organization-000051112-16-528-1-1007-3-3-fx"/>
+   </variable>
+   <variable>
       <name value="Organization-012365782-16-528-1-1007-3-3-id"/>
       <expression value="Organization.id"/>
       <sourceId value="Organization-012365782-16-528-1-1007-3-3-fx"/>
@@ -1428,24 +1418,24 @@
       <sourceId value="Organization-2-16-528-1-1007-3-300001111-fx"/>
    </variable>
    <variable>
-      <name value="Organization-89700016-95bf-11ea-1425-020000000000-id"/>
+      <name value="Organization-4e826eb6-96bf-11ea-4754-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-89700016-95bf-11ea-1425-020000000000-fx"/>
+      <sourceId value="Organization-4e826eb6-96bf-11ea-4754-020000000000-fx"/>
    </variable>
    <variable>
-      <name value="Organization-8995b49f-95bf-11ea-1928-020000000000-id"/>
+      <name value="Organization-4e97816f-96bf-11ea-1971-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-8995b49f-95bf-11ea-1928-020000000000-fx"/>
+      <sourceId value="Organization-4e97816f-96bf-11ea-1971-020000000000-fx"/>
    </variable>
    <variable>
-      <name value="Organization-89abdcca-95bf-11ea-6646-020000000000-id"/>
+      <name value="Organization-4ea98aea-96bf-11ea-1166-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-89abdcca-95bf-11ea-6646-020000000000-fx"/>
+      <sourceId value="Organization-4ea98aea-96bf-11ea-1166-020000000000-fx"/>
    </variable>
    <variable>
-      <name value="Organization-89b6c8dd-95bf-11ea-1837-020000000000-id"/>
+      <name value="Organization-4eb0cd7d-96bf-11ea-1169-020000000000-id"/>
       <expression value="Organization.id"/>
-      <sourceId value="Organization-89b6c8dd-95bf-11ea-1837-020000000000-fx"/>
+      <sourceId value="Organization-4eb0cd7d-96bf-11ea-1169-020000000000-fx"/>
    </variable>
    <variable>
       <name value="Organization-999011112-16-528-1-1007-3-3-id"/>
@@ -1608,9 +1598,9 @@
       <sourceId value="PractitionerRole-000001112010000001111-fx"/>
    </variable>
    <variable>
-      <name value="PractitionerRole-000001115010000001111-id"/>
+      <name value="PractitionerRole-000001115010000005111-id"/>
       <expression value="PractitionerRole.id"/>
-      <sourceId value="PractitionerRole-000001115010000001111-fx"/>
+      <sourceId value="PractitionerRole-000001115010000005111-fx"/>
    </variable>
    <variable>
       <name value="PractitionerRole-999001112010099901111-id"/>
@@ -4528,54 +4518,6 @@
             <resource value="MedicationRequest"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${MedicationRequest-MBH-907-VVandermansMA-andermansVV-id}"/>
-            <requestHeader>
-               <field value="Authorization"/>
-               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
-            </requestHeader>
-            <sourceId value="MedicationRequest-MBH-907-VVandermansMA-andermansVV-fx"/>
-         </operation>
-      </action>
-      <action>
-         <assert>
-            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
-            <operator value="in"/>
-            <responseCode value="200,201"/>
-         </assert>
-      </action>
-      <action>
-         <operation>
-            <type>
-               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
-               <code value="updateCreate"/>
-            </type>
-            <resource value="MedicationRequest"/>
-            <accept value="xml"/>
-            <contentType value="xml"/>
-            <params value="/${MedicationRequest-MBH-907-VVandermansMA-MA-id}"/>
-            <requestHeader>
-               <field value="Authorization"/>
-               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
-            </requestHeader>
-            <sourceId value="MedicationRequest-MBH-907-VVandermansMA-MA-fx"/>
-         </operation>
-      </action>
-      <action>
-         <assert>
-            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
-            <operator value="in"/>
-            <responseCode value="200,201"/>
-         </assert>
-      </action>
-      <action>
-         <operation>
-            <type>
-               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
-               <code value="updateCreate"/>
-            </type>
-            <resource value="MedicationRequest"/>
-            <accept value="xml"/>
-            <contentType value="xml"/>
             <params value="/${MedicationRequest-MBH-907-VVandermansMA-VV-id}"/>
             <requestHeader>
                <field value="Authorization"/>
@@ -4792,6 +4734,30 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
+            <params value="/${Organization-000051112-16-528-1-1007-3-3-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
+            </requestHeader>
+            <sourceId value="Organization-000051112-16-528-1-1007-3-3-fx"/>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="updateCreate"/>
+            </type>
+            <resource value="Organization"/>
+            <accept value="xml"/>
+            <contentType value="xml"/>
             <params value="/${Organization-012365782-16-528-1-1007-3-3-id}"/>
             <requestHeader>
                <field value="Authorization"/>
@@ -4840,12 +4806,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-89700016-95bf-11ea-1425-020000000000-id}"/>
+            <params value="/${Organization-4e826eb6-96bf-11ea-4754-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-89700016-95bf-11ea-1425-020000000000-fx"/>
+            <sourceId value="Organization-4e826eb6-96bf-11ea-4754-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4864,12 +4830,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-8995b49f-95bf-11ea-1928-020000000000-id}"/>
+            <params value="/${Organization-4e97816f-96bf-11ea-1971-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-8995b49f-95bf-11ea-1928-020000000000-fx"/>
+            <sourceId value="Organization-4e97816f-96bf-11ea-1971-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4888,12 +4854,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-89abdcca-95bf-11ea-6646-020000000000-id}"/>
+            <params value="/${Organization-4ea98aea-96bf-11ea-1166-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-89abdcca-95bf-11ea-6646-020000000000-fx"/>
+            <sourceId value="Organization-4ea98aea-96bf-11ea-1166-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -4912,12 +4878,12 @@
             <resource value="Organization"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Organization-89b6c8dd-95bf-11ea-1837-020000000000-id}"/>
+            <params value="/${Organization-4eb0cd7d-96bf-11ea-1169-020000000000-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Organization-89b6c8dd-95bf-11ea-1837-020000000000-fx"/>
+            <sourceId value="Organization-4eb0cd7d-96bf-11ea-1169-020000000000-fx"/>
          </operation>
       </action>
       <action>
@@ -5416,12 +5382,12 @@
             <resource value="PractitionerRole"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${PractitionerRole-000001115010000001111-id}"/>
+            <params value="/${PractitionerRole-000001115010000005111-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="PractitionerRole-000001115010000001111-fx"/>
+            <sourceId value="PractitionerRole-000001115010000005111-fx"/>
          </operation>
       </action>
       <action>
