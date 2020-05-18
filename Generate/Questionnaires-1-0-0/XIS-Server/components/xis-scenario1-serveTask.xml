@@ -21,32 +21,7 @@
             <responseId value="search-response"/>
         </operation>
     </action>
-    <action>
-        <assert>
-            <description value="Confirm that the returned resource type is Bundle."/>
-            <direction value="response"/>
-            <resource value="Bundle"/>
-        </assert>
-    </action>
-    
-    <nts:profile id="Bundle-profile" value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-    <action>
-        <assert>
-            <description value="Confirm that the returned Bundle conforms to the base FHIR specification."/>
-            <direction value="response"/>
-            <validateProfileId value="Bundle-profile"/>
-        </assert>
-    </action>
-    
-    <action>
-        <assert>
-            <description value="Confirm that the returned Bundle type is searchset."/>
-            <direction value="response"/>
-            <operator value="equals"/>
-            <path value="Bundle/type"/>
-            <value value="searchset"/>
-        </assert>
-    </action>
+    <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
     <action>
         <assert>
             <description value="Confirm that the returned searchset Bundle contains 1 entry."/>
@@ -54,5 +29,6 @@
             <expression value="Bundle.entry.count() = 1"/>
         </assert>
     </action>
+    <nts:include value="assert-responseBundleContent" scope="common"/>
     
 </nts:component>
