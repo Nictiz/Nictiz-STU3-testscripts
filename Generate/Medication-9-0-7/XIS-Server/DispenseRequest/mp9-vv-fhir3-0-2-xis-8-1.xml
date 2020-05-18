@@ -22,9 +22,9 @@
       <nts:include value="assert-responseBundleContent" scope="common"/>
       <nts:include value="assert-returnCount" scope="project">
          <nts:with-parameter name="description"
-                       value="Confirm that the returned searchset Bundle contains 0 DispenseRequests."/>
+                       value="Confirm that the returned searchset Bundle contains 1 DispenseRequest."/>
          <nts:with-parameter name="expression"
-                       value="Bundle.entry.where(resource.is(MedicationRequest)).count() = 0"/>
+                       value="Bundle.entry.where(resource.is(MedicationRequest)).count() = 1"/>
       </nts:include>
    </test>
 </TestScript>
