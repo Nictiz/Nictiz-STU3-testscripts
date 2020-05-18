@@ -22,11 +22,12 @@
                 </xsl:variable>
                 <xsl:variable name="relativePath" select="substring-before(substring-after(string(base-uri($document)),$xis_dir),'.xml')"/>
                 <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$xis_dir),$xis_dir)"/>
-                <xsl:for-each select="('xml','json')">
+                <xsl:variable name="accept" select="$document/f:TestScript/@nts:accept"/>
+                <xsl:for-each select="if ($accept) then tokenize($accept,' ') else 'xml'">
                     <xsl:result-document href="{concat(string-join(($outputDir, $xis_dir), '/'),$relativePath,'-',.,'.xml')}">
                         <xsl:apply-templates select="$document_stripped">
                             <xsl:with-param name="inputDir" select="$inputDir"/>
-                            <xsl:with-param name="expectedResponseFormat" select="."/>
+                            <xsl:with-param name="accept" select="."/>
                         </xsl:apply-templates>
                     </xsl:result-document>
                 </xsl:for-each>
