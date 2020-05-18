@@ -30,15 +30,21 @@
             <xsl:variable name="document_stripped">
                 <xsl:apply-templates mode="stripSetup" select="$document"/>
             </xsl:variable>
+            <xsl:variable name="relativePath" select="substring-before(substring-after(string(base-uri($document)),$xis_dir),'.xml')"/>
             <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$xis_dir),$xis_dir)"/>
-            <xsl:result-document href="{string-join(($outputDir, $xis_dir, tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="$document_stripped">
-                    <xsl:with-param name="inputDir" select="$inputDir"/>
-                </xsl:apply-templates>
-            </xsl:result-document>
-            <xsl:result-document href="{string-join(($outputDir, concat($xis_dir, '-nictiz-intern'), tokenize(document-uri(.), '/')[last()]), '/')}">
-                <xsl:apply-templates select="$document"/>
-            </xsl:result-document>
+            <xsl:for-each select="('xml','json')">
+                <xsl:result-document href="{concat(string-join(($outputDir, $xis_dir), '/'),$relativePath,'-',.,'.xml')}">
+                    <xsl:apply-templates select="$document_stripped">
+                        <xsl:with-param name="inputDir" select="$inputDir"/>
+                        <xsl:with-param name="expectedResponseFormat" select="."/>
+                    </xsl:apply-templates>
+                </xsl:result-document>
+                <xsl:result-document href="{concat(string-join(($outputDir, concat($xis_dir, '-nictiz-intern')), '/'),$relativePath,'-',.,'.xml')}">
+                    <xsl:apply-templates select="$document">
+                        <xsl:with-param name="expectedResponseFormat" select="."/>
+                    </xsl:apply-templates>
+                </xsl:result-document>
+            </xsl:for-each>
         </xsl:for-each>
     </xsl:template>
     
