@@ -4,9 +4,7 @@
    <name value="Medication Process 9.0.7 - MedicationAgreement (NL: MedicatieAfspraak) - XIS Server - Scenario 1.2b"/>
    <description value="Scenario 1.2b - Medicatieafspraak gebruiksperiode ingangsdatum en duur (dagen)"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-BOSCHMAN-token.xml" />
-   <profile id="bundle-profile">
-      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-   </profile>
+   
    <test id="mg-mgr-mg-MA-Scenarioset1-1-2boptioneel">
       <name value="Scenario 1.2b"/>
       <description value="Scenario 1.2b - Medicatieafspraak gebruiksperiode ingangsdatum en duur (dagen)"/>

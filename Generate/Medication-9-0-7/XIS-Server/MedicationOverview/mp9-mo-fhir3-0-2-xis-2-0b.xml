@@ -4,9 +4,7 @@
    <name value="Medication Process 9.0.7 - MedicationOverview (NL: MedicatieOverzicht) - XIS Server - Scenario 2.0b"/>
    <description value="Scenario 2.0b - Huidige medicatieafspraken, gestopte medicatie en toekomstige medicatieafspraken"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-KLOKGIETERS-token.xml" />
-   <profile id="bundle-profile">
-      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-   </profile>
+   
    <test id="mo-mor-ma-Scenario2-0-b-output">
       <name value="Scenario 2.0b"/>
       <description value="Scenario 2.0b - Huidige medicatieafspraken, gestopte medicatie en toekomstige medicatieafspraken"/>

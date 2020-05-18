@@ -4,9 +4,7 @@
    <name value="Medication Process 9.0.7 - MedicationAgreement (NL: MedicatieAfspraak) - XIS Server - Scenario 6.12"/>
    <description value="Scenario 6.12 - Variabele hoeveelheid en maximum"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-MAASZ-token.xml" />
-   <profile id="bundle-profile">
-      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-   </profile>
+   
    <test id="mg-mgr-mg-MA-Scenarioset6-6-12optioneel">
       <name value="Scenario 6.12"/>
       <description value="Scenario 6.12 - Variabele hoeveelheid en maximum"/>

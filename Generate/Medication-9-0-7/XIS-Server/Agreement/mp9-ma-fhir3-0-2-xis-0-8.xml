@@ -4,9 +4,7 @@
    <name value="Medication Process 9.0.7 - MedicationAgreement (NL: MedicatieAfspraak) - XIS Server - Scenario 0.8"/>
    <description value="Scenario 0.8 - Een antwoord zonder medicatieafspraken (filter op gebruiksperiode – einddatum (alles voor T-110))&#xA;(Antwoord: bericht zonder medicatieafspraken)"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-JANKIE-token.xml" />
-   <profile id="bundle-profile">
-      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-   </profile>
+   
    <nts:includeDateT value="yes"/>
    <test id="mg-mgr-mg-MA-Scenarioset0-0-8">
       <name value="Scenario 0.8"/>

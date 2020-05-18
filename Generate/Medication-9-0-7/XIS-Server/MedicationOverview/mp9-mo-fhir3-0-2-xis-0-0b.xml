@@ -4,9 +4,7 @@
    <name value="Medication Process 9.0.7 - MedicationOverview (NL: MedicatieOverzicht) medicatieoverzicht beschikbaarstellen - XIS Server - Scenario 0.0b"/>
    <description value="Scenario 0.0b - Systeemrol controle (MP-MGB versus MP-MOB) medicatieoverzicht beschikbaarstellen"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-JANKIE-token.xml" />
-   <profile id="bundle-profile">
-      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-   </profile>
+   
    <test id="mo-mor-ma-Scenario0-0-b-output">
       <name value="Scenario 0.0b"/>
       <description value="Scenario 0.0b - Systeemrol controle (MP-MGB versus MP-MOB) medicatieoverzicht beschikbaarstellen"/>

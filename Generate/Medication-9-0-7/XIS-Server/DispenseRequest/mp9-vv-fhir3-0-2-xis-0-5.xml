@@ -5,9 +5,7 @@
    <name value="Medication Process 9.0.7 - DispenseRequest (NL: VerstrekkingsVerzoek) - XIS Server - Scenario 0.5"/>
    <description value="Scenario 0.5 - Een antwoord zonder verstrekkingsverzoeken (filter op een niet in het systeem aanwezige id &#34;MBH_907_QAnietaanwezig&#34;)&#xA;(Antwoord: bericht zonder verstrekkingsverzoek)"/>
    <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-JANKIE-token.xml"/>
-   <profile id="bundle-profile">
-      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-   </profile>
+   
    <variable>
       <name value="filter-identifier"/>
       <defaultValue value="urn:oid:2.16.840.1.113883.2.4.3.11.999.77.52711000146108.1|MBH_907_QAnietaanwezig"/>
