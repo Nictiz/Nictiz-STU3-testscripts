@@ -35,15 +35,7 @@
             <expression value="Bundle.type = 'transaction'"/>
         </assert>
     </action>
-    
-    <nts:profile id="Bundle-profile" value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
-    <action>
-        <assert>
-            <description value="Confirm that the Bundle conforms to the required profile"/>
-            <direction value="request"/>
-            <validateProfileId value="Bundle-profile"/>
-        </assert>
-    </action>
+    <nts:include value="assert-requestBundleContent" scope="common"/>
     <action>
         <assert>
             <description value="Confirm that the Bundle contains a Task and a QuestionnaireResponse"/>
