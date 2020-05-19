@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/medmij-questionnaires-fhir3-0-1-xis-1.6-2.6-xml"/>
    <name value="MedMij Questionnaires - XIS Server - Scenario 1.6 and 2.6 - XML Format"/>
    <status value="active"/>
-   <date value="2020-05-18"/>
+   <date value="2020-05-19"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -39,7 +39,7 @@
          <reference value="../_reference/resources/resources-specific/medmij-questionnaires-fhir3-0-1-vl-QuestionnaireProvisioningTask-Bie-PHQ9E-REQUESTED.xml"/>
       </resource>
    </fixture>
-   <profile id="bundle-profile">
+   <profile id="Bundle-profile">
       <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
    </profile>
    <variable>
@@ -153,6 +153,13 @@
       </action>
       <action>
          <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.count() = 1"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
             <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
             <direction value="response"/>
             <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
@@ -218,15 +225,8 @@
          <assert>
             <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
             <direction value="response"/>
-            <validateProfileId value="bundle-profile"/>
+            <validateProfileId value="Bundle-profile"/>
             <warningOnly value="false"/>
-         </assert>
-      </action>
-      <action>
-         <assert>
-            <description value="Confirm that the returned searchset Bundle contains 1 entry."/>
-            <direction value="response"/>
-            <expression value="Bundle.entry.count() = 1"/>
          </assert>
       </action>
    </test>
