@@ -15,4 +15,14 @@
       </nts:include>
       <nts:include value="assert-responseBundleContent" scope="common"/>
    </test>
+   <test id="mo-mor-ma-Scenario1-0-b-output-GET">
+      <name value="Scenario 1.0b - GET"/>
+      <description value="Scenario 0.0b - Systeemrol controle (MP-MGB versus MP-MOB) medicatieoverzicht beschikbaarstellen middels een HTTP GET operation. DVZA dient in deze versie van de gegevensdienst zowel een GET als een POST te ondersteunen (MP-135)."/>
+      <nts:include value="xis-mo-operation-get">
+         <nts:with-parameter name="description"
+            value="Test XIS server to serve MedicationOverview (NL: MedicatieOverzicht) - Geen relevante medicatieafspraken"/>
+         <nts:with-parameter name="accept" value="xml"/>
+      </nts:include>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
 </TestScript>
