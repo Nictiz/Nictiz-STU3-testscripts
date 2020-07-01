@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+   <id value="gbz-fhir3-0-1-serve-1-json"/>
+   <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-serve-1-json"/>
+   <name value="Nictiz Geboortezorg - Server - Scenario 1 - Serve resources for current pregnancy - JSON Format"/>
+   <status value="active"/>
+   <date value="2020-07-01"/>
+   <publisher value="Nictiz"/>
+   <contact>
+      <name value="Nictiz"/>
+      <telecom>
+         <system value="email"/>
+         <value value="kwalificatie@nictiz.nl"/>
+         <use value="work"/>
+      </telecom>
+   </contact>
+   <fixture id="patient-fixture">
+      <resource>
+         <reference value="../_reference/Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="organization-fixture">
+      <resource>
+         <reference value="../_reference/Gebz-nl-core-organization-vlkpraktijka.xml"/>
+      </resource>
+   </fixture>
+   <profile id="Bundle-profile">
+      <reference value="http://hl7.org/fhir/StructureDefinition/Bundle"/>
+   </profile>
+   <variable>
+      <name value="patient-token-id"/>
+      <defaultValue value="Bearer 1f5b4282-544e-4832-b370-eeb69eb758d4"/>
+      <description value="OAuth Token for current patient"/>
+   </variable>
+   <variable>
+      <name value="patient-id"/>
+      <expression value="Patient.id"/>
+      <sourceId value="patient-fixture"/>
+   </variable>
+   <variable>
+      <name value="organization-id"/>
+      <expression value="Organization.id"/>
+      <sourceId value="organization-fixture"/>
+   </variable>
+   <test id="01-ServeWoman">
+      <name value="01-ServeWoman"/>
+      <description value="Test Server query operation for Woman (Patient)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Patient"/>
+            <description value="Test Server query operation for Woman (Patient)"/>
+            <accept value="json"/>
+            <params value="?_id=${patient-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="02-ServeMaternalRecord">
+      <name value="02-ServeMaternalRecord"/>
+      <description value="Test Server query operation for MaternalRecord (EpisodeOfCare)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="EpisodeOfCare"/>
+            <description value="Test Server query operation for MaternalRecord (EpisodeOfCare)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;status=active&amp;type=http://snomed.info/sct|364320009"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="03-ServeOrganization">
+      <name value="03-ServeOrganization"/>
+      <description value="Test Server query operation for Organization"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Organization"/>
+            <description value="Test Server query operation for Organization"/>
+            <accept value="json"/>
+            <params value="?_id=${organization-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="04-ServePregnancy">
+      <name value="05-ServePregnancy"/>
+      <description value="Test Server query operation for Pregnancy (Condition)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for Pregnancy (Condition)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="05-ServeBloodGroup">
+      <name value="05-ServeBloodGroup"/>
+      <description value="Test Server query operation for BloodGroup (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for BloodGroup (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|883-9"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="06-ServeRhesusD">
+      <name value="06-ServeRhesusD"/>
+      <description value="Test Server query operation for RhesusD (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for RhesusD (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="07-ServeRhesusC">
+      <name value="07-ServeRhesusC"/>
+      <description value="Test Server query operation for RhesusC (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for RhesusC (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|718-7"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="08-ServeGravidity">
+      <name value="08-ServeGravidity"/>
+      <description value="Test Server query operation for Gravidity (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for Gravidity (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="09-ServeParity">
+      <name value="09-ServeParity"/>
+      <description value="Test Server query operation for Gravidity (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for Gravidity (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="10-ServeTermDate">
+      <name value="10-ServeTermDate"/>
+      <description value="Test Server query operation for TermDate (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for TermDate (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+   <test id="11-ServeHb">
+      <name value="11-ServeHb"/>
+      <description value="Test Server query operation for Hb (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Server query operation for Hb (Observation)"/>
+            <accept value="json"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle type is searchset."/>
+            <direction value="response"/>
+            <expression value="Bundle.type"/>
+            <operator value="equals"/>
+            <value value="searchset"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle total value matches or is less than the number of entries in the Bundle. The included resources should not be counted as entries in the Bundle.total."/>
+            <direction value="response"/>
+            <expression value="Bundle.total.toInteger() &lt;= Bundle.entry.where(search.empty() or search.mode = 'match').count()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle contains a self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.relation.exists() and Bundle.link.relation = 'self' and Bundle.link.url.exists()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) anywhere."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().select(identifier.where(system.toString() = 'http://fhir.nl/fhir/NamingSystem/bsn').where(value.empty())).count() = 0"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that Bundle does not use Burgerservicenummer (BSN) in the self link."/>
+            <direction value="response"/>
+            <expression value="Bundle.link.url.contains('http://fhir.nl/fhir/NamingSystem/bsn') = false"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources except OperationOutcome contain a meta.profile tag."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.resource.where(is(OperationOutcome).not()).where(meta.profile.empty()).empty()"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all returned resources contain an Resource.id except when temporary ids are used in the Bundle. The only time that a resource does not have an id is when it is being submitted to the server using a create operation: https://www.hl7.org/fhir/STU3/resource-definitions.html#Resource.id "/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all( $this.fullUrl.matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or $this.fullUrl.matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or $this.resource.id.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl does not disagree with the id in the resource, see http://hl7.org/fhir/stu3/bundle-definitions.html#Bundle.entry.fullUrl"/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.all($this.fullUrl.endsWith($this.resource.id) or $this.fullUrl.startsWith('urn:'))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the fullUrl is an absolute URL, an uuid or an oid."/>
+            <direction value="response"/>
+            <expression value="Bundle.entry.fullUrl.all( startsWith('http://') or startsWith('https://') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that literal References (Reference.reference) are an absolute URL, a relative URL or an internal fragment reference (contained), see: http://hl7.org/fhir/stu3/references.html#literal."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().reference.all( startsWith('http://') or startsWith('https://') or startsWith('#') or matches('^urn:oid:[0-2](\\.(0|[1-9]\\d*))*$') or matches('^urn:uuid:[A-Fa-f\\d]{8}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{4}-[A-Fa-f\\d]{12}$') or (startsWith('urn:').not() and startsWith('#').not() and matches('^[A-Za-z]{3,}/[^/]+$')) )"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all References have a display value, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_the_reference_datatype."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(Reference)).all(display.exists())"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that all CodeableConcept elements contain a coding.display or a text value if no Coding exists, see https://informatiestandaarden.nictiz.nl/wiki/MedMij:V2019.01_FHIR_IG#Use_of_coded_concepts."/>
+            <direction value="response"/>
+            <expression value="Bundle.descendants().where($this.is(CodeableConcept)).all( coding.display.exists() or (coding.exists().not() and text.exists()))"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned Bundle conforms to the base FHIR specification and the resources to the stated profiles in the meta.profile tag."/>
+            <direction value="response"/>
+            <validateProfileId value="Bundle-profile"/>
+            <warningOnly value="false"/>
+         </assert>
+      </action>
+   </test>
+</TestScript>
