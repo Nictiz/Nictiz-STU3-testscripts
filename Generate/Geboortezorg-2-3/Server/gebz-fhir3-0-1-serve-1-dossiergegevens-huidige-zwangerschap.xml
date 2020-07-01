@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript" nts:scenario="server">
+   <id value="gbz-fhir3-0-1-serve-1"/>
+   <name value="Nictiz Geboortezorg - Server - Scenario 1 - Serve resources for current pregnancy"/>
+   <nts:patientTokenFixture href="Gebz-XXX-Sara-token.xml" />
+   <nts:fixture id="patient-fixture" href="Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
+   <nts:fixture id="organization-fixture" href="Gebz-nl-core-organization-vlkpraktijka.xml"/>
+   <nts:variable name="patient-id" expression="Patient.id" sourceId="patient-fixture"/>
+   <nts:variable name="organization-id" expression="Organization.id" sourceId="organization-fixture"/>
+   
+   <test id="01-ServeWoman">
+      <name value="01-ServeWoman"/>
+      <description value="Test Server query operation for Woman (Patient)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for Woman (Patient)"/>
+         <nts:with-parameter name="resource" value="Patient"/>
+         <nts:with-parameter name="params" value="?_id=${patient-id}"/>
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="02-ServeMaternalRecord">
+      <name value="02-ServeMaternalRecord"/>
+      <description value="Test Server query operation for MaternalRecord (EpisodeOfCare)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for MaternalRecord (EpisodeOfCare)"/>
+         <nts:with-parameter name="resource" value="EpisodeOfCare"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;status=active&amp;type=http://snomed.info/sct|364320009"/>
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="03-ServeOrganization">
+      <name value="03-ServeOrganization"/>
+      <description value="Test Server query operation for Organization"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for Organization"/>
+         <nts:with-parameter name="resource" value="Organization"/>
+         <nts:with-parameter name="params" value="?_id=${organization-id}"/>
+         <!-- ?_has:EpisodeOfCare:organization:condition=wouden-zwanger4 -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+
+   <test id="04-ServePregnancy">
+      <name value="05-ServePregnancy"/>
+      <description value="Test Server query operation for Pregnancy (Condition)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for Pregnancy (Condition)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>
+         <!-- &amp;context={dossier-id} -->
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+
+   <test id="05-ServeBloodGroup">
+      <name value="05-ServeBloodGroup"/>
+      <description value="Test Server query operation for BloodGroup (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for BloodGroup (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|883-9"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="06-ServeRhesusD">
+      <name value="06-ServeRhesusD"/>
+      <description value="Test Server query operation for RhesusD (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for RhesusD (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="07-ServeRhesusC">
+      <name value="07-ServeRhesusC"/>
+      <description value="Test Server query operation for RhesusC (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for RhesusC (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|718-7"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="08-ServeGravidity">
+      <name value="08-ServeGravidity"/>
+      <description value="Test Server query operation for Gravidity (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for Gravidity (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="09-ServeParity">
+      <name value="09-ServeParity"/>
+      <description value="Test Server query operation for Gravidity (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for Gravidity (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+
+   <test id="10-ServeTermDate">
+      <name value="10-ServeTermDate"/>
+      <description value="Test Server query operation for TermDate (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for TermDate (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+   
+   <test id="11-ServeHb">
+      <name value="11-ServeHb"/>
+      <description value="Test Server query operation for Hb (Observation)"/>
+      <nts:include value="serve-gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Server query operation for Hb (Observation)"/>
+         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+         <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
+      </nts:include>
+      <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>
+      <nts:include value="assert-responseBundleContent" scope="common"/>
+   </test>
+
+</TestScript>
