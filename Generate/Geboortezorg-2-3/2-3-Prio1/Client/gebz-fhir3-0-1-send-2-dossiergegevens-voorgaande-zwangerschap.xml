@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript" nts:scenario="client">
+   <id value="gbz-fhir3-0-1-retrieve-1"/>
+   <name value="Nictiz Geboortezorg - Client - Scenario 1 - Send resources for previous pregnancy"/>
+   <nts:patientTokenFixture href="Gebz-XXX-Sara-token.xml" />
+   <nts:fixture id="Bundle-samenvatting-zwangerschap1-fx" href="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap1.xml"/>
+   <nts:fixture id="Bundle-samenvatting-zwangerschap2-fx" href="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap2.xml"/>
+
+   <test id="01-SendRecordPreviousPregnancy1">
+      <name value="01-SendRecordPreviousPregnancy1"/>
+      <description value="Test Client request to create/update previous pregnancy 1 resources from transaction Bundle. The expected response code is 200 (Updated) or 201(Created)."/>
+      <nts:include value="gbz-operation-transaction">
+         <nts:with-parameter name="description"
+            value="Server create or update operation for a transaction Bundle of resources for previous pregnancy 1."/>
+         <nts:with-parameter name="sourceId" value="Bundle-samenvatting-zwangerschap1-fx"/>
+      </nts:include>
+      <nts:include value="assert-authorizationHeader" scope="common"/>
+      <nts:include value="assert-requestBundleContent" scope="common"/>
+      <nts:include value="gbz-assert-responseTransactionBundleSuccess"/>
+      <nts:include value="gbz-assert-requestTransactionBundleType"/>
+      <nts:include value="gbz-assert-requestTransactionBundleContent">
+         <nts:with-parameter name="resource" value="Patient"></nts:with-parameter>
+         <nts:with-parameter name="n" value="2"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'11996-6'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'11977-6'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'EindeZw'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'118951000146109'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'249120008'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'364332008'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'364297003'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'249163006'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'364336006'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'3311000146109'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'9274-2'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'8339-4'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+   </test>
+   
+   <test id="02-SendRecordPreviousPregnancy2">
+      <name value="02-SendRecordPreviousPregnancy2"/>
+      <description value="Test Client request to create/update previous pregnancy 2 resources from transaction Bundle. The expected response code is 200 (Updated) or 201(Created)."/>
+      <nts:include value="gbz-operation-transaction">
+         <nts:with-parameter name="description"
+            value="Server create or update operation for a transaction Bundle of resources for previous pregnancy 2."/>
+         <nts:with-parameter name="sourceId" value="Bundle-samenvatting-zwangerschap2-fx"/>
+      </nts:include>
+      <nts:include value="assert-authorizationHeader" scope="common"/>
+      <nts:include value="assert-requestBundleContent" scope="common"/>
+      <nts:include value="gbz-assert-responseTransactionBundleSuccess"/>
+      <nts:include value="gbz-assert-requestTransactionBundleType"/>
+      <nts:include value="gbz-assert-requestTransactionBundleContent">
+         <nts:with-parameter name="resource" value="Patient"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'11996-6'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'11977-6'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'EindeZw'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-requestTransactionBundleContentWithCode">
+         <nts:with-parameter name="resource" value="Observation"></nts:with-parameter>
+         <nts:with-parameter name="code" value="'118951000146109'"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+   </test>
+   
+</TestScript>

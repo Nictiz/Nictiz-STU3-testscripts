@@ -9,27 +9,38 @@
     
     <xsl:include href="../general/xslt/generateTestScript.xsl"/>
     
-    <xsl:variable name="outputDir" select="'../../FHIR3-0-1-Geboortezorg/dev/2-3-Prio1'"/>
+    <xsl:variable name="outputDir" select="'../../FHIR3-0-1-Geboortezorg/dev'"/>
     
     <!-- Main template to generate the actual tests scripts for PHR and XIS. This template is standalone, it doesn't work on XML content. --> 
     <xsl:template name="generateAll">
-        <xsl:variable name="xis_dir" select="'Server'"/>
-        <xsl:for-each select="collection(string-join(($xis_dir, '?recurse=yes;select=*.xml'), '/'))">
+        <xsl:variable name="dir" select="'2-3-Prio1'"/>
+        <xsl:for-each select="collection(string-join(($dir, '?recurse=yes;select=*.xml'), '/'))">
             <xsl:variable name="document" select="document(document-uri(.))"/>
             <xsl:if test="not(contains(base-uri($document),'/components/'))">
                 <xsl:variable name="document_stripped">
                     <xsl:apply-templates mode="stripSetup" select="$document"/>
                 </xsl:variable>
-                <xsl:variable name="relativePath" select="substring-before(substring-after(string(base-uri($document)),$xis_dir),'.xml')"/>
-                <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$xis_dir),$xis_dir)"/>
-                <xsl:for-each select="('xml','json')">
-                    <xsl:result-document href="{concat(string-join(($outputDir, $xis_dir), '/'),$relativePath,'-',.,'.xml')}">
-                        <xsl:apply-templates select="$document_stripped">
-                            <xsl:with-param name="inputDir" select="$inputDir"/>
-                            <xsl:with-param name="expectedResponseFormat" select="."/>
-                        </xsl:apply-templates>
-                    </xsl:result-document>
-                </xsl:for-each>
+                <xsl:variable name="relativePath" select="substring-before(substring-after(string(base-uri($document)),$dir),'.xml')"/>
+                <xsl:variable name="inputDir" select="concat(substring-before(string(base-uri($document)),$dir),$dir)"/>
+                <xsl:choose>
+                    <xsl:when test="$document/f:TestScript/@nts:scenario = 'server'">
+                        <xsl:for-each select="('xml','json')">
+                            <xsl:result-document href="{concat(string-join(($outputDir, $dir), '/'),$relativePath,'-',.,'.xml')}">
+                                <xsl:apply-templates select="$document_stripped">
+                                    <xsl:with-param name="inputDir" select="$inputDir"/>
+                                    <xsl:with-param name="expectedResponseFormat" select="."/>
+                                </xsl:apply-templates>
+                            </xsl:result-document>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:result-document href="{concat(string-join(($outputDir, $dir), '/'),$relativePath,'.xml')}">
+                            <xsl:apply-templates select="$document_stripped">
+                                <xsl:with-param name="inputDir" select="$inputDir"/>
+                            </xsl:apply-templates>
+                        </xsl:result-document>                        
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>

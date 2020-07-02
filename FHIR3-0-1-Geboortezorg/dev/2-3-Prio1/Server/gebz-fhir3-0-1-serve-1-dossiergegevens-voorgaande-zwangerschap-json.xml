@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-serve-2-json"/>
    <name value="Nictiz Geboortezorg - Server - Scenario 2 - Serve resources for previous pregnancy - JSON Format"/>
    <status value="active"/>
-   <date value="2020-07-01"/>
+   <date value="2020-07-02"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>

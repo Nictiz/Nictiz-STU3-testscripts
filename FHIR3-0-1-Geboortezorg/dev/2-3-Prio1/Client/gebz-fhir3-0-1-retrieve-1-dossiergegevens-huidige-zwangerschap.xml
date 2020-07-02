@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
+   <id value="gbz-fhir3-0-1-retrieve-1"/>
+   <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-retrieve-1"/>
+   <name value="Nictiz Geboortezorg - Client - Scenario 1 - Retrieve resources for current pregnancy"/>
+   <status value="active"/>
+   <date value="2020-07-02"/>
+   <publisher value="Nictiz"/>
+   <contact>
+      <name value="Nictiz"/>
+      <telecom>
+         <system value="email"/>
+         <value value="kwalificatie@nictiz.nl"/>
+         <use value="work"/>
+      </telecom>
+   </contact>
+   <fixture id="patient-token-fixture">
+      <resource>
+         <reference value="../_reference/Gebz-XXX-Sara-token.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="patient-fixture">
+      <resource>
+         <reference value="../_reference/Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="organization-fixture">
+      <resource>
+         <reference value="../_reference/Gebz-nl-core-organization-vlkpraktijka.xml"/>
+      </resource>
+   </fixture>
+   <variable>
+      <name value="patient-token-id"/>
+      <expression value="Patient.id"/>
+      <sourceId value="patient-token-fixture"/>
+   </variable>
+   <variable>
+      <name value="patient-id"/>
+      <expression value="Patient.id"/>
+      <sourceId value="patient-fixture"/>
+   </variable>
+   <variable>
+      <name value="organization-id"/>
+      <expression value="Organization.id"/>
+      <sourceId value="organization-fixture"/>
+   </variable>
+   <test id="01-RetrieveWoman">
+      <name value="01-RetrieveWoman"/>
+      <description value="Test Client query operation for Woman (Patient)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Patient"/>
+            <description value="Test Client query operation for Woman (Patient)"/>
+            <params value="?_id=${patient-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Patient entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Patient)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="02-RetrieveMaternalRecord">
+      <name value="02-RetrieveMaternalRecord"/>
+      <description value="Test Client query operation for MaternalRecord (EpisodeOfCare)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="EpisodeOfCare"/>
+            <description value="Test Client query operation for MaternalRecord (EpisodeOfCare)"/>
+            <params value="?patient=${patient-id}&amp;status=active&amp;type=http://snomed.info/sct|364320009"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 EpisodeOfCare entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(EpisodeOfCare)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="03-RetrieveOrganization">
+      <name value="03-RetrieveOrganization"/>
+      <description value="Test Client query operation for Organization"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Organization"/>
+            <description value="Test Client query operation for Organization"/>
+            <params value="?_id=${organization-id}"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Organization entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Organization)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="04-RetrievePregnancy">
+      <name value="05-RetrievePregnancy"/>
+      <description value="Test Client query operation for Pregnancy (Condition)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for Pregnancy (Condition)"/>
+            <params value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Condition entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Condition)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="05-RetrieveBloodGroup">
+      <name value="05-RetrieveBloodGroup"/>
+      <description value="Test Client query operation for BloodGroup (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for BloodGroup (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|883-9"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="06-RetrieveRhesusD">
+      <name value="06-RetrieveRhesusD"/>
+      <description value="Test Client query operation for RhesusD (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for RhesusD (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="07-RetrieveRhesusC">
+      <name value="07-RetrieveRhesusC"/>
+      <description value="Test Client query operation for RhesusC (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for RhesusC (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|718-7"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="08-RetrieveGravidity">
+      <name value="08-RetrieveGravidity"/>
+      <description value="Test Client query operation for Gravidity (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for Gravidity (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="09-RetrieveParity">
+      <name value="09-RetrieveParity"/>
+      <description value="Test Client query operation for Gravidity (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for Gravidity (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="10-RetrieveTermDate">
+      <name value="10-RetrieveTermDate"/>
+      <description value="Test Client query operation for TermDate (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for TermDate (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+   <test id="11-RetrieveHb">
+      <name value="11-RetrieveHb"/>
+      <description value="Test Client query operation for Hb (Observation)"/>
+      <action>
+         <operation>
+            <type>
+               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
+               <code value="search"/>
+            </type>
+            <resource value="Observation"/>
+            <description value="Test Client query operation for Hb (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+            <requestHeader>
+               <field value="Authorization"/>
+               <value value="${patient-token-id}"/>
+            </requestHeader>
+         </operation>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that HTTP header Authorization contains the patient token ${patient-token-id}"/>
+            <direction value="request"/>
+            <headerField value="Authorization"/>
+            <value value="${patient-token-id}"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the operation was succesful"/>
+            <operator value="in"/>
+            <responseCode value="200,201"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned resource type is Bundle."/>
+            <direction value="response"/>
+            <resource value="Bundle"/>
+         </assert>
+      </action>
+      <action>
+         <assert>
+            <description value="Confirm that the returned searchset Bundle contains 1 Observation entry."/>
+            <direction value="response"/>
+            <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
+         </assert>
+      </action>
+   </test>
+</TestScript>

@@ -11,7 +11,7 @@
    <test id="01-ServeWoman">
       <name value="01-ServeWoman"/>
       <description value="Test Server query operation for Woman (Patient)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Woman (Patient)"/>
          <nts:with-parameter name="resource" value="Patient"/>
@@ -24,7 +24,7 @@
    <test id="02-ServeMaternalRecord">
       <name value="02-ServeMaternalRecord"/>
       <description value="Test Server query operation for MaternalRecord (EpisodeOfCare)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for MaternalRecord (EpisodeOfCare)"/>
          <nts:with-parameter name="resource" value="EpisodeOfCare"/>
@@ -37,7 +37,7 @@
    <test id="03-ServeOrganization">
       <name value="03-ServeOrganization"/>
       <description value="Test Server query operation for Organization"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Organization"/>
          <nts:with-parameter name="resource" value="Organization"/>
@@ -51,7 +51,7 @@
    <test id="04-ServePregnancy">
       <name value="05-ServePregnancy"/>
       <description value="Test Server query operation for Pregnancy (Condition)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Pregnancy (Condition)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -65,7 +65,7 @@
    <test id="05-ServeBloodGroup">
       <name value="05-ServeBloodGroup"/>
       <description value="Test Server query operation for BloodGroup (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for BloodGroup (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -79,7 +79,7 @@
    <test id="06-ServeRhesusD">
       <name value="06-ServeRhesusD"/>
       <description value="Test Server query operation for RhesusD (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for RhesusD (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -93,7 +93,7 @@
    <test id="07-ServeRhesusC">
       <name value="07-ServeRhesusC"/>
       <description value="Test Server query operation for RhesusC (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for RhesusC (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -107,7 +107,7 @@
    <test id="08-ServeGravidity">
       <name value="08-ServeGravidity"/>
       <description value="Test Server query operation for Gravidity (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Gravidity (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -121,7 +121,7 @@
    <test id="09-ServeParity">
       <name value="09-ServeParity"/>
       <description value="Test Server query operation for Gravidity (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Gravidity (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -135,7 +135,7 @@
    <test id="10-ServeTermDate">
       <name value="10-ServeTermDate"/>
       <description value="Test Server query operation for TermDate (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for TermDate (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
@@ -149,7 +149,7 @@
    <test id="11-ServeHb">
       <name value="11-ServeHb"/>
       <description value="Test Server query operation for Hb (Observation)"/>
-      <nts:include value="serve-gbz-operation-search">
+      <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Hb (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
