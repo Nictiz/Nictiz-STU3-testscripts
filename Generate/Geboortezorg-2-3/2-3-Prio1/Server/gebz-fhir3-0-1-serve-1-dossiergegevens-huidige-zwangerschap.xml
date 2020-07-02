@@ -4,7 +4,7 @@
    <name value="Nictiz Geboortezorg - Server - Scenario 1 - Serve resources for current pregnancy"/>
    <nts:patientTokenFixture href="Gebz-XXX-Sara-token.xml" />
    <nts:fixture id="patient-fixture" href="Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
-   <nts:fixture id="organization-fixture" href="Gebz-nl-core-organization-vlkpraktijka.xml"/>
+   <nts:fixture id="organization-fixture" href="Gebz-prio1-nl-core-organization-Verloskundigenpraktijk-A.xml"/>
    <nts:variable name="patient-id" expression="Patient.id" sourceId="patient-fixture"/>
    <nts:variable name="organization-id" expression="Organization.id" sourceId="organization-fixture"/>
    

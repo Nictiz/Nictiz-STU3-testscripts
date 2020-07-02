@@ -21,7 +21,7 @@
    </fixture>
    <fixture id="organization-fixture">
       <resource>
-         <reference value="../_reference/Gebz-nl-core-organization-vlkpraktijka.xml"/>
+         <reference value="../_reference/Gebz-prio1-nl-core-organization-Verloskundigenpraktijk-A.xml"/>
       </resource>
    </fixture>
    <profile id="Bundle-profile">

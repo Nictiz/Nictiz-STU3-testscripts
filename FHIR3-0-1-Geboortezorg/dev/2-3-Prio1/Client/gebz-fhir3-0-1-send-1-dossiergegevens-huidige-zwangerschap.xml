@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript">
-   <id value="gbz-fhir3-0-1-retrieve-1"/>
-   <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-retrieve-1"/>
-   <name value="Nictiz Geboortezorg - Client - Scenario 2 - Send resources for current pregnancy and previous pregnancy"/>
+   <id value="gbz-fhir3-0-1-send-1-1"/>
+   <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-send-1-1"/>
+   <name value="Nictiz Geboortezorg - Client - Scenario 1.1 - Send resources for previous pregnancy 3 and 4"/>
    <status value="active"/>
    <date value="2020-07-02"/>
    <publisher value="Nictiz"/>
@@ -14,6 +14,21 @@
          <use value="work"/>
       </telecom>
    </contact>
+   <description value="Geboortezorg for FHIR STU3 (v3.0.1) - Scenario 1.1: Send Record Previous Pregnancy 3 and 4 - XML Format"/>
+   <origin>
+      <index value="1"/>
+      <profile>
+         <system value="http://hl7.org/fhir/testscript-profile-origin-types"/>
+         <code value="FHIR-Client"/>
+      </profile>
+   </origin>
+   <destination>
+      <index value="1"/>
+      <profile>
+         <system value="http://hl7.org/fhir/testscript-profile-destination-types"/>
+         <code value="FHIR-Server"/>
+      </profile>
+   </destination>
    <fixture id="patient-token-fixture">
       <resource>
          <reference value="../_reference/Gebz-XXX-Sara-token.xml"/>
@@ -21,12 +36,12 @@
    </fixture>
    <fixture id="Bundle-samenvatting-zwangerschap3-fx">
       <resource>
-         <reference value="../_reference/../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap3.xml"/>
+         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap3.xml"/>
       </resource>
    </fixture>
    <fixture id="Bundle-samenvatting-zwangerschap4-fx">
       <resource>
-         <reference value="../_reference/../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap4.xml"/>
+         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap4.xml"/>
       </resource>
    </fixture>
    <profile id="Bundle-profile">

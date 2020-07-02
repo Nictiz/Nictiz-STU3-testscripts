@@ -2,9 +2,11 @@
 <TestScript xmlns="http://hl7.org/fhir" xmlns:nts="http://nictiz.nl/xsl/testscript" nts:scenario="client">
    <id value="gbz-fhir3-0-1-retrieve-1"/>
    <name value="Nictiz Geboortezorg - Client - Scenario 1 - Retrieve resources for current pregnancy"/>
+   <description value="Geboortezorg for FHIR STU3 (v3.0.1) - Scenario 1.1: Query Record Current Pregnancy"/>
+   
    <nts:patientTokenFixture href="Gebz-XXX-Sara-token.xml" />
    <nts:fixture id="patient-fixture" href="Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
-   <nts:fixture id="organization-fixture" href="Gebz-nl-core-organization-vlkpraktijka.xml"/>
+   <nts:fixture id="organization-fixture" href="Gebz-prio1-nl-core-organization-Verloskundigenpraktijk-A.xml"/>
    <nts:variable name="patient-id" expression="Patient.id" sourceId="patient-fixture"/>
    <nts:variable name="organization-id" expression="Organization.id" sourceId="organization-fixture"/>
    

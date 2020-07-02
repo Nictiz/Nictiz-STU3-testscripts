@@ -16,7 +16,12 @@
    </contact>
    <fixture id="patient-fixture">
       <resource>
-         <reference value="../_reference/Gebz-prio1-nl-core-patient-XXX-VDWOUDEN.xml"/>
+         <reference value="../_reference/Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
+      </resource>
+   </fixture>
+   <fixture id="organization-fixture">
+      <resource>
+         <reference value="../_reference/Gebz-prio1-nl-core-organization-Verloskundigenpraktijk-A.xml"/>
       </resource>
    </fixture>
    <profile id="Bundle-profile">
@@ -31,6 +36,11 @@
       <name value="patient-id"/>
       <expression value="Patient.id"/>
       <sourceId value="patient-fixture"/>
+   </variable>
+   <variable>
+      <name value="organization-id"/>
+      <expression value="Organization.id"/>
+      <sourceId value="organization-fixture"/>
    </variable>
    <variable>
       <name value="pregnancy-id"/>

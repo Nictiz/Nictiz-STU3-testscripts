@@ -3,8 +3,10 @@
    <id value="gbz-fhir3-0-1-serve-2"/>
    <name value="Nictiz Geboortezorg - Server - Scenario 2 - Serve resources for previous pregnancy"/>
    <nts:patientTokenFixture href="Gebz-XXX-Sara-token.xml" />
-   <nts:fixture id="patient-fixture" href="Gebz-prio1-nl-core-patient-XXX-VDWOUDEN.xml"/>
+   <nts:fixture id="patient-fixture" href="Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
+   <nts:fixture id="organization-fixture" href="Gebz-prio1-nl-core-organization-Verloskundigenpraktijk-A.xml"/>
    <nts:variable name="patient-id" expression="Patient.id" sourceId="patient-fixture"/>
+   <nts:variable name="organization-id" expression="Organization.id" sourceId="organization-fixture"/>
    <nts:variable name="pregnancy-id" defaultValue="wouden-zwangerschap-3"/>
    <nts:variable name="child-id" defaultValue="zwangerschap-3-kind-1"/>
    
