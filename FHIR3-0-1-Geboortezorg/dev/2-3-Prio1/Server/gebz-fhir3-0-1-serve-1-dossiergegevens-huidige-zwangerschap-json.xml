@@ -16,12 +16,12 @@
    </contact>
    <fixture id="patient-fixture">
       <resource>
-         <reference value="../_reference/Gebz-prio1-nl-core-patient-WOUDENVANDER.xml"/>
+         <reference value="../_reference/Gebz-prio1-huidige-zwangerschap-nl-core-patient-WOUDENVANDER.xml"/>
       </resource>
    </fixture>
    <fixture id="organization-fixture">
       <resource>
-         <reference value="../_reference/Gebz-prio1-nl-core-organization-Verloskundigenpraktijk-A.xml"/>
+         <reference value="../_reference/Gebz-prio1-huidige-zwangerschap-nl-core-organization-1504.xml"/>
       </resource>
    </fixture>
    <profile id="Bundle-profile">

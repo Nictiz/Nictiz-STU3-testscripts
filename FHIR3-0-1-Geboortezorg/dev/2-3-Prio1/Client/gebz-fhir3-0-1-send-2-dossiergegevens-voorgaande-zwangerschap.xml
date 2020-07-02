@@ -34,12 +34,12 @@
          <reference value="../_reference/Gebz-XXX-Sara-token.xml"/>
       </resource>
    </fixture>
-   <fixture id="Bundle-samenvatting-zwangerschap1-fx">
+   <fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap1-fx">
       <resource>
          <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap1.xml"/>
       </resource>
    </fixture>
-   <fixture id="Bundle-samenvatting-zwangerschap2-fx">
+   <fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap2-fx">
       <resource>
          <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap2.xml"/>
       </resource>
