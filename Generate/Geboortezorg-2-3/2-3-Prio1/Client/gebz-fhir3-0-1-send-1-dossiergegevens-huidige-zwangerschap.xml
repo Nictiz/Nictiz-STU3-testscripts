@@ -5,8 +5,8 @@
    <description value="Geboortezorg for FHIR STU3 (v3.0.1) - Scenario 1.1: Send Record Previous Pregnancy 3 and 4 - XML Format"/>
    
    <nts:patientTokenFixture href="Gebz-XXX-Sara-token.xml" />
-   <nts:fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap3-fx" href="Gebz-prio1-transaction-samenvatting-zwangerschap3.xml"/>
-   <nts:fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap4-fx" href="Gebz-prio1-transaction-samenvatting-zwangerschap4.xml"/>
+   <nts:fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap3-fx" href="Gebz-prio1-transaction-samenvatting-zwangerschap-3.xml"/>
+   <nts:fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap4-fx" href="Gebz-prio1-transaction-samenvatting-zwangerschap-4.xml"/>
    
    <test id="01-SendRecordPreviousPregnancy3">
       <name value="01-SendRecordPreviousPregnancy3"/>

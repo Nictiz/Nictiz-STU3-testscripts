@@ -825,7 +825,7 @@
             <direction value="response"/>
             <expression value="Bundle.where(entry.where(resource.is(Observation)).count() = 1).exists()"/>
          </assert>
-      </action>&gt;
+      </action>
    </test>
    <test id="17-RetrieveChild">
       <name value="17-RetrieveChild"/>

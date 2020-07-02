@@ -36,12 +36,12 @@
    </fixture>
    <fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap3-fx">
       <resource>
-         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap3.xml"/>
+         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap-3.xml"/>
       </resource>
    </fixture>
    <fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap4-fx">
       <resource>
-         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap4.xml"/>
+         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap-4.xml"/>
       </resource>
    </fixture>
    <profile id="Bundle-profile">
