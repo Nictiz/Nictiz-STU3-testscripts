@@ -286,9 +286,9 @@
       <reference value="../_reference/resources/medmij-bgz-fhir3-0-1-product-ts-615560.xml"/>
     </resource>
   </fixture>
-  <fixture id="Medication-6939-2-16-840-1-113883-2-4-4-10-fx">
+  <fixture id="Medication-6920-2-16-840-1-113883-2-4-4-10-fx">
     <resource>
-      <reference value="../_reference/resources/medmij-bgz-fhir3-0-1-product-ts-6939.xml"/>
+      <reference value="../_reference/resources/medmij-bgz-fhir3-0-1-product-ts-6920.xml"/>
     </resource>
   </fixture>
   <fixture id="RelatedPerson-medmij-bgz-relatedperson-ts-01-fx">
@@ -582,9 +582,9 @@
     <sourceId value="Medication-615560-2-16-840-1-113883-2-4-4-7-fx"/>
   </variable>
   <variable>
-    <name value="Medication-6939-2-16-840-1-113883-2-4-4-10-id"/>
+    <name value="Medication-6920-2-16-840-1-113883-2-4-4-10-id"/>
     <expression value="Medication.id"/>
-    <sourceId value="Medication-6939-2-16-840-1-113883-2-4-4-10-fx"/>
+    <sourceId value="Medication-6920-2-16-840-1-113883-2-4-4-10-fx"/>
   </variable>
   <variable>
     <name value="RelatedPerson-medmij-bgz-relatedperson-ts-01-id"/>
@@ -1942,12 +1942,12 @@
         <resource value="Medication"/>
         <accept value="xml"/>
         <contentType value="xml"/>
-        <params value="/${Medication-6939-2-16-840-1-113883-2-4-4-10-id}"/>
+        <params value="/${Medication-6920-2-16-840-1-113883-2-4-4-10-id}"/>
         <requestHeader>
           <field value="Authorization"/>
           <value value="Bearer 93cde269-ce35-4077-a39d-19296670e949"/>
         </requestHeader>
-        <sourceId value="Medication-6939-2-16-840-1-113883-2-4-4-10-fx"/>
+        <sourceId value="Medication-6920-2-16-840-1-113883-2-4-4-10-fx"/>
       </operation>
     </action>
     <action>
