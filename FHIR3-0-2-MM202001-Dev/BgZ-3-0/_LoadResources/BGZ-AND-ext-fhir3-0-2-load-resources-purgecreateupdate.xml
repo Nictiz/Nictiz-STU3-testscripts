@@ -322,7 +322,7 @@
          <reference value="../_reference/resources-bgz-extended/medmij-bgz-ext-fhir3-0-2-product-01.xml"/>
       </resource>
    </fixture>
-   <fixture id="Medication-medmij-bgz-ext-product-01-fx">
+   <fixture id="Medication-medmij-bgz-ext-product-02-fx">
       <resource>
          <reference value="../_reference/resources-bgz-extended/medmij-bgz-ext-fhir3-0-2-product-02.xml"/>
       </resource>
@@ -1163,9 +1163,9 @@
       <sourceId value="Medication-medmij-bgz-ext-product-01-fx"/>
    </variable>
    <variable>
-      <name value="Medication-medmij-bgz-ext-product-01-id"/>
+      <name value="Medication-medmij-bgz-ext-product-02-id"/>
       <expression value="Medication.id"/>
-      <sourceId value="Medication-medmij-bgz-ext-product-01-fx"/>
+      <sourceId value="Medication-medmij-bgz-ext-product-02-fx"/>
    </variable>
    <variable>
       <name value="Medication-medmij-bgz-ext-product-03-id"/>
@@ -3272,12 +3272,12 @@
             <resource value="Medication"/>
             <accept value="xml"/>
             <contentType value="xml"/>
-            <params value="/${Medication-medmij-bgz-ext-product-01-id}"/>
+            <params value="/${Medication-medmij-bgz-ext-product-02-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="Bearer d30f66ca-288d-44ea-aae0-659400d3ff42"/>
             </requestHeader>
-            <sourceId value="Medication-medmij-bgz-ext-product-01-fx"/>
+            <sourceId value="Medication-medmij-bgz-ext-product-02-fx"/>
          </operation>
       </action>
       <action>

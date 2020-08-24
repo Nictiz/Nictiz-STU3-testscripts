@@ -204,7 +204,7 @@
             <assert>
                 <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 2 Coverage and 1 Organization entries."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Coverage) or resource.is(Organization)).count() = 1).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Coverage) or resource.is(Organization)).count() = 3).exists()"/>
             </assert>
         </action>
         <action>
@@ -1299,7 +1299,7 @@
     </test>
     <test id="14-ServeBgZ-MedicationUse">
         <name value="14-ServeBgZ-MedicationUse"/>
-        <description value="Test XIS Server search operation for all MedicationStatement resources with a category code for MedicationUse of person 1, including the Medication resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 1 MedicationStatement resource entry and 1 Medication resource entry, returned in XML format."/>
+        <description value="Test XIS Server search operation for all MedicationStatement resources with a category code for MedicationUse of person 1, including the Medication resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 2 MedicationStatement resource entry and 1 Medication resource entry, returned in XML format."/>
         <action>
             <operation>
                 <type>
@@ -1359,9 +1359,9 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 1 MedicationStatement and 1 Medication entry."/>
+                <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 2 MedicationStatement and 1 Medication entry."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationStatement) or resource.is(Medication)).count() = 2).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationStatement) or resource.is(Medication)).count() = 3).exists()"/>
             </assert>
         </action>
         <action>
@@ -1457,7 +1457,7 @@
             <assert>
                 <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 1 MedicationRequest and 1 Medication entry."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationRequest) or resource.is(Medication)).count() = 2).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationRequest) or resource.is(Medication)).count() = 4).exists()"/>
             </assert>
         </action>
         <action>
@@ -2067,7 +2067,7 @@
     </test>
     <test id="22-ServeBgZ-LaboratoryTestResult">
         <name value="22-ServeBgZ-LaboratoryTestResult"/>
-        <description value="Test XIS Server search operation for the last known Obervation resources with a category for LaboratoryTestResult, specific for Chemistry observations of person 1, including the referenced Specimem resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 1 Observation resource entry and 1 Specimen resource, returned in XML format."/>
+        <description value="Test XIS Server search operation for the last known Obervation resources with a category for LaboratoryTestResult, specific for Chemistry observations of person 1, including the referenced Specimem resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 3 Observation resources entry and 1 Specimen resource, returned in XML format."/>
         <action>
             <operation>
                 <type>
@@ -2129,7 +2129,7 @@
             <assert>
                 <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 1 Observation and 1 Specimen entry."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Observation) or resource.is(Specimen)).count() = 2).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Observation) or resource.is(Specimen)).count() = 4).exists()"/>
             </assert>
         </action>
         <action>

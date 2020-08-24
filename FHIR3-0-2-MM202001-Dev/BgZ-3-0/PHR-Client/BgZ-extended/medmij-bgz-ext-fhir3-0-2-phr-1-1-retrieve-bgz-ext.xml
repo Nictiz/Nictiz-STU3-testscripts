@@ -296,7 +296,7 @@
             <assert>
                 <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 2 Coverage and 1 Organization entries."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Coverage) or resource.is(Organization)).count() = 1).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Coverage) or resource.is(Organization)).count() = 3).exists()"/>
             </assert>
         </action>
     </test>
@@ -1652,7 +1652,7 @@
     </test>
     <test id="14-RetrieveBgZ-MedicationUse">
         <name value="14-RetrieveBgZ-MedicationUse"/>
-        <description value="Test PHR Client retrieve search operation for all MedicationStatement resources with a category code for MedicationUse of person 1, including the Medication resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 1 MedicationStatement resource entry and 1 Medication resource entry."/>
+        <description value="Test PHR Client retrieve search operation for all MedicationStatement resources with a category code for MedicationUse of person 1, including the Medication resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 2 MedicationStatement resource entry and 1 Medication resource entry."/>
         <action>
             <operation>
                 <type>
@@ -1769,13 +1769,13 @@
             <assert>
                 <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 1 MedicationStatement and 1 Medication entry."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationStatement) or resource.is(Medication)).count() = 2).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationStatement) or resource.is(Medication)).count() = 3).exists()"/>
             </assert>
         </action>
     </test>
     <test id="15-RetrieveBgZ-MedicationAgreement">
         <name value="15-RetrieveBgZ-MedicationAgreement"/>
-        <description value="Test PHR Client retrieve search operation for all MedicationRequest resources with a category code for MedicationAgreement of person 1, including the Medication resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 1 MedicationRequest resource entry and 1 Medication resource entry."/>
+        <description value="Test PHR Client retrieve search operation for all MedicationRequest resources with a category code for MedicationAgreement of person 1, including the Medication resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 2 MedicationRequest resource entry and 1 Medication resource entry."/>
         <action>
             <operation>
                 <type>
@@ -1890,9 +1890,9 @@
         </action>
         <action>
             <assert>
-                <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 1 MedicationRequest and 1 Medication entry."/>
+                <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 3 MedicationRequest and 1 Medication entry."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationRequest) or resource.is(Medication)).count() = 2).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(MedicationRequest) or resource.is(Medication)).count() = 4).exists()"/>
             </assert>
         </action>
     </test>
@@ -2636,7 +2636,7 @@
     </test>
     <test id="22-RetrieveBgZ-LaboratoryTestResult">
         <name value="22-RetrieveBgZ-LaboratoryTestResult"/>
-        <description value="Test PHR Client retrieve search operation for the last known Obervation resources with a category for LaboratoryTestResult, specific for Chemistry observations of person 1, including the referenced Specimem resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 1 Observation resource entry and 1 Specimen resource."/>
+        <description value="Test PHR Client retrieve search operation for the last known Obervation resources with a category for LaboratoryTestResult, specific for Chemistry observations of person 1, including the referenced Specimem resource. The expected response code is 200(OK) and content is a searchset Bundle resource with 2 Observation resource entry and 2 Specimen resource."/>
         <action>
             <operation>
                 <type>
@@ -2753,7 +2753,7 @@
             <assert>
                 <description value="Confirm that the returned searchset Bundle is empty, or contains an OperationOutcome as first resource or contains 1 Observation and 1 Specimen entry."/>
                 <direction value="response"/>
-                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Observation) or resource.is(Specimen)).count() = 2).exists()"/>
+                <expression value="Bundle.where(entry.empty() or entry[0].resource.is(OperationOutcome) or entry.where(resource.is(Observation) or resource.is(Specimen)).count() = 4).exists()"/>
             </assert>
         </action>
     </test>
