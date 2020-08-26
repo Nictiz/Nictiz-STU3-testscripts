@@ -1,0 +1,58 @@
+<ProcedureRequest xmlns="http://hl7.org/fhir">
+    <id value="medmij-laboratoryresults-ProcedureRequest3-Albumine"/>
+    <text>
+        <status value="extensions"/>
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <table>
+                <caption>Verrichtingaanvraag. Subject: <a href="Patient/laboratoryresults-patient-kwalificatie1">Alexandra XXX_Aantrekker</a>. Categorie: <span title="Laboratory procedure (108252007 - SNOMED CT)">Laboratory procedure</span>, Status: voltooid<span style="display: block;">Intentie: aanvraag</span>
+                    <span style="display: block;">Aangevraagd door: <a href="PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1">J. van Beek</a>
+                    </span>
+                </caption>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span title="Albumine [massa/volume] in urine d.m.v. detectielimiet &lt;= 20 mg/L (14957-5 - LOINC)">Albumine [massa/volume] in urine d.m.v. detectielimiet &lt;= 20 mg/L</span>
+                        </td>
+                        <td/>
+                    </tr>
+                    <tr>
+                        <th>Reden</th>
+                        <td/>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </text>
+    <status value="completed"/>
+    <intent value="order"/>
+    <category>
+        <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="108252007"/>
+            <display value="Laboratory procedure"/>
+        </coding>
+    </category>
+    <code>
+        <coding>
+            <system value="http://loinc.org"/>
+            <code value="14957-5"/>
+            <display value="Albumine [massa/volume] in urine d.m.v. detectielimiet &lt;= 20 mg/L"/>
+        </coding>
+    </code>
+    <subject>
+        <reference value="Patient/laboratoryresults-patient-kwalificatie1"/>
+        <display value="Alexandra XXX_Aantrekker"/>
+    </subject>
+    <requester>
+        <agent>
+            <extension url="http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference">
+                <valueReference>
+                    <reference value="PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1"/>
+                    <display value="J. van Beek"/>
+                </valueReference>
+            </extension>
+            <reference value="Practitioner/laboratoryresults-practitioner-kwalificatie1"/>
+            <display value="J. van Beek"/>
+        </agent>
+    </requester>
+</ProcedureRequest>

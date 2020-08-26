@@ -1,0 +1,58 @@
+<ProcedureRequest xmlns="http://hl7.org/fhir">
+    <id value="medmij-laboratoryresults-ProcedureRequest2-BloodGlucose"/>
+    <text>
+        <status value="extensions"/>
+        <div xmlns="http://www.w3.org/1999/xhtml">
+            <table>
+                <caption>Verrichtingaanvraag. Subject: <a href="Patient/laboratoryresults-patient-kwalificatie1">Alexandra XXX_Aantrekker</a>. Categorie: <span title="Laboratory procedure (108252007 - SNOMED CT)">Laboratory procedure</span>, Status: voltooid<span style="display: block;">Intentie: aanvraag</span>
+                    <span style="display: block;">Aangevraagd door: <a href="PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1">J. van Beek</a>
+                    </span>
+                </caption>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span title="Glucose [mol/volume] in serum of plasm (14749-6 - LOINC)">Glucose [mol/volume] in serum of plasm</span>
+                        </td>
+                        <td/>
+                    </tr>
+                    <tr>
+                        <th>Reden</th>
+                        <td/>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </text>
+    <status value="completed"/>
+    <intent value="order"/>
+    <category>
+        <coding>
+            <system value="http://snomed.info/sct"/>
+            <code value="108252007"/>
+            <display value="Laboratory procedure"/>
+        </coding>
+    </category>
+    <code>
+        <coding>
+            <system value="http://loinc.org"/>
+            <code value="14749-6"/>
+            <display value="Glucose [mol/volume] in serum of plasm"/>
+        </coding>
+    </code>
+    <subject>
+        <reference value="Patient/laboratoryresults-patient-kwalificatie1"/>
+        <display value="Alexandra XXX_Aantrekker"/>
+    </subject>
+    <requester>
+        <agent>
+            <extension url="http://nictiz.nl/fhir/StructureDefinition/practitionerrole-reference">
+                <valueReference>
+                    <reference value="PractitionerRole/laboratoryresults-practitionerrole-kwalificatie1"/>
+                    <display value="J. van Beek"/>
+                </valueReference>
+            </extension>
+            <reference value="Practitioner/laboratoryresults-practitioner-kwalificatie1"/>
+            <display value="J. van Beek"/>
+        </agent>
+    </requester>
+</ProcedureRequest>
