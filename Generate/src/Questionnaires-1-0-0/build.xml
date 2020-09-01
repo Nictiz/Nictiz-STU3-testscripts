@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="generateTestScriptsQuestionnaires" default="build">
+
+    <property name="project" value="Questionnaires-1-0-0"/>
+    <property name="build.dir" location="../../build" />
+    <property name="src.dir" location="../../src" />
+    <property name="lib.dir" location="../../lib/ant-dependencies"/>
+    
+    <!-- We're an extension of the "normal" build script, but with some additions to create a version of the XIS 
+         scripts for internal and external use -->
+    <include file="../../build.xml" as="base"/>
+
+    <!-- Create a copy of the XIS scripts without the "setup" step in a temporary directory. These scripts will be the
+         actual XIS scripts, while the version with the setup step will be used for internal Nictiz tests. -->
+    <target name="createCopyWithoutSetup" depends="base.getToolRepo">
+        <sequential>
+            <tempfile property="xis.stripped" prefix="XIS-Server-stripped"/>
+            <mkdir dir="${xis.stripped}"/>
+            <xslt basedir="XIS-Server" destdir="${xis.stripped}" style="stripSetup.xsl" extension=".xml"/>
+        </sequential>
+    </target>
+
+    <!-- Clean the build dir. This is needed because we do some shuffling with the directory names, and we don't want
+         to mess things up. -->
+    <target name="cleanBuildDir">
+        <delete dir="${build.dir}/${project}"/>
+    </target>
+    
+    <target name="build" depends="cleanBuildDir, createCopyWithoutSetup, base.build">
+        <!-- When the transformations have been done, we have to shuffle the output directories around:
+             - the "XIS-Server" output (with setup step) should become "XIS-Server-nictiz-intern"
+             - the temp dir (without setup) should becom "XIS-Server"
+             - and we have to delete our temporary dir in the src location -->
+        <sequential>
+            <local name="xis.stripped.reldir"/>
+            <pathconvert property="xis.stripped.reldir">
+                <path>
+                    <dirset dir="${xis.stripped}"/>
+                </path>
+                <map from="${src.dir}/${project}" to=""/>
+            </pathconvert>
+
+            <move todir="${build.dir}/${project}/XIS-Server-nictiz-intern">
+                <fileset dir="${build.dir}/${project}/XIS-Server"/>
+            </move>
+
+            <move todir="${build.dir}/${project}/XIS-Server">
+                <fileset dir="${build.dir}/${project}/${xis.stripped.reldir}"/>
+            </move>
+
+            <delete dir="${xis.stripped}"/>
+        </sequential>
+    </target>
+</project>
