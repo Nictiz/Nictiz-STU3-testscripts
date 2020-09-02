@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project basedir="." name="generateTestScripts" default="build">
+<project basedir="." name="generateTestScriptsForProject" default="build">
     <!-- Build the NTS project using the tools (including the extended build script) in the Nictiz-tooling-testscripts
          repository. It will download a copy from Github if needed.
          If you'd rather use a local copy, specify its path with the -Dtestscripttools.localdir parameter. -->
@@ -7,8 +7,14 @@
     <property name="testscripttools.version" value="1.0.0"/>
     <property name="testscripttools.localdir" value=""/>
     
-    <property name="testscripttools.localdir.abs" location="${testscripttools.localdir}"/> <!-- Relative paths turn out to be a nightmare to get right, so lets convert it to an absolute path -->
-    <property name="lib.dir" value="${basedir}/lib/ant-dependencies"/>
+    <!-- Relative paths turn out to be a nightmare to get right, so lets convert it to an absolute path -->
+    <property name="testscripttools.localdir.abs" location="${testscripttools.localdir}"/>
+
+    <!-- Set the build, src and lib dir in a way that this file can be imported by other projects. -->
+    <dirname property="basedir.common" file="${ant.file.generateTestScriptsForProject}"/>
+    <property name="build.dir" location="${basedir.common}/build" />
+    <property name="src.dir" location="${basedir.common}/src" />
+    <property name="lib.dir" location="${basedir.common}/lib/ant-dependencies"/>
        
     <!-- Construct the path to the test scripts, either the locally defined dir or a new dir under "lib" -->
     <condition property="testscripttools.dir" value="${testscripttools.localdir.abs}" else="${lib.dir}/Nictiz-tooling-testscripts/${testscripttools.version}">
