@@ -4,7 +4,7 @@
          repository. It will download a copy from Github if needed.
          If you'd rather use a local copy, specify its path with the -Dtestscripttools.localdir parameter. -->
     
-    <property name="testscripttools.version" value="1.0.0"/>
+    <property name="testscripttools.version" value="1.1.0"/>
     <property name="testscripttools.localdir" value=""/>
     
     <!-- Relative paths turn out to be a nightmare to get right, so lets convert it to an absolute path -->
@@ -17,12 +17,14 @@
     <property name="lib.dir" location="${basedir.common}/lib/ant-dependencies"/>
        
     <!-- Construct the path to the test scripts, either the locally defined dir or a new dir under "lib" -->
-    <condition property="testscripttools.dir" value="${testscripttools.localdir.abs}" else="${lib.dir}/Nictiz-tooling-testscripts/${testscripttools.version}">
+    <property name="testscripttools.repo.dir" location="${lib.dir}/Nictiz-tooling-testscripts/${testscripttools.version}"/>
+    <condition property="testscripttools.dir" value="${testscripttools.localdir.abs}" else="${testscripttools.repo.dir}">
         <length string="${testscripttools.localdir}" trim="true" when="greater" length="0"/>
     </condition>
-    <!-- Just for the case we run the build file directly from Github (see below), we have to define the location of
-         the Ivy file. In that case, it doesn't exist, but it will be downloaded once we need it. -->
-    <property name="ivy.dep.file" value="${testscripttools.dir}/ant/ivy.xml" />
+    <!-- Just for the case when we run the build file directly from Github (see below), we have to set the location 
+         where this file expects the testscripttools repo dir to be. It isn't there yet, but it will be downloaded
+         there by the time we need it. -->
+    <property name="included.basedir" value="${testscripttools.repo.dir}" />
     
     <!-- Include the main buildscript from the testscript repo (or the locally defined version) -->
     <include as="main" file="${testscripttools.dir}/ant/build.xml" optional="true"/>
