@@ -37,6 +37,11 @@
         <!--<defaultValue value="${patient1-token-id}"/>-->
         <description value="OAuth Token for patient XXX_Bals"/>
     </variable>
+    <variable>
+        <name value="T"/>
+        <defaultValue value="${CURRENTDATE}"/>
+        <description value="Date that data and queries are expected to be relative to."/>
+    </variable>
     <!-- No Setup -->
     <test id="01-RetrieveGGZ-Patient">
         <name value="01-RetrieveGGZ-Patient"/>
