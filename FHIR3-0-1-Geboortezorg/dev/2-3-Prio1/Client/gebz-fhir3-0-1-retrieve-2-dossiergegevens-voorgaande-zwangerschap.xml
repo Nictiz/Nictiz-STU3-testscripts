@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-retrieve-1"/>
    <name value="Nictiz Geboortezorg - Client - Scenario 1 - Retrieve resources for previous pregnancy"/>
    <status value="active"/>
-   <date value="2020-07-02"/>
+   <date value="2020-07-03"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -212,7 +212,7 @@
                <system value="http://hl7.org/fhir/testscript-operation-codes"/>
                <code value="search"/>
             </type>
-            <resource value="Observation"/>
+            <resource value="Condition"/>
             <description value="Test Client query operation for Pregnancy (Condition)"/>
             <params value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>
             <requestHeader>
@@ -301,7 +301,7 @@
    </test>
    <test id="06-RetrieveParity">
       <name value="09-RetrieveParity"/>
-      <description value="Test Client query operation for Gravidity (Observation)"/>
+      <description value="Test Client query operation for Parity (Observation)"/>
       <action>
          <operation>
             <type>
@@ -309,7 +309,7 @@
                <code value="search"/>
             </type>
             <resource value="Observation"/>
-            <description value="Test Client query operation for Gravidity (Observation)"/>
+            <description value="Test Client query operation for Parity (Observation)"/>
             <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
             <requestHeader>
                <field value="Authorization"/>

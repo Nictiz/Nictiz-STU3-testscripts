@@ -1,0 +1,13 @@
+<Patient xmlns="http://hl7.org/fhir">
+   <id value="05a0618a-bd15-11ea-4332-020000000000"/>
+   <meta>
+      <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-patient"/>
+   </meta>
+   <text>
+      <status value="generated"/>
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         <div>2 augustus 2016</div>
+      </div>
+   </text>
+   <birthDate value="2016-08-02"/>
+</Patient>

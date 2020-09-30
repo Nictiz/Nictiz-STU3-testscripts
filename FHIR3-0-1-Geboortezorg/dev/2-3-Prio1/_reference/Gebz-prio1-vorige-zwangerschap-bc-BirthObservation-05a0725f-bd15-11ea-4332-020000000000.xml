@@ -1,0 +1,29 @@
+<Observation xmlns="http://hl7.org/fhir">
+   <id value="05a0725f-bd15-11ea-4332-020000000000"/>
+   <meta>
+      <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-observation"/>
+      <profile value="http://nictiz.nl/fhir/StructureDefinition/bc-BirthObservation"/>
+   </meta>
+   <status value="final"/>
+   <code>
+      <coding>
+         <system value="http://loinc.org"/>
+         <code value="8339-4"/>
+         <display value="Birth weight Measured"/>
+      </coding>
+   </code>
+   <subject>
+      <reference value="Patient/05a0618a-bd15-11ea-4332-020000000000"/>
+      <display value="Kind wouden"/>
+   </subject>
+   <context>
+      <reference value="EpisodeOfCare/05a05f40-bd15-11ea-4332-020000000000"/>
+      <display value="Zwangerschap 1 wouden"/>
+   </context>
+   <valueQuantity>
+      <value value="4810"/>
+      <unit value="gram"/>
+      <system value="http://unitsofmeasure.org"/>
+      <code value="g"/>
+   </valueQuantity>
+</Observation>

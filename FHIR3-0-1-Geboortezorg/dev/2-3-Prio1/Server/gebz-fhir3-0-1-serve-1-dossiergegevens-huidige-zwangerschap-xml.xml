@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-serve-1-xml"/>
    <name value="Nictiz Geboortezorg - Server - Scenario 1 - Serve resources for current pregnancy - XML Format"/>
    <status value="active"/>
-   <date value="2020-07-02"/>
+   <date value="2020-07-03"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -435,7 +435,7 @@
                <system value="http://hl7.org/fhir/testscript-operation-codes"/>
                <code value="search"/>
             </type>
-            <resource value="Observation"/>
+            <resource value="Condition"/>
             <description value="Test Server query operation for Pregnancy (Condition)"/>
             <accept value="xml"/>
             <params value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>

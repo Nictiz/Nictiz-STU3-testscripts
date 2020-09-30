@@ -56,7 +56,7 @@
       <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Server query operation for Pregnancy (Condition)"/>
-         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="resource" value="Condition"/>
          <nts:with-parameter name="params" value="?_id=${pregnancy-id}"/>
       </nts:include>
       <nts:include value="assert-responseSearchBundleSuccess" scope="common"/>

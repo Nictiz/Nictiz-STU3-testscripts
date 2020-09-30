@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-retrieve-1"/>
    <name value="Nictiz Geboortezorg - Client - Scenario 1 - Retrieve resources for current pregnancy"/>
    <status value="active"/>
-   <date value="2020-07-02"/>
+   <date value="2020-07-03"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -29,6 +29,8 @@
          <code value="FHIR-Server"/>
       </profile>
    </destination>
+   <!-- TODO: dossier id moet dynamisch opgehaald worden -->
+   <!--   <nts:variable name="dossier-id" expression="EpisodeOfCare.id" sourceId="episodeofcare-fixture"/>-->
    <fixture id="patient-token-fixture">
       <resource>
          <reference value="../_reference/Gebz-XXX-Sara-token.xml"/>
@@ -58,6 +60,10 @@
       <name value="organization-id"/>
       <expression value="Organization.id"/>
       <sourceId value="organization-fixture"/>
+   </variable>
+   <variable>
+      <name value="dossier-id"/>
+      <defaultValue value="db441a70-bd14-11ea-3840-020000000000"/>
    </variable>
    <test id="01-RetrieveWoman">
       <name value="01-RetrieveWoman"/>
@@ -123,6 +129,7 @@
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
             </requestHeader>
+            <responseId value="episodeofcare-fixture"/>
          </operation>
       </action>
       <action>
@@ -212,7 +219,7 @@
                <system value="http://hl7.org/fhir/testscript-operation-codes"/>
                <code value="search"/>
             </type>
-            <resource value="Observation"/>
+            <resource value="Condition"/>
             <description value="Test Client query operation for Pregnancy (Condition)"/>
             <params value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>
             <requestHeader>
@@ -262,7 +269,7 @@
             </type>
             <resource value="Observation"/>
             <description value="Test Client query operation for BloodGroup (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|883-9"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|883-9&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -310,7 +317,7 @@
             </type>
             <resource value="Observation"/>
             <description value="Test Client query operation for RhesusD (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -358,7 +365,7 @@
             </type>
             <resource value="Observation"/>
             <description value="Test Client query operation for RhesusC (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|718-7"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|718-7&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -406,7 +413,7 @@
             </type>
             <resource value="Observation"/>
             <description value="Test Client query operation for Gravidity (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -445,7 +452,7 @@
    </test>
    <test id="09-RetrieveParity">
       <name value="09-RetrieveParity"/>
-      <description value="Test Client query operation for Gravidity (Observation)"/>
+      <description value="Test Client query operation for Parity (Observation)"/>
       <action>
          <operation>
             <type>
@@ -453,8 +460,8 @@
                <code value="search"/>
             </type>
             <resource value="Observation"/>
-            <description value="Test Client query operation for Gravidity (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+            <description value="Test Client query operation for Parity (Observation)"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -502,7 +509,7 @@
             </type>
             <resource value="Observation"/>
             <description value="Test Client query operation for TermDate (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>
@@ -550,7 +557,7 @@
             </type>
             <resource value="Observation"/>
             <description value="Test Client query operation for Hb (Observation)"/>
-            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+            <params value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6&amp;context=EpisodeOfCare/${dossier-id}"/>
             <requestHeader>
                <field value="Authorization"/>
                <value value="${patient-token-id}"/>

@@ -1,0 +1,37 @@
+<Procedure xmlns="http://hl7.org/fhir">
+   <id value="05a0724e-bd15-11ea-4332-020000000000"/>
+   <meta>
+      <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Procedure"/>
+      <profile value="http://nictiz.nl/fhir/StructureDefinition/bc-DeliveryProcedure"/>
+   </meta>
+   <status value="completed"/>
+   <category>
+      <coding>
+         <system value="http://snomed.info/sct"/>
+         <code value="386637004"/>
+         <display value="Obstetric procedure (procedure)"/>
+      </coding>
+   </category>
+   <code>
+      <coding>
+         <system value="http://snomed.info/sct"/>
+         <code value="236973005"/>
+         <display value="Delivery procedure (procedure)"/>
+      </coding>
+   </code>
+   <subject>
+      <reference value="Patient/WOUDENVANDER"/>
+      <display value="Wouden van der"/>
+   </subject>
+   <context>
+      <reference value="EpisodeOfCare/05a05f40-bd15-11ea-4332-020000000000"/>
+      <display value="Zwangerschap 1 wouden"/>
+   </context>
+   <performedPeriod>
+      <start value="2016-08-01T21:46:00+02:00"/>
+   </performedPeriod>
+   <reasonReference>
+      <reference value="Condition/05a07249-bd15-11ea-4332-020000000000"/>
+      <display value="Zwangerschap 1 wouden"/>
+   </reasonReference>
+</Procedure>

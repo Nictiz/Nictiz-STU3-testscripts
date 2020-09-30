@@ -4,7 +4,7 @@
    <url value="http://nictiz.nl/fhir/fhir3-0-1/TestScript/gbz-fhir3-0-1-send-1-2"/>
    <name value="Nictiz Geboortezorg - Client - Scenario 1.2 - Send resources for previous pregnancy 1 and 2"/>
    <status value="active"/>
-   <date value="2020-07-02"/>
+   <date value="2020-07-03"/>
    <publisher value="Nictiz"/>
    <contact>
       <name value="Nictiz"/>
@@ -34,14 +34,14 @@
          <reference value="../_reference/Gebz-XXX-Sara-token.xml"/>
       </resource>
    </fixture>
-   <fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap1-fx">
+   <fixture id="Bundle-samenvatting-zwangerschap1-fx">
       <resource>
-         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap-1.xml"/>
+         <reference value="../_reference/Gebz-prio1-vorige-zwangerschap-transaction-samenvatting-wouden-zwangerschap-1.xml"/>
       </resource>
    </fixture>
-   <fixture id="Gebz-prio1-transaction-samenvatting-zwangerschap2-fx">
+   <fixture id="Bundle-transaction-samenvatting-zwangerschap2-fx">
       <resource>
-         <reference value="../_reference/Gebz-prio1-transaction-samenvatting-zwangerschap-2.xml"/>
+         <reference value="../_reference/Gebz-prio1-vorige-zwangerschap-transaction-samenvatting-wouden-zwangerschap-2.xml"/>
       </resource>
    </fixture>
    <profile id="Bundle-profile">

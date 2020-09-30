@@ -1,0 +1,30 @@
+<Observation xmlns="http://hl7.org/fhir">
+   <id value="05a0724f-bd15-11ea-4332-020000000000"/>
+   <meta>
+      <profile value="http://fhir.nl/fhir/StructureDefinition/nl-core-observation"/>
+      <profile value="http://nictiz.nl/fhir/StructureDefinition/bc-DeliveryObservation"/>
+   </meta>
+   <extension url="http://nictiz.nl/fhir/StructureDefinition/Observation-focusSTU3">
+      <valueReference>
+         <reference value="Procedure/05a0724e-bd15-11ea-4332-020000000000"/>
+         <display value="bevalling zwangerschap 1 wouden"/>
+      </valueReference>
+   </extension>
+   <status value="final"/>
+   <code>
+      <coding>
+         <system value="http://snomed.info/sct"/>
+         <code value="249120008"/>
+         <display value="Onset of labor first stage (observable entity)"/>
+      </coding>
+   </code>
+   <subject>
+      <reference value="Patient/WOUDENVANDER"/>
+      <display value="Wouden van der"/>
+   </subject>
+   <context>
+      <reference value="EpisodeOfCare/05a05f40-bd15-11ea-4332-020000000000"/>
+      <display value="Zwangerschap 1 wouden"/>
+   </context>
+   <valueDateTime value="2016-08-01T21:46:00+02:00"/>
+</Observation>

@@ -9,6 +9,9 @@
    <nts:fixture id="organization-fixture" href="Gebz-prio1-huidige-zwangerschap-nl-core-organization-1504.xml"/>
    <nts:variable name="patient-id" expression="Patient.id" sourceId="patient-fixture"/>
    <nts:variable name="organization-id" expression="Organization.id" sourceId="organization-fixture"/>
+   <!-- TODO: dossier id moet dynamisch opgehaald worden -->
+<!--   <nts:variable name="dossier-id" expression="EpisodeOfCare.id" sourceId="episodeofcare-fixture"/>-->
+   <nts:variable name="dossier-id" defaultValue="db441a70-bd14-11ea-3840-020000000000"/>
    
    <test id="01-RetrieveWoman">
       <name value="01-RetrieveWoman"/>
@@ -30,11 +33,12 @@
    <test id="02-RetrieveMaternalRecord">
       <name value="02-RetrieveMaternalRecord"/>
       <description value="Test Client query operation for MaternalRecord (EpisodeOfCare)"/>
-      <nts:include value="gbz-operation-search">
+      <nts:include value="gbz-operation-searchWithResponseId">
          <nts:with-parameter name="description"
             value="Test Client query operation for MaternalRecord (EpisodeOfCare)"/>
          <nts:with-parameter name="resource" value="EpisodeOfCare"/>
          <nts:with-parameter name="params" value="?patient=${patient-id}&amp;status=active&amp;type=http://snomed.info/sct|364320009"/>
+         <nts:with-parameter name="responseId" value="episodeofcare-fixture"/>
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
       <nts:include value="assert-responseSuccess" scope="common"/>
@@ -68,7 +72,7 @@
       <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
             value="Test Client query operation for Pregnancy (Condition)"/>
-         <nts:with-parameter name="resource" value="Observation"/>
+         <nts:with-parameter name="resource" value="Condition"/>
          <nts:with-parameter name="params" value="?patient=${patient-id}&amp;clinical-status=active&amp;code=http://snomed.info/sct|364320009"/>
          <!-- &amp;context={dossier-id} -->
       </nts:include>
@@ -87,7 +91,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for BloodGroup (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|883-9"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|883-9&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -105,7 +109,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for RhesusD (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|1305-2&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -123,7 +127,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for RhesusC (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|718-7"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|718-7&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -141,7 +145,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for Gravidity (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11996-6&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -154,12 +158,12 @@
    
    <test id="09-RetrieveParity">
       <name value="09-RetrieveParity"/>
-      <description value="Test Client query operation for Gravidity (Observation)"/>
+      <description value="Test Client query operation for Parity (Observation)"/>
       <nts:include value="gbz-operation-search">
          <nts:with-parameter name="description"
-            value="Test Client query operation for Gravidity (Observation)"/>
+            value="Test Client query operation for Parity (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -177,7 +181,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for TermDate (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11778-8&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -195,7 +199,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for Hb (Observation)"/>
          <nts:with-parameter name="resource" value="Observation"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;code=http://loinc.org|11977-6&amp;context=EpisodeOfCare/${dossier-id}"/>
          <!-- &amp;context:EpisodeOfCare.status=active&amp;context:EpisodeOfCare.type=http://snomed.info/sct|364320009" -->  
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>

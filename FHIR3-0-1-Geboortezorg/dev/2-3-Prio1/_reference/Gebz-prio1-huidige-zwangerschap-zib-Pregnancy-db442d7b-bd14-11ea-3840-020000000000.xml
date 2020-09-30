@@ -1,0 +1,22 @@
+<Condition xmlns="http://hl7.org/fhir">
+   <id value="db442d7b-bd14-11ea-3840-020000000000"/>
+   <meta>
+      <profile value="http://nictiz.nl/fhir/StructureDefinition/zib-Pregnancy"/>
+   </meta>
+   <clinicalStatus value="active"/>
+   <code>
+      <coding>
+         <system value="http://snomed.info/sct"/>
+         <code value="364320009"/>
+         <display value="Pregnancy observable (observable entity)"/>
+      </coding>
+   </code>
+   <subject>
+      <reference value="Patient/WOUDENVANDER"/>
+      <display value="Wouden van der"/>
+   </subject>
+   <context>
+      <reference value="EpisodeOfCare/db441a70-bd14-11ea-3840-020000000000"/>
+      <display value="Zwangerschap 4 wouden"/>
+   </context>
+</Condition>
