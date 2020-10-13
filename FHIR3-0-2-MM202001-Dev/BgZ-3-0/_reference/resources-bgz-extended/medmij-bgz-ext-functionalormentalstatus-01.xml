@@ -59,9 +59,7 @@
         <reference value="Patient/medmij-bgz-ext-nl-core-patient-01"/>
         <display value="S. XXX_Bakkerz"/>
     </subject>
-    <effectivePeriod>
-        <start value="${DATE, T, D, -180}"/>
-    </effectivePeriod>
+    <effectiveDateTime value="${DATE, T, D, -180}"/>
     <valueCodeableConcept>
         <coding>
             <system value="http://snomed.info/sct"/>

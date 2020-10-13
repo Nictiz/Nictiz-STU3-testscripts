@@ -48,9 +48,7 @@
         <reference value="Patient/XXX-Bals"/>
         <display value="Adam XXX_Bals"/>
     </subject>
-    <effectivePeriod>
-        <start value="2018-05-07"/>
-    </effectivePeriod>
+    <effectiveDateTime value="2018-05-07"/>
     <valueCodeableConcept>
         <coding>
             <system value="http://snomed.info/sct"/>
