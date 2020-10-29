@@ -20,6 +20,6 @@
 
     <target name="build" depends="createCopyWithoutInternalSearchParam, base.build">
         <!-- Delete the stripped PHR-Server scripts again. -->
-        <delete dir="${phr.stripped}"/>
+        <delete dir="${phr.stripped}/Dispense612Conversion"/>
     </target>
 </project>
