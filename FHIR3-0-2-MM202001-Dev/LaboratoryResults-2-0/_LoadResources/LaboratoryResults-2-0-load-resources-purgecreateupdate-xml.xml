@@ -42,11 +42,6 @@
          <reference value="../_reference/resources-generic/medmij-laboratoryresults-Patient-kwalificatie1.xml"/>
       </resource>
    </fixture>
-   <fixture id="Practitioner-laboratoryresults-practitioner-kwalificatie1">
-      <resource>
-         <reference value="../_reference/resources-generic/medmij-laboratoryresults-Practitioner-kwalificatie1.xml"/>
-      </resource>
-   </fixture>
    <fixture id="PractitionerRole-d6e2-laboratoryresults-practitionerrole-kwalifi">
       <resource>
          <reference value="../_reference/resources-generic/medmij-laboratoryresults-PractitionerRole-kwalificatie1.xml"/>
@@ -76,11 +71,6 @@
       <name value="Patient-laboratoryresults-patient-kwalificatie1-id"/>
       <expression value="Patient.id"/>
       <sourceId value="Patient-laboratoryresults-patient-kwalificatie1"/>
-   </variable>
-   <variable>
-      <name value="Practitioner-laboratoryresults-practitioner-kwalificatie1-id"/>
-      <expression value="Practitioner.id"/>
-      <sourceId value="Practitioner-laboratoryresults-practitioner-kwalificatie1"/>
    </variable>
    <variable>
       <name value="PractitionerRole-d6e2-laboratoryresults-practitionerrole-kwalifi-id"/>
@@ -231,30 +221,6 @@
                <value value="Bearer 14bc6cc6-7b7b-4c29-b662-c5284d76cf3c"/>
             </requestHeader>
             <sourceId value="Patient-laboratoryresults-patient-kwalificatie1"/>
-         </operation>
-      </action>
-      <action>
-         <assert>
-            <description value="Confirm that the returned HTTP status is 200(OK) or 201(Created)."/>
-            <operator value="in"/>
-            <responseCode value="200,201"/>
-         </assert>
-      </action>
-      <action>
-         <operation>
-            <type>
-               <system value="http://hl7.org/fhir/testscript-operation-codes"/>
-               <code value="updateCreate"/>
-            </type>
-            <resource value="Practitioner"/>
-            <accept value="xml"/>
-            <contentType value="xml"/>
-            <params value="/${Practitioner-laboratoryresults-practitioner-kwalificatie1-id}"/>
-            <requestHeader>
-               <field value="Authorization"/>
-               <value value="Bearer 14bc6cc6-7b7b-4c29-b662-c5284d76cf3c"/>
-            </requestHeader>
-            <sourceId value="Practitioner-laboratoryresults-practitioner-kwalificatie1"/>
          </operation>
       </action>
       <action>
