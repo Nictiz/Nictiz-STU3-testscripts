@@ -4,7 +4,7 @@
    <version value="stu3-9.0.7"/>
    <name value="Medication Process 9.0.7 - MedicationOverview (NL: MedicatieOverzicht) - XIS Server - Scenario 1.0b"/>
    <description value="Scenario 1.0b - Geen relevante medicatieafspraken"/>
-   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-STIJL-token.xml" />
+   <nts:patientTokenFixture href="mp9-nl-core-patient-J-XXX-LEV-TEST-A-token.xml" />
    
    <test id="mo-mor-ma-Scenario1-0-b-output">
       <name value="Scenario 1.0b"/>

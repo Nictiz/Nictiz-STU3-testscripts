@@ -4,7 +4,7 @@
    <version value="stu3-9.0.7"/>
    <name value="Medication Process 9.0.7 - MedicationOverview (NL: MedicatieOverzicht) - XIS Server - Scenario 3.0b"/>
    <description value="Scenario 3.0b - Onderbroken medicatieafspraak"/>
-   <nts:patientTokenFixture href="mp9-nl-core-patient-XXX-HERWEIJER-token.xml" />
+   <nts:patientTokenFixture href="mp9-nl-core-patient-L-XXX-LEV-TEST-C-token.xml" />
    
    <test id="mo-mor-ma-Scenario3-0-b-output">
       <name value="Scenario 3.0b"/>
