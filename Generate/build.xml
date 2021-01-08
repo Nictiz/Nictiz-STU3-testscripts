@@ -11,10 +11,7 @@
     <property name="testscripttools.localdir.abs" location="${testscripttools.localdir}"/>
 
     <!-- Set the build, src and lib dir in a way that this file can be imported by other projects. -->
-    <dirname property="basedir.common" file="${ant.file.generateTestScriptsForProject}"/>
-    <property name="build.dir" location="${basedir.common}/build" />
-    <property name="src.dir" location="${basedir.common}/src" />
-    <property name="lib.dir" location="${basedir.common}/lib/ant-dependencies"/>
+    <dirname property="common.dir" file="${ant.file.generateTestScriptsForProject}"/>
     
     <!-- Construct the path to the test scripts, either the locally defined dir or a new dir under "lib" -->
     <property name="testscripttools.repo.dir" location="${lib.dir}/Nictiz-tooling-testscripts/${testscripttools.version}"/>
