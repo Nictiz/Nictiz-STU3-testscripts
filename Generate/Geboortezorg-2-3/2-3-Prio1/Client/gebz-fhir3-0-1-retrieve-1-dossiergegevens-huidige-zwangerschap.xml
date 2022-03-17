@@ -30,6 +30,7 @@
       </nts:include>
    </test>
 
+   <!--1e zwangerschap-->
    <test id="02-RetrieveMaternalRecord">
       <name value="02-RetrieveMaternalRecord"/>
       <description value="Test Client query operation for MaternalRecord (EpisodeOfCare)"/>
@@ -37,7 +38,7 @@
          <nts:with-parameter name="description"
             value="Test Client query operation for MaternalRecord (EpisodeOfCare)"/>
          <nts:with-parameter name="resource" value="EpisodeOfCare"/>
-         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;status=active&amp;type=http://snomed.info/sct|364320009"/>
+         <nts:with-parameter name="params" value="?patient=${patient-id}&amp;status=active&amp;type=http://snomed.info/sct|364320009&amp;_include=EpisodeOfCare:organization&amp;_include=EpisodeOfCare:care-manager"/>
          <nts:with-parameter name="responseId" value="episodeofcare-fixture"/>
       </nts:include>
       <nts:include value="assert-authorizationHeader" scope="common"/>
@@ -46,8 +47,55 @@
          <nts:with-parameter name="resource" value="EpisodeOfCare"></nts:with-parameter>
          <nts:with-parameter name="n" value="1"></nts:with-parameter>
       </nts:include>
+      <nts:include value="gbz-assert-responseBundleContent">
+         <nts:with-parameter name="resource" value="Organization"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+      <nts:include value="gbz-assert-responseBundleContent">
+         <nts:with-parameter name="resource" value="Practitioner"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
    </test>
    
+   <!--   managing organization-->
+   <test id="03-RetrieveOrganization">
+      <name value="03-RetrieveOrganization"/>
+      <description value="Test Client query operation for Organization"/>
+      <nts:include value="gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Client query operation for Organization"/>
+         <nts:with-parameter name="resource" value="Organization"/>
+         <nts:with-parameter name="params" value="?_id=${organization-id}"/>
+         <!-- ?_has:EpisodeOfCare:organization:condition=wouden-zwanger4 -->  
+      </nts:include>
+      <nts:include value="assert-authorizationHeader" scope="common"/>
+      <nts:include value="assert-responseSuccess" scope="common"/>
+      <nts:include value="gbz-assert-responseBundleContent">
+         <nts:with-parameter name="resource" value="Organization"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+   </test>
+   
+   <!--   managing practitioner -->
+   <test id="04-RetrievePractitioner">
+      <name value="04-RetrieveOrganization"/>
+      <description value="Test Client query operation for Organization"/>
+      <nts:include value="gbz-operation-search">
+         <nts:with-parameter name="description"
+            value="Test Client query operation for Organization"/>
+         <nts:with-parameter name="resource" value="Organization"/>
+         <nts:with-parameter name="params" value="?_id=${organization-id}"/>
+         <!-- ?_has:EpisodeOfCare:organization:condition=wouden-zwanger4 -->  
+      </nts:include>
+      <nts:include value="assert-authorizationHeader" scope="common"/>
+      <nts:include value="assert-responseSuccess" scope="common"/>
+      <nts:include value="gbz-assert-responseBundleContent">
+         <nts:with-parameter name="resource" value="Organization"></nts:with-parameter>
+         <nts:with-parameter name="n" value="1"></nts:with-parameter>
+      </nts:include>
+   </test>
+   
+   <!--   managing organization-->
    <test id="03-RetrieveOrganization">
       <name value="03-RetrieveOrganization"/>
       <description value="Test Client query operation for Organization"/>
